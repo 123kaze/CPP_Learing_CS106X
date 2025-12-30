@@ -2,10 +2,10 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
-
+#include "Quick.h"
 using namespace std;
 
-int percision(vector<int>& a,int left,int right)
+int partition(vector<int>& a,int left,int right)
 {
     int mid = left + (right - left)/2;
     int pivoit = a[right];
@@ -25,7 +25,7 @@ void Quicksort(vector<int>& a,int left,int right)
 {
     int i=left,j=right;
     if (left >= right) return;
-    int piv_idx = percision(a,left,right);
+    int piv_idx = partition(a,left,right);
     Quicksort(a,i,piv_idx -1);
     Quicksort(a,piv_idx+1,right);
 }
