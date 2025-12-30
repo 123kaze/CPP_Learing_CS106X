@@ -7,17 +7,16 @@ using namespace std;
 
 int partition(vector<int>& a,int left,int right)
 {
-    int mid = left + (right - left)/2;
-    int pivoit = a[right];
-    int i = left,j=right;
+    int pivot = a[right];
+    int i = left, j = right;
 
-    while(i < j )
+    while(i < j)
     {
-        while(i<j && a[i]<=pivoit) i++;
-        while(i<j && a[j]>=pivoit) j--;
-        if(i<j) swap(a[i],a[j]);
+        while(i < j && a[i] <= pivot) i++;
+        while(i < j && a[j] >= pivot) j--;
+        if(i < j) swap(a[i], a[j]);
     }
-    swap(a[i],a[right]);
+    swap(a[i], a[right]);
     return i;
 }
 
