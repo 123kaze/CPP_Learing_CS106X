@@ -7,6 +7,7 @@ using namespace std;
 void preOrder(TreeNode* root, vector<int>& a)
 {
     if(root == nullptr) return;
+    //也可以替换成你要的操作
     printf(" %d",root->val);
     a.push_back(root->val);
     preOrder(root->left,a);

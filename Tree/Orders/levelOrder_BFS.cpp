@@ -20,10 +20,10 @@ void levelOrder(TreeNode *root)
         {
             TreeNode* cur = q.front();
             q.pop();
-            
+            // 这里写你需要做的过程操作
             printf(" %d", cur->val);
             res.push_back(cur->val);
-            
+            //-----------------------
             if(cur->left != nullptr) q.push(cur->left);
             if(cur->right != nullptr) q.push(cur->right);
         }
