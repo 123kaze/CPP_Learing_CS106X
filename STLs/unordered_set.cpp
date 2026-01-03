@@ -85,12 +85,13 @@ int main() {
     // 插入多个元素
     us1.insert({50, 60, 70, 20});  // 20已存在，不会被插入
     cout << "批量插入后us1: ";
-    for (int num : us1) cout << num << " ";
+    
     cout << endl;
     
-    // 使用emplace插入
+    // 使用emplace插入  
     us1.emplace(80);
     us1.emplace(90);
+    for (int num : us1) cout << num << " "<<endl;
     cout << "emplace插入后us1大小: " << us1.size() << endl;
     
     // 3. 查找操作
@@ -114,7 +115,7 @@ int main() {
     cout << "元素100在us2中出现的次数: " << us2.count(100) << endl;
     
     // 使用contains()检查元素是否存在（C++20）
-    // cout << "us2是否包含5: " << us2.contains(5) << endl;
+    cout << "us2是否包含5: " << us2.contains(5) << endl;
     
     // 4. 删除操作
     cout << "\n4. 删除操作:" << endl;

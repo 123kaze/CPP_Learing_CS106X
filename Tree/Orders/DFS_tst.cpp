@@ -10,8 +10,10 @@ using namespace std;
 void preOrder(TreeNode *root,vector<int>& nums)
 {
     if(root == nullptr) return;
+    //-----写你的操作-----
     printf("%d/n",root->val);
     nums.push_back(root->val);
+    // --------------------
     preOrder(root->left,nums);
     preOrder(root->right,nums);
 }

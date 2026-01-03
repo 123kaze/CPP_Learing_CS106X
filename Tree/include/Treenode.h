@@ -11,6 +11,11 @@ struct TreeNode
     TreeNode* left;
     TreeNode* right;
     TreeNode(int x):val(x),left(nullptr),right(nullptr) {}
+
+    bool operator<(const TreeNode *Other)
+    {
+        return this->val < Other->val;
+    }
 };
 
 // 前中后序遍历声明
