@@ -1,63 +1,67 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <cmath>
-#include <algorithm>
 
 using namespace std;
 
-//寻找第k小的元素
-double findKth(vector<int>& nums1,int l1,int h1,vector<int>& nums2, int l2,int h2,int k)
+// 寻找第k小的元素
+double findKth(vector<int>& nums1, int l1, int h1, vector<int>& nums2, int l2, int h2, int k)
 {
-    int m = h1 - l1 -1;
-    int n = h2 - l2 -1;
+    int m = h1 - l1 - 1;
+    int n = h2 - l2 - 1;
 
-    if (m>n){
-        return findKth(nums2,l2,h2,nums1,l1,h2,k);
-    }
-
-    if(m==0)
+    if (m > n)
     {
-        return nums2[l2+k-1];
+        return findKth(nums2, l2, h2, nums1, l1, h2, k);
     }
 
-    if(k==1)
+    if (m == 0)
     {
-        return min(nums1[l1],nums2[l2]);
+        return nums2[l2 + k - 1];
     }
 
-    int na = min(k/2,m);
+    if (k == 1)
+    {
+        return min(nums1[l1], nums2[l2]);
+    }
+
+    int na = min(k / 2, m);
     int nb = k - na;
-    int va = nums1[l1 + na -1];
-    int vb = nums2[l1 + nb -1];
+    int va = nums1[l1 + na - 1];
+    int vb = nums2[l1 + nb - 1];
 
-    if(va == vb)
+    if (va == vb)
     {
         return va;
     }
-    else if (va<vb){
-        return findKth(nums1,l1+na,h1,nums2,l2,l2+nb-1,k-na);
+    else if (va < vb)
+    {
+        return findKth(nums1, l1 + na, h1, nums2, l2, l2 + nb - 1, k - na);
     }
     else
     {
-        return findKth(nums1,l1+na,l1+na-1,nums2,l2+nb,h2,k-nb);
+        return findKth(nums1, l1 + na, l1 + na - 1, nums2, l2 + nb, h2, k - nb);
     }
 }
 
-
-
 // 方案1：使用vector，可以获取长度
-double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+{
     int m = nums1.size();  // 正确获取长度
     int n = nums2.size();  // 正确获取长度
-    
-    int k = (m+n)/2;
 
-    if((m+n)%2==1){
-        return findKth(nums1,0,m-1,nums2,0,n-1,k+1);
+    int k = (m + n) / 2;
+
+    if ((m + n) % 2 == 1)
+    {
+        return findKth(nums1, 0, m - 1, nums2, 0, n - 1, k + 1);
     }
     else
     {
-        return (findKth(nums1,0,m-1,nums2,0,n-1,k)+findKth(nums1,0,m-1,nums2,0,n-1,k+1))/2.0;
+        return (findKth(nums1, 0, m - 1, nums2, 0, n - 1, k) +
+                findKth(nums1, 0, m - 1, nums2, 0, n - 1, k + 1)) /
+               2.0;
     }
 }
 
@@ -78,13 +82,14 @@ double findMedianSortedArrays(int (&nums1)[M], int (&nums2)[N]) {
     return 0.0;
 } */
 
-int main() {
+int main()
+{
     // 测试示例
     vector<int> nums1 = {1, 3};
     vector<int> nums2 = {2};
-    
+
     double result = findMedianSortedArrays(nums1, nums2);
     cout << "中位数: " << result << endl;
-    
+
     return 0;
 }
