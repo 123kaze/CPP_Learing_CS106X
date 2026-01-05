@@ -13,4 +13,5 @@ int main(){
     int x=1;
     cout << x << " "<< foo::x<<endl;
     return 0;
+
 }
