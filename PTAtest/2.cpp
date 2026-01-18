@@ -19,6 +19,10 @@ int main()
     int inidx = 0, oidx = 0;
     int n = inp.size();
 
+    // 1,2,3,4,5
+    // 3 4 5 2 1
+    // "pppopopooo"
+
     while (oidx < outp.size())
     {
         if (!s.empty() && s.top() == outp[oidx])

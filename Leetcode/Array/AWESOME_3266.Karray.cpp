@@ -50,11 +50,37 @@
 #include <vector>
 using namespace std;
 
+struct cmp
+{
+    bool operator()(const int& a, const int& b) const
+    {
+        return a > b;
+    }
+};
+
+int MOD = 1e9 + 7;
+int quick(int& a, int& ind)
+{
+    int res = 1;
+    a = a % MOD;
+
+    while (ind > 0)
+    {
+        if (ind % 2)
+        {
+            res = (res * a) % MOD;
+        }
+        ind >>= 1;
+        a = (a * a) % MOD;
+    }
+    return res;
+}
+
 class Solution
 {
    public:
     vector<int> getFinalState(vector<int>& nums, int k, int multiplier)
     {
-        priority_queue<int, vector<int>, greater<int>> pq;
+        priority_queue<int, vector<int>, cmp> pq;
     }
 };

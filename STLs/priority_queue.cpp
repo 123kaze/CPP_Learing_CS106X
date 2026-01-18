@@ -238,6 +238,23 @@ int main()
         return a.distance() < b.distance();  // 最大堆，距离大的优先级高
     };
 
+    // struct PointComparator
+    // {
+    //     bool operator()(const Point& a, const Point& b) const
+    //     {
+    //         // 最大堆：返回 true 表示 a 的优先级低于 b
+    //         return a.distance() < b.distance();
+    //     }
+    // };
+
+    struct cmp
+    {
+        bool operator()(const Point& a, const Point& b) const
+        {
+            return a.distance() < b.distance();
+        }
+    };
+
     priority_queue<Point, vector<Point>, decltype(point_cmp)> point_pq(point_cmp);
 
     point_pq.push({1, 1});
