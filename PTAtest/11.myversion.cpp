@@ -43,6 +43,7 @@ int main()
         edges.push_back(Edge(u, v, w));
     }
 
+    stable_sort(edges.begin(), edges.end());
     sort(edges.begin(), edges.end());
     parent.resize(m + 1);
     for (int i = 0; i <= m; i++)

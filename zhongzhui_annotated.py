@@ -136,7 +136,6 @@ while stack:
         result.append(stack.pop())
     # 如果弹出后栈顶是 '@'，也弹出
     stack.pop() if stack and stack[-1] == "@" else None
-
 # 输出后缀表达式，空格分隔
 print(" ".join(result))
 
