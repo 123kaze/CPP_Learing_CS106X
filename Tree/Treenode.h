@@ -10,7 +10,9 @@ struct TreeNode
     int val;
     TreeNode* left = nullptr;
     TreeNode* right = nullptr;
-    TreeNode(int x):val(x),left(nullptr),right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr)
+    {
+    }
     virtual ~TreeNode() = default;
 };
 
