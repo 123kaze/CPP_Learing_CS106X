@@ -18,6 +18,7 @@ class Solution
         {
             res.push_back(nums);
         }
+        sort(res.begin(), res.end());
         return res;
     }
 };
