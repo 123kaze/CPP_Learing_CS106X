@@ -9,6 +9,6 @@ class Solution:
             else:
                 dic[curtar] = i
 
-
+        
 s = Solution()
 print(s.twoSum([2,7,11,15],9))
