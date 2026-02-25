@@ -1,4 +1,5 @@
 from typing import List
+from collections import defaultdict
 
 
 class Solution:
@@ -11,30 +12,28 @@ class Solution:
         DFS,so if visited == 2,its circle
         """
         graph = defaultdict(list)
-        for course, prereq in prerequisites:
-            graph[prereq].append(course)  # prereq → course 的依赖关系
+        for course, pre in prerequisites:
+            graph[pre].append(course)
 
         visited = [0] * numCourses
 
-        def dfs(course):
+        def checkCircle(course):
             if visited[course] == 1:
                 return True
             if visited[course] == 2:
                 return False
 
             visited[course] = 1
-
             for ne in graph[course]:
-                if dfs(ne):
+                if checkCircle(ne):
                     return True
 
             visited[course] = 2
-
             return False
 
         for cour in range(numCourses):
             if visited[cour] == 0:
-                if dfs(cour):
+                if checkCircle(cour):
                     return False
 
         return True

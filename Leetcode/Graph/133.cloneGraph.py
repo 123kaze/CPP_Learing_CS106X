@@ -35,3 +35,29 @@ class Solution:
             clone.neighbors.append(self.cloneGraph(n))
 
         return clone
+
+
+"""拓扑排序解决方法"""
+
+
+from collections import deque
+import heapq
+
+
+class Solution:
+    def __init__(self) -> None:
+        self.visited = {}
+
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        if not node:
+            return node
+
+        if node in self.visited:
+            return self.visited[node]
+
+        clone = Node(node.val)
+        self.visited[node] = clone
+        for ne in node.neighbors:
+            clone.neighbors.append(self.cloneGraph(ne))
+
+        return clone
