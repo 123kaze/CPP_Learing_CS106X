@@ -14,4 +14,4 @@ class Solution:
             
             mp[pre] = mp.get(pre,0)+1
         
-        return count
+        return count          
