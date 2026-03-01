@@ -6,7 +6,7 @@ class Solution:
         n = len(nums)
         nums.sort()
         used = [False] * n
-        res = set()
+        res = []
         cur: list[int] = []
 
         def backtrack(current, n, now, nums, used):
@@ -20,7 +20,7 @@ class Solution:
             :param used: 说明
             """
             if len(now) == n:
-                res.add(now[:])
+                res.append(now[:])
                 return
 
             for i in range(n):
@@ -29,7 +29,7 @@ class Solution:
 
                 if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
                     continue
-
+                
                 else:
 
                     used[i] = True

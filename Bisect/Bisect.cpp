@@ -4,7 +4,7 @@
 #include <algorithm>
 
 using namespace std;
-
+ 
 int bisect(vector<int>& a,int l,int h,int target)
 {
     // 标准二分查找实现

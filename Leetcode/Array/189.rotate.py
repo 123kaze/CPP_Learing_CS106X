@@ -27,3 +27,4 @@ class Solution:
 
                 if cur == i:
                     break
+            
