@@ -3,19 +3,20 @@ class Solution:
         res = []
         path = []
 
-        def dfs(i, t):
+        def dfs(i,t):
             l = k - len(path)
-            if t < 0 or t > (9 * l - l * (l - 1) // 2):
+            if t<0 or t > (9*l - ((l-1)*l//2)):
                 return
-            if len(path) + (9 - i + 1) < k:
-                return
+            
             if len(path) == k:
                 res.append(path[:])
                 return
-            for j in range(i, 10):
+            
+            for j in range(i,10):
                 path.append(j)
-                dfs(j + 1, t - j)
+                dfs(j+1,t-j)
                 path.pop()
+            
 
         dfs(1, n)
         return res
