@@ -28,7 +28,6 @@ class Solution:
         n = len(nums)
         for i in range(k):
             while q and q[-1] < nums[i]:
-                q.pop()
             q.append(nums[i])
         res.append(q[0])
         for i in range(k,n):
