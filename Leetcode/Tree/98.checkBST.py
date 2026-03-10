@@ -5,7 +5,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-from typing import List
+from typing import Optional
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def check(root, minval, maxval):
