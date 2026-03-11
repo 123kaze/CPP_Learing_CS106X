@@ -1,0 +1,16 @@
+
+
+
+
+from typing import List
+
+
+class Solution:
+    def maximumBeauty(self, nums: List[int], k: int) -> int:
+        res, j, n = 0, 0, len(nums)
+        nums.sort()
+        for i in range(n):
+            while nums[i] - 2 * k > nums[j]:
+                j += 1
+            res = max(res, i - j + 1)
+        return res
