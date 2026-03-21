@@ -24,7 +24,7 @@ class Solution:
             tail.next = l1 or l2
             return cur.next
 
-        def merge(l,r):
+        def merge(l:int,r:int):
             if l == r:
                 return lists[l]
             if l > r:

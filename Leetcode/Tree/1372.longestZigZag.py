@@ -8,7 +8,7 @@ from typing import Optional
 class Solution:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
         res = 0
-        flag = True  # True left ,flase right
+        flag = True  # True left ,flase right，当前是通过flag得到
         length = 0
 
         def dfs(root,flag,length):
