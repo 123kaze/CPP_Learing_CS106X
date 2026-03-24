@@ -34,6 +34,3 @@ class Solution:
             else:
                 # left2 > right1，i 太小，需要增大 i
                 left = i + 1
-
-        # 理论上不会执行到这里
-        return 0.0
