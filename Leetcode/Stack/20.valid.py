@@ -9,4 +9,4 @@ class Solution:
                 if not stack or map[stack[-1]] != c:
                     return False
                 stack.pop()
-        return True if not stack else False                                      dasd wd wa dcasdse
+        return True if not stack else False      
