@@ -1,3 +1,5 @@
+from typing import List
+from functools import cache
 class Solution:
     def maximumAmount(self, coins: List[List[int]]) -> int:
         @cache  # 缓存装饰器，避免重复计算 dfs 的结果（记忆化）
@@ -20,3 +22,24 @@ class Solution:
 # 链接：https://leetcode.cn/problems/maximum-amount-of-money-robot-can-earn/solutions/3045103/wang-ge-tu-dp-by-endlesscheng-g96j/
 # 来源：力扣（LeetCode）
 # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+class Solution:
+    def maximumAmount(self, coins: List[List[int]]) -> int:
+        @cache
+        def dfs(i: int, j: int, k: int) -> int:
+            if i < 0 or j < 0:
+                return -inf
+            x = coins[i][j]
+            if i == 0 and j == 0:
+                return max(x,0) if k else x
+
+            res = max(dfs(i-1,j,k),dfs(i,j-1,k))+x
+            if x<0 and k:
+                res = max(res,dfs(i-1,j,k-1),dfs(i,j-1,k-1))
+            return res
+        m = len(coins)
+        n = len(coins[0])
+        ans = dfs(m-1,n-1,2)
+        dfs.cache_clear()
+        return ans
+
