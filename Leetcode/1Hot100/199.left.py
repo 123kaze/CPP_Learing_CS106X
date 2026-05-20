@@ -11,10 +11,7 @@ from collections import deque
 
 
 class Solution:
-    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        q = deque()
-        if not root:
-            return []
+    def rightSideView(self,             return []
         q.append(root)
         res = []
         while q:
