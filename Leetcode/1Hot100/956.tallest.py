@@ -25,4 +25,30 @@ class Solution:
         return 0
 
 s = Solution()
+print(s.tallestBillboard([3,4,3,3,2]))
+
+
+
+from typing import List
+from functools import cache
+class Solution:
+    def tallestBillboard(self, nums: List[int]) -> int:
+        n = len(nums)
+        s = sum(nums)
+        s1 = s//2
+        visited = [0]*(n)
+        @cache
+        def dfs(i,c):
+            '''
+            i 当前i号
+            c 当前空余
+            dfs(i,c) = dfs(i-1,c)+dfs(i-1,c-v)
+            '''
+            if i<0 :
+                return 0 if c==0 else -inf
+            return max(dfs(i-1,c),dfs(i-1,c+nums[i])+nums[i],dfs(i-1,c-nums[i]))
+
+        return dfs(n-1,0)
+
+s = Solution()
 print(s.tallestBillboard([1,2]))

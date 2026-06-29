@@ -21,7 +21,7 @@ class HashMap:
 
         index = self._hash(key)
         bucket = self.data[index]
-        
+    
         for p in bucket:
             if p[0] == key:
                 p[1] = value
