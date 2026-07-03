@@ -36,7 +36,6 @@ class Solution:
         n = len(nums)
         s = sum(nums)
         s1 = s//2
-        visited = [0]*(n)
         @cache
         def dfs(i,c):
             '''
