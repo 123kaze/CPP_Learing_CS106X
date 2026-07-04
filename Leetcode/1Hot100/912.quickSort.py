@@ -32,7 +32,7 @@ class Solution:
 import random
 
 class Solution:
-    def sortArray(self, nums: list[int]) -> list[int]:
+    def sortArray(self, nums: List[int]) -> List[int]:
         def partition(l, r):
             # 随机选择 pivot 并交换到最后一位，防止最坏情况
             pivot_idx = random.randint(l, r)
@@ -60,3 +60,7 @@ class Solution:
 
         quickSort(0, len(nums) - 1)
         return nums
+
+
+    s = Solution()
+    print(s.sortArray([0,4,6,2,1,9,8,5,7,7,9]))
