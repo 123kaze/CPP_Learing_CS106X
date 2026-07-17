@@ -4,6 +4,7 @@ from functools import lru_cache
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         m = len(matrix)
+
         n = len(matrix[0])
 
         @lru_cache(maxsize=None)
