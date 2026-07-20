@@ -16,20 +16,26 @@ void* worker(void *arg){
     return NULL;
 }
 
+void *thread_funk(void* arg){
+    printf("Hello from thread\n");
+    return NULL;
+}
+
 int main(int argc,char* argv[]){
     if (argc !=2){
         fprintf(stderr,"usage:thread <value>\n");
         exit(1);
     }
     loops = atoi(argv[1]);
-    pthread_t p1,p2;
+    pthread_t p1,p2,p3;
     printf("Initial value : %d\n",counter);
 
     Pthread_create(&p1,NULL,worker,NULL);
     Pthread_create(&p2,NULL,worker,NULL);
+    Pthread_create(&p3,NULL,thread_funk,NULL);
     Pthread_join(p1,NULL);
     Pthread_join(p2,NULL);
-
+    Pthread_join(p3,NULL);
     printf("(%d)Final value counter and counter 1 : %d  , %d\n "
         ,getpid(),counter,counter1);
 
