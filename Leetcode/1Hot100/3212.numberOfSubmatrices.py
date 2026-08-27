@@ -1,7 +1,7 @@
 from typing import List
 from collections import deque
 
-class Solution:
+class Solution1:
     def numberOfSubmatrices(self, grid: List[List[str]]) -> int:
         '''
         0,0
