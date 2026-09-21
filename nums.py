@@ -13,6 +13,3 @@ def query(nums,k):
 
     return nums
 
-
-if __name__ == '__main__':
-    nums = 
