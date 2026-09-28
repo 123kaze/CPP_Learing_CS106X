@@ -1,0 +1,41 @@
+/*
+完成两个类，一个类Animal，表示动物类，有一个成员表示年龄。一个类Dog，继承自Animal，
+有一个新的数据成员表示颜色，合理设计这两个类，使得测试程序可以运行并得到正确的结果。
+函数接口定义：
+按照要求实现类
+*/
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Animal {
+    public:
+    int age;
+    int getAge(){
+        return age;
+    }
+    Animal(int c):age(c){}
+};
+
+class Dog : public Animal{
+    public:
+    string color;
+    void showInfor(){
+        cout<<"age:"<<getAge()<<endl;
+        cout<<"color:"<<color<<endl;
+    }
+    Dog(int c,string colo):Animal(c),color(colo){}
+};
+
+
+
+/* 请在这里填写答案 */
+
+int main(){
+    Animal ani(5);
+    cout<<"age of ani:"<<ani.getAge()<<endl;
+    Dog dog(5,"black");
+    cout<<"infor of dog:"<<endl;
+    dog.showInfor();
+}
+

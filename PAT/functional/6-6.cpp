@@ -49,8 +49,6 @@ void sort(T *a, int size) {
 
       std::sort(a, a + size);
   }
-
-
 */
 
 
