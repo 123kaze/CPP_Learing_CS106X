@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Untitled</title>
+</head>
+<body><figure class='table-figure'><table>
+<thead>
+<tr><th><strong>信号名</strong></th><th><strong>方向</strong></th><th><strong>位宽</strong></th><th><strong>功能描述</strong></th></tr></thead>
+<tbody><tr><td><code>clk</code></td><td>input</td><td>1bit</td><td>时钟信号</td></tr><tr><td><code>rst</code></td><td>input</td><td>1bit</td><td>复位信号，高电平有效</td></tr><tr><td><code>memtoreg</code></td><td>input</td><td>1bit</td><td>写回寄存器的数据源选择信号 (0: ALU 结果, 1: 内存数据)</td></tr><tr><td><code>pcsrc</code></td><td>input</td><td>1bit</td><td>PC 数据源选择信号 (0: PC+4, 1: 分支跳转地址)</td></tr><tr><td><code>alusrc</code></td><td>input</td><td>1bit</td><td>ALU 源操作数 B 选择信号 (0: 寄存器数据, 1: 符号扩展立即数)</td></tr><tr><td><code>regdst</code></td><td>input</td><td>1bit</td><td>写入寄存器的目标地址选择 (0: rt, 1: rd)</td></tr><tr><td><code>regwrite</code></td><td>input</td><td>1bit</td><td>寄存器堆写使能信号</td></tr><tr><td><code>jump</code></td><td>input</td><td>1bit</td><td>无条件跳转指令标识信号</td></tr><tr><td><code>alucontrol</code></td><td>input</td><td>3bits</td><td>ALU 运算控制信号</td></tr><tr><td><code>instr</code></td><td>input</td><td>32bits</td><td>从指令存储器读出的机器码指令</td></tr><tr><td><code>readdata</code></td><td>input</td><td>32bits</td><td>从数据存储器读出的数据</td></tr><tr><td><code>pc</code></td><td>output</td><td>32bits</td><td>输出给指令存储器的当前指令地址</td></tr><tr><td><code>aluout</code></td><td>output</td><td>32bits</td><td>ALU 的运算结果（也用作数据存储器的访问地址）</td></tr><tr><td><code>writedata</code></td><td>output</td><td>32bits</td><td>准备写入数据存储器的数据 (GPR[rt])</td></tr><tr><td><code>zero</code></td><td>output</td><td>1bit</td><td>ALU 运算结果是否为零的标志位</td></tr></tbody>
+</table></figure>
+</body>
+</html>
