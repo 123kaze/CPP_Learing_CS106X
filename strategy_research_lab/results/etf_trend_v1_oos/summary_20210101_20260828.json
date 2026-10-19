@@ -1,0 +1,48 @@
+{
+  "hypothesis": "etf_trend_v1",
+  "symbol": "sh510300",
+  "data_adjustment": "qfq",
+  "assumptions": {
+    "start": "2021-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "output_dir": "results/etf_trend_v1_oos",
+    "refresh": false
+  },
+  "strategy": {
+    "start_date": "2021-01-04",
+    "end_date": "2026-08-28",
+    "complete_round_trips": 38,
+    "entry_count": 38,
+    "terminal_equity": 15887.4,
+    "total_return_pct": -20.56,
+    "cagr_pct": -4.0,
+    "max_drawdown_pct": -34.11,
+    "total_commission": 380.0,
+    "closed_win_rate_pct": 21.05,
+    "closed_total_net_pnl": -4112.6,
+    "open_position_at_end": false
+  },
+  "buy_and_hold_reference": {
+    "start_date": "2021-01-04",
+    "entry_price": 4.789,
+    "shares": 4100,
+    "cost": 5.0,
+    "terminal_equity": 19544.0,
+    "total_return_pct": -2.28,
+    "cagr_pct": -0.41,
+    "max_drawdown_pct": -44.03
+  },
+  "gate": {
+    "rule": "年化收益 > 0、期末净资产高于初始资金、最大回撤不差于买入持有",
+    "passed": false
+  },
+  "caveats": [
+    "前复权价格近似含分红再投资；实际分红到账和再投资时点可能不同",
+    "未模拟盘口滑点、ETF 跟踪误差和暂停申赎",
+    "实际券商佣金不同必须重跑"
+  ]
+}

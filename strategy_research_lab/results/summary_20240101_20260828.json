@@ -1,0 +1,123 @@
+{
+  "signal_window": "2024-01-01 至 2026-08-28",
+  "universe_with_history": 3046,
+  "history_download_failed": 6,
+  "signals": 1892,
+  "market_filter": "sh000985 收盘 > EMA50",
+  "selectable_signals": 73,
+  "portfolio": {
+    "trades": 24,
+    "closed_trades": 24,
+    "target_hit_rate_pct": 33.33,
+    "net_positive_rate_pct": 54.17,
+    "mean_net_r": 0.455,
+    "mean_net_pnl": 30.6,
+    "total_net_pnl": 734.38,
+    "status_counts": {
+      "loss": 9,
+      "win": 8,
+      "timeout": 7
+    },
+    "total_return_pct": 3.67,
+    "max_drawdown_yuan": -148.86,
+    "max_drawdown_pct_of_account": -0.74,
+    "total_cost": 250.62,
+    "yearly": {
+      "2024": {
+        "trades": 9,
+        "net_pnl": 399.75,
+        "return_pct": 2.0,
+        "mean_net_r": 0.536,
+        "max_drawdown": -148.86
+      },
+      "2025": {
+        "trades": 11,
+        "net_pnl": 444.14,
+        "return_pct": 2.22,
+        "mean_net_r": 0.699,
+        "max_drawdown": -90.79
+      },
+      "2026": {
+        "trades": 4,
+        "net_pnl": -109.51,
+        "return_pct": -0.55,
+        "mean_net_r": -0.397,
+        "max_drawdown": -125.73
+      }
+    }
+  },
+  "holdout_gate": {
+    "rule": "2025-01-01 之后每年扣费后平均 R > 0，且整段平均 R >= 0.2",
+    "in_sample_trades": 9,
+    "in_sample_mean_net_r": 0.536,
+    "holdout_trades": 15,
+    "holdout_mean_net_r": 0.406,
+    "holdout_years": {
+      "2025": {
+        "trades": 11,
+        "mean_net_r": 0.699
+      },
+      "2026": {
+        "trades": 4,
+        "mean_net_r": -0.397
+      }
+    },
+    "holdout_year_positive": {
+      "2025": true,
+      "2026": false
+    },
+    "passed": false
+  },
+  "per_signal_reference": {
+    "closed_trades": 230,
+    "target_hit_rate_pct": 33.91,
+    "net_positive_rate_pct": 43.04,
+    "mean_net_r": 0.126,
+    "mean_net_pnl": 4.74,
+    "total_net_pnl": 1091.29,
+    "status_counts": {
+      "loss": 112,
+      "win": 78,
+      "timeout": 29,
+      "gap_stop": 11
+    }
+  },
+  "assumptions": {
+    "account": 20000,
+    "risk": 0.005,
+    "worst_gap": 0.1,
+    "top": 0.1,
+    "near": 0.03,
+    "confluence": 0.03,
+    "min_anchor_age": 3,
+    "max_stop_atr": 2.5,
+    "target_r": 3.0,
+    "target_atr_cap": 4.0,
+    "min_effective_r": 2.0,
+    "max_chase": 0.01,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "stamp": 0.0005,
+    "max_cost_r": 0.2,
+    "max_picks": 2,
+    "market_filter": "csi_all_ema50",
+    "market_symbol": "sh000985",
+    "start": "2024-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "hold_days": 20,
+    "max_positions": 2,
+    "holdout_start": "2025-01-01 00:00:00",
+    "gate_min_r": 0.2,
+    "workers": 3,
+    "cache_dir": "backtest_cache/tencent_daily",
+    "output_dir": "backtest_output",
+    "refresh": false,
+    "max_symbols": null
+  },
+  "known_bias": [
+    "存活偏差：只有当前上市股票",
+    "ST 按今天名称剔除，有未来信息",
+    "未模拟同板块最多 1 只",
+    "日线无法确定盘中先后，同日两者都碰到按止损"
+  ]
+}

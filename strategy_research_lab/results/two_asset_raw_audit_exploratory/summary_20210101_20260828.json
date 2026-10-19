@@ -1,0 +1,39 @@
+{
+  "hypothesis": "two_asset_etf_v1_raw_total_return_audit",
+  "data": "腾讯未复权日线 + 新浪现金分红",
+  "assumptions": {
+    "start": "2021-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "output_dir": "results/two_asset_raw_audit_exploratory"
+  },
+  "strategy": {
+    "start_date": "2021-01-04",
+    "end_date": "2026-08-28",
+    "terminal_equity": 32142.2,
+    "total_return_pct": 60.71,
+    "cagr_pct": 8.77,
+    "max_drawdown_pct": -18.89,
+    "total_dividend_cash": 1263.5,
+    "total_commission": 150.0,
+    "trades": 36,
+    "end_cash": 1050.2,
+    "end_shares": {
+      "510300": 3000,
+      "518880": 1800
+    }
+  },
+  "buy_and_hold_510300_reference": {
+    "terminal_equity": 19588.0,
+    "total_return_pct": -2.06,
+    "cagr_pct": -0.37,
+    "max_drawdown_pct": -40.16,
+    "dividend_cash": 1816.7
+  },
+  "caveats": [
+    "分红日期和到账时间可能与券商存在细微差异",
+    "未模拟盘口滑点、跟踪误差、申赎或停牌"
+  ]
+}

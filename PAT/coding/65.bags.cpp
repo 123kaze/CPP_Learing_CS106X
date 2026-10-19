@@ -4,45 +4,29 @@
 #include <vector>
 
 using namespace std;
-
+int n,m;
+vector<int> w;
+vector<int> v;
+vector<int> dp;
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    int n;
-    int total_minutes;
-    cin >> n >> total_minutes;
-
-    vector<int> minutes(n);
-    vector<int> coins(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> minutes[i];
+    cin>>n>>m;
+    w.resize(n);
+    v.resize(n);
+    dp.assign(m+1,0);
+    dp[0] = 0;
+    for(int i=0;i<n;i++){
+        cin>>w[i];
     }
-    for (int i = 0; i < n; ++i) {
-        cin >> coins[i];
+    int sumV = 0;
+    for(int i=0;i<n;i++){
+        cin>>v[i];
+        sumV+=v[i];
     }
-
-    const int max_coins = accumulate(coins.begin(), coins.end(), 0);
-    const int impossible = total_minutes + 1;
-    vector<int> min_time(max_coins + 1, impossible);
-    min_time[0] = 0;
-
-    int reachable_coins = 0;
-    for (int i = 0; i < n; ++i) {
-        for (int value = reachable_coins + coins[i]; value >= coins[i]; --value) {
-            min_time[value] = min(
-                min_time[value],
-                min_time[value - coins[i]] + minutes[i]);
-        }
-        reachable_coins += coins[i];
-    }
-
-    for (int value = max_coins; value >= 0; --value) {
-        if (min_time[value] <= total_minutes) {
-            cout << value << '\n';
-            return 0;
+    // dp[space] = max(dp[space - w[j]]+v[j],dp[j]) for j in range(space,m+1)
+    for(int i=0;i<n;i++){
+        for(int j=m;j>=w[i];j--){
+            dp[j] = max(dp[j],dp[j-w[i]]+v[i]);
         }
     }
-
-    return 0;
+    
 }

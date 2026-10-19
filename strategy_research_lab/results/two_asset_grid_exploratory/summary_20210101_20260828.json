@@ -1,0 +1,192 @@
+{
+  "hypothesis": "two_asset_etf_fixed_grid_robustness_audit",
+  "data_adjustment": "qfq; 近似分红再投资",
+  "predeclared_grid": {
+    "weight_510300": [
+      0.4,
+      0.5,
+      0.6
+    ],
+    "weight_518880": [
+      0.6,
+      0.5,
+      0.4
+    ],
+    "rebalance_frequency": [
+      "monthly",
+      "quarterly",
+      "annual"
+    ]
+  },
+  "assumptions": {
+    "start": "2021-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "slippage_bps": 0.0,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "refresh": false,
+    "output_dir": "results/two_asset_grid_exploratory"
+  },
+  "results": [
+    {
+      "stock_weight": 0.4,
+      "frequency": "monthly",
+      "status": "ok",
+      "terminal_equity": 34574.7,
+      "total_return_pct": 72.87,
+      "cagr_pct": 10.18,
+      "max_drawdown_pct": -20.07,
+      "scheduled_rebalances": 68,
+      "actual_trades": 81,
+      "total_commission": 405.0,
+      "end_cash": 1096.4,
+      "end_shares": {
+        "510300": 2700,
+        "518880": 2200
+      }
+    },
+    {
+      "stock_weight": 0.5,
+      "frequency": "monthly",
+      "status": "ok",
+      "terminal_equity": 31607.3,
+      "total_return_pct": 58.04,
+      "cagr_pct": 8.44,
+      "max_drawdown_pct": -21.37,
+      "scheduled_rebalances": 68,
+      "actual_trades": 85,
+      "total_commission": 425.0,
+      "end_cash": 527.0,
+      "end_shares": {
+        "510300": 3200,
+        "518880": 1700
+      }
+    },
+    {
+      "stock_weight": 0.6,
+      "frequency": "monthly",
+      "status": "ok",
+      "terminal_equity": 28604.0,
+      "total_return_pct": 43.02,
+      "cagr_pct": 6.54,
+      "max_drawdown_pct": -25.65,
+      "scheduled_rebalances": 68,
+      "actual_trades": 82,
+      "total_commission": 410.0,
+      "end_cash": 857.5,
+      "end_shares": {
+        "510300": 3500,
+        "518880": 1200
+      }
+    },
+    {
+      "stock_weight": 0.4,
+      "frequency": "quarterly",
+      "status": "ok",
+      "terminal_equity": 34767.4,
+      "total_return_pct": 73.84,
+      "cagr_pct": 10.29,
+      "max_drawdown_pct": -19.87,
+      "scheduled_rebalances": 23,
+      "actual_trades": 30,
+      "total_commission": 150.0,
+      "end_cash": 809.5,
+      "end_shares": {
+        "510300": 2600,
+        "518880": 2300
+      }
+    },
+    {
+      "stock_weight": 0.5,
+      "frequency": "quarterly",
+      "status": "ok",
+      "terminal_equity": 31926.6,
+      "total_return_pct": 59.63,
+      "cagr_pct": 8.64,
+      "max_drawdown_pct": -20.77,
+      "scheduled_rebalances": 23,
+      "actual_trades": 31,
+      "total_commission": 155.0,
+      "end_cash": 834.6,
+      "end_shares": {
+        "510300": 3000,
+        "518880": 1800
+      }
+    },
+    {
+      "stock_weight": 0.6,
+      "frequency": "quarterly",
+      "status": "ok",
+      "terminal_equity": 28900.8,
+      "total_return_pct": 44.5,
+      "cagr_pct": 6.74,
+      "max_drawdown_pct": -25.24,
+      "scheduled_rebalances": 23,
+      "actual_trades": 31,
+      "total_commission": 155.0,
+      "end_cash": 674.7,
+      "end_shares": {
+        "510300": 3400,
+        "518880": 1300
+      }
+    },
+    {
+      "stock_weight": 0.4,
+      "frequency": "annual",
+      "status": "ok",
+      "terminal_equity": 34671.1,
+      "total_return_pct": 73.36,
+      "cagr_pct": 10.24,
+      "max_drawdown_pct": -20.15,
+      "scheduled_rebalances": 6,
+      "actual_trades": 11,
+      "total_commission": 55.0,
+      "end_cash": 1204.5,
+      "end_shares": {
+        "510300": 2900,
+        "518880": 2100
+      }
+    },
+    {
+      "stock_weight": 0.5,
+      "frequency": "annual",
+      "status": "ok",
+      "terminal_equity": 31360.3,
+      "total_return_pct": 56.8,
+      "cagr_pct": 8.29,
+      "max_drawdown_pct": -20.12,
+      "scheduled_rebalances": 6,
+      "actual_trades": 11,
+      "total_commission": 55.0,
+      "end_cash": 759.6,
+      "end_shares": {
+        "510300": 3300,
+        "518880": 1600
+      }
+    },
+    {
+      "stock_weight": 0.6,
+      "frequency": "annual",
+      "status": "ok",
+      "terminal_equity": 28825.6,
+      "total_return_pct": 44.13,
+      "cagr_pct": 6.69,
+      "max_drawdown_pct": -24.44,
+      "scheduled_rebalances": 6,
+      "actual_trades": 10,
+      "total_commission": 50.0,
+      "end_cash": 611.2,
+      "end_shares": {
+        "510300": 3600,
+        "518880": 1200
+      }
+    }
+  ],
+  "interpretation": [
+    "本表完整披露预先固定的 3×3 网格，不能按最高收益单元事后改写纸面策略。",
+    "历史正收益不代表未来盈利；纸面交易规则仍固定为 50/50、季度再平衡。",
+    "结果未模拟盘口冲击、跟踪误差、申赎与停牌。"
+  ]
+}

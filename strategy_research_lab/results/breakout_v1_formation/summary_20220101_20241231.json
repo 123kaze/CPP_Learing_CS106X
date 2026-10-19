@@ -1,0 +1,87 @@
+{
+  "hypothesis": "breakout_v1",
+  "start": "2022-01-01 00:00:00",
+  "end": "2024-12-31 00:00:00",
+  "universe_with_history": 3046,
+  "history_download_failed": 6,
+  "signals": 641,
+  "selectable_signals": 128,
+  "portfolio": {
+    "trades": 15,
+    "closed_trades": 15,
+    "net_positive_rate_pct": 13.33,
+    "mean_net_r": -0.457,
+    "total_net_pnl": -446.05,
+    "total_return_pct": -2.23,
+    "total_cost": 155.76,
+    "max_drawdown_yuan": -661.79,
+    "max_drawdown_pct_of_account": -3.31,
+    "status_counts": {
+      "trail_stop": 13,
+      "gap_stop": 2
+    },
+    "yearly": {
+      "2022": {
+        "trades": 4,
+        "mean_net_r": -1.03,
+        "net_pnl": -253.28,
+        "max_drawdown_yuan": -253.28
+      },
+      "2023": {
+        "trades": 6,
+        "mean_net_r": -0.937,
+        "net_pnl": -368.21,
+        "max_drawdown_yuan": -368.21
+      },
+      "2024": {
+        "trades": 5,
+        "mean_net_r": 0.577,
+        "net_pnl": 175.44,
+        "max_drawdown_yuan": -169.02
+      }
+    }
+  },
+  "assumptions": {
+    "start": "2022-01-01 00:00:00",
+    "end": "2024-12-31 00:00:00",
+    "holdout_start": null,
+    "account": 20000,
+    "risk": 0.005,
+    "worst_gap": 0.1,
+    "max_chase": 0.01,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "stamp": 0.0005,
+    "max_cost_r": 0.2,
+    "hold_days": 40,
+    "max_positions": 2,
+    "max_picks": 2,
+    "market_symbol": "sh000985",
+    "workers": 3,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "output_dir": "results/breakout_v1_formation",
+    "refresh": false,
+    "max_symbols": null
+  },
+  "known_bias": [
+    "存活偏差：只有当前上市股票",
+    "ST 按今天名称剔除，有未来信息",
+    "日线无法确定盘中先后；追踪止损只在下一日生效",
+    "未模拟排队、冲击成本和行业集中度"
+  ],
+  "formation_gate": {
+    "rule": "形成期 >= 40 笔、整体平均净 R > 0，且每个自然年平均净 R > 0",
+    "passed": false,
+    "each_year_positive": false,
+    "expected_years": [
+      "2022",
+      "2023",
+      "2024"
+    ]
+  },
+  "holdout_gate": {
+    "applicable": false,
+    "passed": null,
+    "reason": "形成期模式：未设置样本外段，不作样本外判定"
+  }
+}

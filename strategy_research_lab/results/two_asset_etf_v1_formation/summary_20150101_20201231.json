@@ -1,0 +1,46 @@
+{
+  "hypothesis": "two_asset_etf_v1_exploratory",
+  "assets": {
+    "510300": "sh510300",
+    "518880": "sh518880"
+  },
+  "data_adjustment": "qfq",
+  "assumptions": {
+    "start": "2015-01-01 00:00:00",
+    "end": "2020-12-31 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "slippage_bps": 0.0,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "output_dir": "results/two_asset_etf_v1_formation",
+    "refresh": false
+  },
+  "strategy": {
+    "start_date": "2015-01-05",
+    "end_date": "2020-12-31",
+    "terminal_equity": 35241.1,
+    "total_return_pct": 76.21,
+    "cagr_pct": 9.92,
+    "max_drawdown_pct": -29.0,
+    "scheduled_rebalances": 24,
+    "actual_trades": 42,
+    "total_commission": 210.0,
+    "end_shares": {
+      "510300": 3900,
+      "518880": 4200
+    },
+    "end_cash": 366.7
+  },
+  "buy_and_hold_510300_reference": {
+    "terminal_equity": 34131.1,
+    "total_return_pct": 70.66,
+    "cagr_pct": 9.34,
+    "max_drawdown_pct": -52.84
+  },
+  "caveats": [
+    "探索性历史结果：不能视为盲样本外验证",
+    "前复权价格近似分红再投资",
+    "未模拟滑点、跟踪误差、申赎与停牌；实际费用变化须重跑"
+  ]
+}

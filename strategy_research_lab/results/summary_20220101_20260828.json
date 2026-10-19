@@ -1,0 +1,138 @@
+{
+  "signal_window": "2022-01-01 至 2026-08-28",
+  "universe_with_history": 3046,
+  "history_download_failed": 6,
+  "signals": 2881,
+  "market_filter": "sh000985 收盘 > EMA50",
+  "selectable_signals": 114,
+  "portfolio": {
+    "trades": 35,
+    "closed_trades": 35,
+    "target_hit_rate_pct": 22.86,
+    "net_positive_rate_pct": 37.14,
+    "mean_net_r": -0.089,
+    "mean_net_pnl": -5.74,
+    "total_net_pnl": -201.0,
+    "status_counts": {
+      "loss": 17,
+      "timeout": 8,
+      "win": 8,
+      "gap_stop": 2
+    },
+    "total_return_pct": -1.0,
+    "max_drawdown_yuan": -999.69,
+    "max_drawdown_pct_of_account": -5.0,
+    "total_cost": 365.0,
+    "yearly": {
+      "2022": {
+        "trades": 6,
+        "net_pnl": -514.44,
+        "return_pct": -2.57,
+        "mean_net_r": -1.26,
+        "max_drawdown": -514.44
+      },
+      "2023": {
+        "trades": 5,
+        "net_pnl": -420.94,
+        "return_pct": -2.1,
+        "mean_net_r": -1.295,
+        "max_drawdown": -420.94
+      },
+      "2024": {
+        "trades": 9,
+        "net_pnl": 399.75,
+        "return_pct": 2.0,
+        "mean_net_r": 0.536,
+        "max_drawdown": -148.86
+      },
+      "2025": {
+        "trades": 11,
+        "net_pnl": 444.14,
+        "return_pct": 2.22,
+        "mean_net_r": 0.699,
+        "max_drawdown": -90.79
+      },
+      "2026": {
+        "trades": 4,
+        "net_pnl": -109.51,
+        "return_pct": -0.55,
+        "mean_net_r": -0.397,
+        "max_drawdown": -125.73
+      }
+    }
+  },
+  "holdout_gate": {
+    "rule": "2025-01-01 之后每年扣费后平均 R > 0，且整段平均 R >= 0.2",
+    "in_sample_trades": 20,
+    "in_sample_mean_net_r": -0.46,
+    "holdout_trades": 15,
+    "holdout_mean_net_r": 0.406,
+    "holdout_years": {
+      "2025": {
+        "trades": 11,
+        "mean_net_r": 0.699
+      },
+      "2026": {
+        "trades": 4,
+        "mean_net_r": -0.397
+      }
+    },
+    "holdout_year_positive": {
+      "2025": true,
+      "2026": false
+    },
+    "passed": false
+  },
+  "per_signal_reference": {
+    "closed_trades": 351,
+    "target_hit_rate_pct": 28.77,
+    "net_positive_rate_pct": 36.47,
+    "mean_net_r": -0.103,
+    "mean_net_pnl": -4.32,
+    "total_net_pnl": -1514.83,
+    "status_counts": {
+      "loss": 186,
+      "win": 101,
+      "timeout": 40,
+      "gap_stop": 24
+    }
+  },
+  "assumptions": {
+    "account": 20000,
+    "risk": 0.005,
+    "worst_gap": 0.1,
+    "top": 0.1,
+    "near": 0.03,
+    "confluence": 0.03,
+    "min_anchor_age": 3,
+    "max_stop_atr": 2.5,
+    "target_r": 3.0,
+    "target_atr_cap": 4.0,
+    "min_effective_r": 2.0,
+    "max_chase": 0.01,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "stamp": 0.0005,
+    "max_cost_r": 0.2,
+    "max_picks": 2,
+    "market_filter": "csi_all_ema50",
+    "market_symbol": "sh000985",
+    "start": "2022-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "hold_days": 20,
+    "max_positions": 2,
+    "holdout_start": "2025-01-01 00:00:00",
+    "gate_min_r": 0.2,
+    "workers": 3,
+    "cache_dir": "backtest_cache/tencent_daily",
+    "output_dir": "backtest_output",
+    "refresh": false,
+    "max_symbols": null
+  },
+  "known_bias": [
+    "存活偏差：只有当前上市股票",
+    "ST 按今天名称剔除，有未来信息",
+    "未模拟同板块最多 1 只",
+    "日线无法确定盘中先后，同日两者都碰到按止损"
+  ]
+}

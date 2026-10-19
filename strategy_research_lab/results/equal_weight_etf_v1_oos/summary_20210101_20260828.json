@@ -1,0 +1,54 @@
+{
+  "hypothesis": "equal_weight_etf_v1",
+  "assets": {
+    "510300": "sh510300",
+    "511010": "sh511010",
+    "518880": "sh518880"
+  },
+  "data_adjustment": "qfq",
+  "assumptions": {
+    "start": "2021-01-01 00:00:00",
+    "end": "2026-08-28 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "output_dir": "results/equal_weight_etf_v1_oos",
+    "refresh": false
+  },
+  "strategy": {
+    "start_date": "2021-01-04",
+    "end_date": "2026-08-28",
+    "terminal_equity": 27524.1,
+    "total_return_pct": 37.62,
+    "cagr_pct": 5.82,
+    "max_drawdown_pct": -14.18,
+    "scheduled_rebalances": 23,
+    "actual_trades": 28,
+    "actual_buys": 14,
+    "total_commission": 140.0,
+    "end_shares": {
+      "510300": 1700,
+      "511010": 0,
+      "518880": 1000
+    },
+    "end_cash": 10094.8
+  },
+  "buy_and_hold_510300_reference": {
+    "symbol": "510300",
+    "terminal_equity": 19544.0,
+    "total_return_pct": -2.28,
+    "cagr_pct": -0.41,
+    "max_drawdown_pct": -44.03,
+    "entry_cost": 5.0
+  },
+  "gate": {
+    "rule": "年化收益 > 0、期末净资产高于初始资金、最大回撤不差于 510300 买入持有",
+    "passed": true
+  },
+  "caveats": [
+    "前复权价格近似分红再投资",
+    "未模拟盘口滑点、ETF 跟踪误差、申赎或停牌",
+    "实际券商费用变化时必须重跑"
+  ]
+}

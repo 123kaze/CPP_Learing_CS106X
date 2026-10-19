@@ -1,0 +1,55 @@
+{
+  "hypothesis": "multi_asset_etf_v1",
+  "assets": {
+    "510300": "sh510300",
+    "511010": "sh511010",
+    "518880": "sh518880"
+  },
+  "data_adjustment": "qfq",
+  "assumptions": {
+    "start": "2015-01-01 00:00:00",
+    "end": "2020-12-31 00:00:00",
+    "account": 20000,
+    "fee_rate": 0.00025,
+    "min_fee": 5.0,
+    "cache_dir": "../backtest_cache/tencent_daily",
+    "output_dir": "results/multi_asset_etf_v1_formation",
+    "refresh": false
+  },
+  "strategy": {
+    "start_date": "2015-01-05",
+    "end_date": "2020-12-31",
+    "terminal_equity": 27997.09,
+    "total_return_pct": 39.99,
+    "cagr_pct": 5.78,
+    "max_drawdown_pct": -52.96,
+    "actual_switches": 12,
+    "complete_round_trips": 11,
+    "total_commission": 119.2,
+    "closed_win_rate_pct": 63.64,
+    "signal_selection_counts": {
+      "cash": 0,
+      "510300": 36,
+      "511010": 12,
+      "518880": 23
+    },
+    "open_holding_at_end": "510300"
+  },
+  "buy_and_hold_510300_reference": {
+    "symbol": "510300",
+    "terminal_equity": 34131.1,
+    "total_return_pct": 70.66,
+    "cagr_pct": 9.34,
+    "max_drawdown_pct": -52.84,
+    "entry_cost": 5.0
+  },
+  "gate": {
+    "rule": "年化收益 > 0、至少 12 次实际换仓、最大回撤不差于 510300 买入持有",
+    "passed": false
+  },
+  "caveats": [
+    "前复权价格近似分红再投资",
+    "未模拟盘口滑点、申赎、ETF 跟踪误差或基金停牌",
+    "实际券商费用不同必须重跑"
+  ]
+}
