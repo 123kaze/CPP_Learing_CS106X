@@ -21,25 +21,19 @@ n,m = map(int,input().split())
 v = list(map(int,input().split()))
 v.sort()
 res = []
+@cache
 def dfs(i,space):
     '''
-    dfs(i,s) = for j form i[dfs(j+1,space - v[j])]
-    dfs(i, space) = 对所有 j ∈ [i, n)：
-                    选择 v[j]
-                    dfs(j + 1, space - v[j])
+    dfs(i,s) = for j form i[dfs(i+j,space - v[j])]
     '''
     if space == 0:
         return True
-
     for j in range(i,n):
         if v[j] > space:
             break
-   
         res.append(v[j])
-
         if dfs(j+1,space - v[j]):
             return True
-
         res.pop()
 
     return False

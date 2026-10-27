@@ -15,9 +15,9 @@ int dfs(int node){
     int maxn = 0;
     for(auto child:graph[node]){
         int len = dfs(child);
-        if (len< maxn){
+        if (len< maxn){ // 这是>不是《
             maxn = len;
-            nextNode[node];
+            nextNode[node] ;// = child;
         }
         else if (len == maxn && child < nextNode[node]) {
             nextNode[node] = child;

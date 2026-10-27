@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PTA 考试复习手册</title>
+<style>
+:root {
+  --fs: 16px;
+  --bg: #f6f6f3; --card: #ffffff; --text: #24292f; --muted: #6b7280; --line: #e5e7eb;
+  --accent: #2f6fde; --accent-soft: #e8f0fd; --ok: #1a8f5a; --ok-soft: #e3f5ec;
+  --warn: #b45309; --warn-soft: #fdf2e2; --bad: #c53030; --bad-soft: #fde8e8;
+  --code-bg: #f3f4f6; --code-text: #24292f;
+  --hl-kw: #a626a4; --hl-str: #50a14f; --hl-com: #8a919a; --hl-num: #c18401; --hl-pre: #0f7c9c;
+}
+html[data-theme="dark"] {
+  --bg: #181a1f; --card: #22252b; --text: #dcdfe4; --muted: #9aa1ab; --line: #343841;
+  --accent: #6aa3ff; --accent-soft: #24344f; --ok: #4cc38a; --ok-soft: #1f3a2e;
+  --warn: #f0a84b; --warn-soft: #3d3020; --bad: #ff7b7b; --bad-soft: #432628;
+  --code-bg: #1b1d22; --code-text: #d7dae0;
+  --hl-kw: #c678dd; --hl-str: #98c379; --hl-com: #7f848e; --hl-num: #d19a66; --hl-pre: #56b6c2;
+}
+* { box-sizing: border-box; }
+html { font-size: var(--fs); scroll-behavior: smooth; scroll-padding-top: 16px; }
+body {
+  margin: 0; background: var(--bg); color: var(--text); line-height: 1.75;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+code, pre { font-family: "SF Mono", Menlo, Consolas, "Courier New", monospace; }
+a { color: var(--accent); text-decoration: none; }
+
+/* ---------- 布局 ---------- */
+.side {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 248px; overflow-y: auto;
+  background: var(--card); border-right: 1px solid var(--line); padding: 20px 16px; z-index: 10;
+}
+.main { margin-left: 248px; padding: 28px 32px 120px; }
+.wrap { max-width: 900px; margin: 0 auto; }
+.side h1 { font-size: 1.05rem; margin: 0 0 4px; }
+.side .sub { color: var(--muted); font-size: .8rem; margin-bottom: 14px; }
+.side nav a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px 10px; border-radius: 8px; color: var(--text); font-size: .92rem;
+}
+.side nav a:hover { background: var(--accent-soft); }
+.side nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.badge { font-size: .72rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.btn {
+  border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 8px;
+  padding: 5px 10px; font-size: .8rem; cursor: pointer; font-family: inherit;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.search {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--text); font-size: .88rem; font-family: inherit;
+}
+.menu-btn { display: none; }
+
+/* ---------- 内容 ---------- */
+section { margin-bottom: 56px; }
+section > h2 {
+  font-size: 1.45rem; margin: 0 0 6px; padding-top: 8px; display: flex; align-items: center; gap: 10px;
+}
+section > .lead { color: var(--muted); margin: 0 0 18px; }
+h3 { font-size: 1.08rem; margin: 22px 0 10px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 14px;
+}
+.card h4 { margin: 0 0 6px; font-size: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.grid .card { margin: 0; }
+.stat { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+.tag {
+  display: inline-block; font-size: .75rem; padding: 1px 8px; border-radius: 999px; margin-right: 4px;
+  background: var(--accent-soft); color: var(--accent); font-weight: 500; white-space: nowrap;
+}
+.tag.ok { background: var(--ok-soft); color: var(--ok); }
+.tag.warn { background: var(--warn-soft); color: var(--warn); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+.note {
+  border-left: 4px solid var(--accent); background: var(--accent-soft);
+  padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0;
+}
+.note.warn { border-color: var(--warn); background: var(--warn-soft); }
+.note.bad { border-color: var(--bad); background: var(--bad-soft); }
+.note.ok { border-color: var(--ok); background: var(--ok-soft); }
+ul, ol { padding-left: 1.3em; margin: 6px 0; }
+li { margin: 3px 0; }
+:not(pre) > code {
+  background: var(--code-bg); padding: 1px 6px; border-radius: 5px; font-size: .88em;
+}
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: .82rem; }
+.table-card { padding: 4px 8px; overflow-x: auto; }
+
+/* 折叠块 */
+details {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px;
+}
+details > summary {
+  cursor: pointer; padding: 13px 20px; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 8px;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "▸"; color: var(--muted); transition: transform .15s; }
+details[open] > summary::before { transform: rotate(90deg); }
+details > .body { padding: 0 20px 14px; }
+
+/* 代码 */
+.codebox { position: relative; margin: 10px 0; }
+.codebox pre {
+  background: var(--code-bg); color: var(--code-text); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 0; font-size: .84rem; line-height: 1.6;
+}
+.codebox .copy { position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity .15s; }
+.codebox:hover .copy { opacity: 1; }
+.hl-kw { color: var(--hl-kw); } .hl-str { color: var(--hl-str); } .hl-com { color: var(--hl-com); font-style: italic; }
+.hl-num { color: var(--hl-num); } .hl-pre { color: var(--hl-pre); }
+
+/* 勾选 */
+label.chk { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; cursor: pointer; }
+label.chk input { margin-top: .45em; width: 16px; height: 16px; accent-color: var(--ok); flex-shrink: 0; }
+label.chk input:checked + span { color: var(--muted); text-decoration: line-through; }
+.progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 8px 0 4px; }
+.progress > i { display: block; height: 100%; background: var(--ok); width: 0; transition: width .3s; }
+
+/* 计划 */
+.tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.day { position: relative; }
+.day.today { border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.day.today::after {
+  content: "今天"; position: absolute; top: 12px; right: 14px; background: var(--accent); color: #fff;
+  font-size: .75rem; padding: 2px 10px; border-radius: 99px;
+}
+.day .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.day .cols h5 { margin: 4px 0; font-size: .82rem; color: var(--muted); }
+
+/* 错题对照 */
+.fix { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fix .codebox pre { font-size: .8rem; }
+.fix .lab { font-size: .78rem; font-weight: 600; }
+.fix .lab.bad { color: var(--bad); } .fix .lab.ok { color: var(--ok); }
+
+/* 题库筛选 */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+tr.redo td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+
+/* 考前模式：只显示 .key */
+body.focus .main section:not(.key-section) { display: none; }
+body.focus .main .key-section > *:not(.key):not(h2):not(.lead) { display: none; }
+.focus-banner { display: none; }
+body.focus .focus-banner { display: block; }
+
+.hidden-by-search { display: none !important; }
+
+@media (max-width: 860px) {
+  .side { transform: translateX(-100%); transition: transform .2s; box-shadow: 0 0 30px rgba(0,0,0,.2); }
+  .side.open { transform: none; }
+  .main { margin-left: 0; padding: 60px 16px 100px; }
+  .menu-btn { display: block; position: fixed; top: 12px; left: 12px; z-index: 11; }
+  .day .cols, .fix { grid-template-columns: 1fr; }
+}
+@media print {
+  .side, .menu-btn, .copy, .tools { display: none !important; }
+  .main { margin: 0; padding: 0; }
+  details { break-inside: avoid; }
+  details > .body { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<button class="btn menu-btn" onclick="document.querySelector('.side').classList.toggle('open')">☰ 目录</button>
+
+<aside class="side">
+  <h1>PTA 考试复习手册</h1>
+  <div class="sub">3 道编程题 + 2 道函数题</div>
+  <input class="search" id="search" placeholder="搜索：virtual、背包、getline…">
+  <div class="tools">
+    <button class="btn" id="focusBtn" title="只显示考前必看的内容">⏱ 考前 30 分钟</button>
+    <button class="btn" id="themeBtn">🌙 深色</button>
+    <button class="btn" id="fsDown">A−</button>
+    <button class="btn" id="fsUp">A+</button>
+    <button class="btn" id="expandBtn">全部展开</button>
+  </div>
+  <nav id="nav">
+    <a href="#home">🏠 总览</a>
+    <a href="#plan">📅 复习计划 <span class="badge" data-badge="plan"></span></a>
+    <a href="#bugs">🐞 我的 Bug 本 <span class="badge" data-badge="bugs"></span></a>
+    <a href="#func">🧱 函数题速记</a>
+    <a href="#bank">📚 编程题库 <span class="badge" data-badge="bank"></span></a>
+    <a href="#cpp">⚡ C++ 速查</a>
+    <a href="#tpl">🧩 算法模板</a>
+    <a href="#exam">✅ 考场清单 <span class="badge" data-badge="exam"></span></a>
+    <a href="#env">💻 本地环境</a>
+  </nav>
+</aside>
+
+<main class="main"><div class="wrap">
+
+<div class="note focus-banner key">⏱ 考前模式：只显示最关键的内容。再点一次左上角「考前 30 分钟」恢复全部。</div>
+
+<!-- ======================= 总览 ======================= -->
+<section id="home" class="key-section">
+  <h2>🏠 总览</h2>
+  <p class="lead">你的算法水平够用（LeetCode 1700-1800）。主要失分风险在 <b>C++ 语法细节</b>、<b>输出格式</b>、<b>Python 思路翻成 C++ 时的 bug</b>。</p>
+
+  <div class="grid">
+    <div class="card"><h4>距离考试</h4><div class="stat" id="countdown">—</div>
+      <input type="date" id="examDate" class="search" style="margin-top:6px"></div>
+    <div class="card"><h4>总进度</h4><div class="stat" id="totalPct">0%</div>
+      <div class="progress"><i id="totalBar"></i></div><div class="badge" id="totalTxt"></div></div>
+    <div class="card"><h4>今天该做</h4><div id="todayHint" style="font-size:.92rem">先在左边填考试日期 ←</div></div>
+  </div>
+
+  <div class="card key">
+    <h4>分数策略</h4>
+    <table>
+      <tr><th>题型</th><th>目标</th><th>关键</th></tr>
+      <tr><td>函数题 ×2</td><td><span class="tag ok">必须满分</span></td><td>输出和样例逐字符一致；会手推构造/析构顺序</td></tr>
+      <tr><td>编程题 · 易</td><td><span class="tag ok">满分</span></td><td>≤ 20 分钟，Python 可以</td></tr>
+      <tr><td>编程题 · 中</td><td><span class="tag">满分</span></td><td>树 / 搜索 / 贪心；数据 ≥ 1e5 直接 C++</td></tr>
+      <tr><td>编程题 · 难</td><td><span class="tag warn">至少部分分</span></td><td>DP / 剪枝搜索 / 复杂模拟，只能 C++</td></tr>
+    </table>
+  </div>
+  <div class="note key"><b>做题顺序：</b>两道函数题（约 30 分钟）→ 编程简单题 → 中等题 → 难题。<br>
+    PTA 按测试点给分：难题卡住超过 20 分钟，<b>先交暴力拿部分分</b>，再回来优化。</div>
+</section>
+
+<!-- ======================= 计划 ======================= -->
+<section id="plan" data-prog="plan">
+  <h2>📅 复习计划</h2>
+  <p class="lead">每天 3-4 小时，每道题都限时。超时就看旧代码，第二天再重写一遍。做完一项就勾掉，进度会自动保存。</p>
+  <div class="tabs">
+    <button class="btn on" data-plan="p7">7 天版</button>
+    <button class="btn" data-plan="p3">3 天压缩版</button>
+  </div>
+
+  <div id="p7">
+    <div class="card day" data-day="7-1"><h4>D1 · 类和对象 + 修 bug</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>看「类的骨架」「构造/析构顺序」</span></label>
+        <label class="chk"><input type="checkbox"><span><b>不运行</b>，手推 6-11、6-12 的输出，再运行对照</span></label>
+        <label class="chk"><input type="checkbox"><span>重写 6-4、6-8</span></label></div>
+      <div><h5>编程题</h5>
+        <label class="chk"><input type="checkbox"><span>修 48（见 Bug 本）</span></label>
+        <label class="chk"><input type="checkbox"><span>44 改成 BFS，输出门的编号</span></label></div></div></div>
+
+    <div class="card day" data-day="7-2"><h4>D2 · 继承多态 + 回溯</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>看「继承与多态」</span></label>
+        <label class="chk"><input type="checkbox"><span>重写 6-1、6-13</span></label>
+        <label class="chk"><input type="checkbox"><span>自己写 Shape / Circle / Rect，用基类指针数组求面积和</span></label></div>
+      <div><h5>编程题</h5>
+        <label class="chk"><input type="checkbox"><span>63 用 C++ DP 重写</span></label>
+        <label class="chk"><input type="checkbox"><span>默写 42、47 回溯</span></label></div></div></div>
+
+    <div class="card day" data-day="7-3"><h4>D3 · 运算符重载 + 树</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>重写 6-5、6-14</span></label>
+        <label class="chk"><input type="checkbox"><span>写完整 Complex（+ − == &lt;&lt; &gt;&gt; 前后置 ++）</span></label>
+        <label class="chk"><input type="checkbox"><span>写 MyString 深拷贝三件套</span></label></div>
+      <div><h5>编程题</h5>
+        <label class="chk"><input type="checkbox"><span>49 用哈希表优化建树</span></label>
+        <label class="chk"><input type="checkbox"><span>50、52 用 C++ 写</span></label></div></div></div>
+
+    <div class="card day" data-day="7-4"><h4>D4 · 模板链表 + map/string</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>重写 6-6、6-2、6-10</span></label>
+        <label class="chk"><input type="checkbox"><span>写类模板 Stack&lt;T&gt;，成员放在类外定义</span></label></div>
+      <div><h5>编程题</h5>
+        <label class="chk"><input type="checkbox"><span>43 用 C++ 写</span></label>
+        <label class="chk"><input type="checkbox"><span>51 用 C++ 写</span></label></div></div></div>
+
+    <div class="card day" data-day="7-5"><h4>D5 · 零碎语法 + DP</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>过一遍「零碎但会考的」</span></label>
+        <label class="chk"><input type="checkbox"><span>按 Bug 本改好 6-3、6-15</span></label></div>
+      <div><h5>编程题（每题 ≤ 30 分钟）</h5>
+        <label class="chk"><input type="checkbox"><span>默写 64、65.di</span></label>
+        <label class="chk"><input type="checkbox"><span>默写 67、68</span></label>
+        <label class="chk"><input type="checkbox"><span>45 改成 C++ 迭代 DP</span></label></div></div></div>
+
+    <div class="card day" data-day="7-6"><h4>D6 · 补完函数题 + 贪心模拟</h4><div class="cols">
+      <div><h5>函数题</h5>
+        <label class="chk"><input type="checkbox"><span>6-16 以后还没写的全部做完</span></label></div>
+      <div><h5>编程题</h5>
+        <label class="chk"><input type="checkbox"><span>46、59、61</span></label>
+        <label class="chk"><input type="checkbox"><span>66 默写</span></label>
+        <label class="chk"><input type="checkbox"><span>54 用 C++ 写</span></label></div></div></div>
+
+    <div class="card day" data-day="7-7"><h4>D7 · 模拟考</h4>
+      <label class="chk"><input type="checkbox"><span>随机抽 2 道函数题 + 3 道编程题（易 / 中 / 难各一），按正式考试时间限时完成</span></label>
+      <label class="chk"><input type="checkbox"><span>复盘：新犯的错记进 Bug 本</span></label>
+      <label class="chk"><input type="checkbox"><span>看一遍「考场清单」</span></label></div>
+  </div>
+
+  <div id="p3" style="display:none">
+    <div class="card day" data-day="3-1"><h4>Day 1 · 语法全过一遍</h4>
+      <label class="chk"><input type="checkbox"><span>Bug 本全部看懂</span></label>
+      <label class="chk"><input type="checkbox"><span>「函数题速记」全部过一遍，手推 6-11、6-12 的输出</span></label>
+      <label class="chk"><input type="checkbox"><span>重写 6-1、6-5、6-14</span></label></div>
+    <div class="card day" data-day="3-2"><h4>Day 2 · C++ 重写编程题</h4>
+      <label class="chk"><input type="checkbox"><span>63、48、44、50 用 C++ 写</span></label>
+      <label class="chk"><input type="checkbox"><span>默写 65.di、68</span></label></div>
+    <div class="card day" data-day="3-3"><h4>Day 3 · 模拟考</h4>
+      <label class="chk"><input type="checkbox"><span>做完剩下的函数题</span></label>
+      <label class="chk"><input type="checkbox"><span>限时模拟考一次</span></label>
+      <label class="chk"><input type="checkbox"><span>考前看 Bug 本 + C++ 的坑</span></label></div>
+  </div>
+</section>
+
+<!-- ======================= Bug 本 ======================= -->
+<section id="bugs" class="key-section" data-prog="bugs">
+  <h2>🐞 我的 Bug 本</h2>
+  <p class="lead">这些都是你代码里真实出现过的问题，考试时最容易再犯。改好一个就勾一个。</p>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>48 最长变异链：比较写反 + 空语句</span></label></h4>
+    <div class="fix">
+      <div><div class="lab bad">✗ coding/48.vir.cpp:409</div>
+<script type="text/plain" class="code">
+if (len < maxn) {
+    maxn = len;
+    nextNode[node];   // 什么都没做
+}
+</script></div>
+      <div><div class="lab ok">✓ 改成</div>
+<script type="text/plain" class="code">
+if (len > maxn) {
+    maxn = len;
+    nextNode[node] = child;
+}
+</script></div>
+    </div>
+    <div class="badge">编译加 <code>-Wall</code> 会提示 expression result unused。</div>
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>44 最深的门：输出的东西不对</span></label></h4>
+    现在输出的是 <code>root</code> 和深度连在一起，题目要的是<b>最深那扇门的编号</b>。另外 N &lt; 1e5，链状数据递归可能爆栈 → 改 BFS，最后出队的就是答案（见「算法模板」）。
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>63 凑硬币：答案正确，但有超时风险</span></label></h4>
+    不是逻辑错误。无解时回溯会把所有子集都试一遍：28 枚面值 3 的硬币凑 100，实测超过 20 秒 → 改成 O(n·m) 的可行性 DP + 贪心构造（「算法模板」里有，已测试）。
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>6-3：手动调用析构函数</span></label></h4>
+    <div class="fix">
+      <div><div class="lab bad">✗</div>
+<script type="text/plain" class="code">
+pS[i]->~Student();
+</script></div>
+      <div><div class="lab ok">✓ 调析构 + 释放内存</div>
+<script type="text/plain" class="code">
+delete pS[i];
+</script></div>
+    </div>
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>6-3 / 6-4：初始化顺序 ≠ 初始化列表顺序</span></label></h4>
+    成员按<b>类里的声明顺序</b>初始化，和初始化列表写的顺序无关。编译器警告 <code>-Wreorder</code>。
+    如果某个成员的初始化依赖另一个成员，就会拿到垃圾值。<b>初始化列表按声明顺序写</b>。
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>6-5 / 6-15：参数漏写 const</span></label></h4>
+    <div class="fix">
+      <div><div class="lab bad">✗ 临时对象传不进来</div>
+<script type="text/plain" class="code">
+friend ostream& operator<<(ostream& os, Student& st);
+CLine(CLine &other);
+</script></div>
+      <div><div class="lab ok">✓</div>
+<script type="text/plain" class="code">
+friend ostream& operator<<(ostream& os, const Student& st);
+CLine(const CLine& other);
+</script></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>6-15：inline static 需要 C++17</span></label></h4>
+    保险写法：类内 <code>static int count;</code>，类外 <code>int CLine::count = 0;</code>
+  </div>
+
+  <div class="card key">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>6-14：默认构造不初始化</span></label></h4>
+    <code>Complex(){}</code> 里 x、y 是垃圾值 → <code>Complex() : x(0), y(0) {}</code>，或者用默认参数 <code>Complex(int x = 0, int y = 0)</code>。
+  </div>
+
+  <div class="card">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>64：空的桩函数没写 return</span></label></h4>
+    <code>int dfs(int, int) {}</code>：非 void 函数不 return 是未定义行为。没用的代码提交前删掉。
+  </div>
+
+  <div class="card">
+    <h4><label class="chk" style="padding:0"><input type="checkbox"><span>45：Python 递归深度</span></label></h4>
+    <code>@cache</code> 递归的深度等于字符串长度，超过约 1000 就会 RecursionError。长度大就改成迭代 DP，或者用 C++：<code>dp[i][r]</code> 表示处理完前 i 位、余数为 r 的方案数。
+  </div>
+</section>
+
+<!-- ======================= 函数题 ======================= -->
+<section id="func" class="key-section">
+  <h2>🧱 函数题速记</h2>
+  <p class="lead">裁判程序已经给了 main 和部分类声明，你只提交「请在这里填写答案」的那部分。</p>
+
+  <div class="note warn key">
+    <b>提交前四问：</b>
+    <ol>
+      <li>有没有重复写 <code>main</code>，或者重复定义题目已经给的类？</li>
+      <li>题目给了类声明 → 是不是用 <code>类名::函数名</code> 在类外实现？</li>
+      <li>输出和样例逐字符一致吗？（包括题目自己的拼写错误，比如 6-12 的 <code>desturct</code>）</li>
+      <li>用到 <code>string</code> / <code>cmath</code> 的头文件，裁判程序给了吗？</li>
+    </ol>
+  </div>
+
+  <details class="key"><summary>① 类的骨架（背下来）</summary><div class="body">
+<script type="text/plain" class="code">
+class Student {
+private:
+    string name;
+    int score;
+    static int count;                       // 所有对象共享
+public:
+    Student() : name(""), score(0) { count++; }
+    Student(const string& n, int s) : name(n), score(s) { count++; }
+    Student(const Student& o) : name(o.name), score(o.score) { count++; }  // 拷贝构造
+    ~Student() { count--; }
+
+    string getName() const { return name; }  // const：不修改对象
+    void setScore(int s) { this->score = s; }
+    static int getCount() { return count; }  // 没有 this，只能访问静态成员
+};
+int Student::count = 0;                      // 静态成员必须在类外定义
+</script>
+  </div></details>
+
+  <details class="key"><summary>② 构造 / 析构顺序 + 拷贝构造的调用时机（6-11、6-12 的核心）</summary><div class="body">
+    <div class="note"><b>构造：</b>基类 → 成员对象（按<b>声明顺序</b>）→ 自己的函数体。<b>析构：</b>完全相反。局部对象先构造的后析构。</div>
+<script type="text/plain" class="code">
+struct A { A(){cout<<"A ";} ~A(){cout<<"~A ";} };
+struct B { B(){cout<<"B ";} ~B(){cout<<"~B ";} };
+struct M { M(){cout<<"M ";} ~M(){cout<<"~M ";} };
+struct C : public A { M m; B b; C(){cout<<"C ";} ~C(){cout<<"~C ";} };
+
+{ C c; }   // 输出：A M B C ~C ~B ~M ~A      （已实测）
+</script>
+<script type="text/plain" class="code">
+T a;            // T()
+T b = a;        // 拷贝构造（不是赋值！）
+T b2(a);        // 拷贝构造
+T c; c = a;     // T() + operator=（这才是赋值）
+void f(T x);        f(a);   // 按值传参 → 拷贝构造，函数结束时 x 析构
+void g(const T& x); g(a);   // 按引用 → 不拷贝
+</script>
+    <div class="note warn">函数按值返回对象时，编译器通常会省掉拷贝（RVO）。如果样例输出里少了一次 copy，就是这个原因。</div>
+    <p><b>组合类</b>（6-4、6-12）：成员对象没有默认构造时，<b>必须</b>在初始化列表里构造它：</p>
+<script type="text/plain" class="code">
+Club::Club(string n1, int y, string n2, int wr) : name(n1), c(n2, wr), year(y) {}
+</script>
+  </div></details>
+
+  <details class="key"><summary>③ 继承与多态（6-1、6-13）</summary><div class="body">
+<script type="text/plain" class="code">
+class Shape {
+protected:                                  // 子类能访问，外部不能
+    string name;
+public:
+    Shape(const string& n) : name(n) {}
+    virtual double area() const = 0;        // 纯虚 → 抽象类，不能实例化
+    virtual void show() const { cout << name << " " << area() << endl; }
+    virtual ~Shape() {}                     // 基类析构一定要 virtual
+};
+
+class Circle : public Shape {
+    double r;
+public:
+    Circle(double r) : Shape("Circle"), r(r) {}   // 在初始化列表里调用基类构造
+    double area() const override { return 3.14159 * r * r; }
+};
+
+Shape* p = new Circle(1.0);
+p->show();   // 虚函数 → 调 Circle::area
+delete p;    // 虚析构 → 先 ~Circle 再 ~Shape
+</script>
+    <ul>
+      <li><b>基类指针 + virtual</b> 才有多态；非虚函数按<b>指针类型</b>调用（实测 <code>Base* p = new Der; p->g();</code> 调的是 <code>Base::g</code>）。</li>
+      <li>基类析构不是 virtual → <code>delete 基类指针</code> 只调基类析构，输出会少一行。</li>
+      <li>子类同名函数会<b>隐藏</b>基类版本；要调基类的写 <code>Base::func()</code>。</li>
+      <li><code>private</code> 成员子类不能直接访问 → 用 <code>protected</code> 或 getter。</li>
+      <li>菱形继承用 <code>class B : virtual public A</code>，了解即可。</li>
+    </ul>
+  </div></details>
+
+  <details class="key"><summary>④ 运算符重载（6-5、6-14）</summary><div class="body">
+<script type="text/plain" class="code">
+class Complex {
+    double re, im;
+public:
+    Complex(double r = 0, double i = 0) : re(r), im(i) {}
+
+    // 成员形式：左操作数是 *this
+    Complex operator+(const Complex& o) const { return Complex(re + o.re, im + o.im); }
+    Complex& operator+=(const Complex& o) { re += o.re; im += o.im; return *this; }
+    bool operator==(const Complex& o) const { return re == o.re && im == o.im; }
+
+    Complex& operator++() { ++re; return *this; }                   // 前置 ++a
+    Complex operator++(int) { Complex t = *this; ++re; return t; }  // 后置 a++
+
+    // 左边是流 → 只能写成友元
+    friend ostream& operator<<(ostream& os, const Complex& c) {
+        os << c.re;
+        if (c.im >= 0) os << "+";
+        os << c.im << "i";
+        return os;                    // 必须返回流，才能连续 <<
+    }
+    friend istream& operator>>(istream& is, Complex& c) {   // 读入不能加 const
+        is >> c.re >> c.im;
+        return is;
+    }
+    friend Complex operator*(double k, const Complex& c) {  // 2 * c：左边不是对象
+        return Complex(k * c.re, k * c.im);
+    }
+};
+</script>
+  </div></details>
+
+  <details><summary>⑤ 深拷贝三件套（类里有指针成员时）</summary><div class="body">
+<script type="text/plain" class="code">
+class MyString {
+    char* p;
+public:
+    MyString(const char* s = "") { p = new char[strlen(s) + 1]; strcpy(p, s); }
+    MyString(const MyString& o) { p = new char[strlen(o.p) + 1]; strcpy(p, o.p); }
+    MyString& operator=(const MyString& o) {
+        if (this != &o) {             // 防自赋值
+            delete[] p;
+            p = new char[strlen(o.p) + 1];
+            strcpy(p, o.p);
+        }
+        return *this;
+    }
+    ~MyString() { delete[] p; }       // new[] 对应 delete[]
+    char& operator[](int i) { return p[i]; }
+};
+</script>
+  </div></details>
+
+  <details><summary>⑥ 模板（6-6）</summary><div class="body">
+<script type="text/plain" class="code">
+template <class T>
+T myMax(T a, T b) { return a > b ? a : b; }
+
+template <class T>
+class Stack {
+    vector<T> a;
+public:
+    void push(const T& x) { a.push_back(x); }
+    void pop() { a.pop_back(); }
+    T top() const;
+    bool empty() const { return a.empty(); }
+};
+
+template <class T>                    // 类外定义：template 头 + Stack<T>:: 都要带
+T Stack<T>::top() const { return a.back(); }
+</script>
+    <p>自己的函数和 std 里的重名（6-6 的 <code>sort</code>），参数类型不同一般不冲突；报 ambiguous 就写 <code>::sort(...)</code>。</p>
+  </div></details>
+
+  <details><summary>⑦ 链表与指针（6-2、6-10）</summary><div class="body">
+<script type="text/plain" class="code">
+struct Node { int val; Node* next; };
+
+Node* insertSorted(Node* head, Node* node) {   // 有序插入，返回新的头
+    if (head == NULL || node->val < head->val) { node->next = head; return node; }
+    Node* p = head;
+    while (p->next != NULL && p->next->val < node->val) p = p->next;
+    node->next = p->next;
+    p->next = node;
+    return head;
+}
+
+Node* reverse(Node* head) {
+    Node* prev = NULL;
+    while (head) { Node* nx = head->next; head->next = prev; prev = head; head = nx; }
+    return prev;
+}
+</script>
+    <p>先判空再解引用：<code>p != NULL &amp;&amp; p->next</code>，短路的顺序不能反。</p>
+  </div></details>
+
+  <details class="key"><summary>⑧ 零碎但会考的</summary><div class="body">
+    <ul>
+      <li><code>this</code> 是指针：<code>this->x</code>；返回自身写 <code>return *this;</code></li>
+      <li><code>const</code> 对象只能调用 <code>const</code> 成员函数。</li>
+      <li><code>T&amp;</code> 能改实参；<code>const T&amp;</code> 能接临时对象。</li>
+      <li>默认参数只写在声明里，类外定义时不要再写。</li>
+      <li><code>enum R { P1 = 1, P2 };</code> 用 <code>cout</code> 输出是数字；int 转 enum 用 <code>static_cast&lt;R&gt;(x)</code>。</li>
+      <li><code>struct</code> 默认 public，<code>class</code> 默认 private。</li>
+      <li>友元函数不是成员，类外定义时<b>不加</b> <code>类名::</code>。</li>
+      <li><code>new</code> 对应 <code>delete</code>，<code>new T[n]</code> 对应 <code>delete[]</code>。</li>
+    </ul>
+  </div></details>
+</section>
+
+<!-- ======================= 题库 ======================= -->
+<section id="bank" data-prog="bank">
+  <h2>📚 编程题库</h2>
+  <p class="lead">橙色竖线 = 建议用 C++ 重做（只写过 Python、有 bug 或有超时风险）。勾选 = 已经用 C++ 重新默写过。</p>
+  <div class="chips" id="chips">
+    <button class="btn on" data-cat="all">全部</button>
+    <button class="btn" data-cat="redo">⚠️ 要重做</button>
+    <button class="btn" data-cat="模拟">模拟</button>
+    <button class="btn" data-cat="栈">栈</button>
+    <button class="btn" data-cat="树">树</button>
+    <button class="btn" data-cat="搜索">搜索</button>
+    <button class="btn" data-cat="贪心">贪心</button>
+    <button class="btn" data-cat="DP">DP</button>
+  </div>
+  <div class="card table-card"><table id="bankTable">
+    <thead><tr><th style="width:40px"></th><th>题号</th><th>内容</th><th>类别</th><th>难度</th><th>现在</th><th>备注</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+
+  <div class="note"><b>什么时候只能用 C++：</b>n ≥ 1e5 · 总运算量 ≥ 1e7 · 指数搜索 + 剪枝 · 递归可能 ≥ 1e4 层 · DP 表 ≥ 1e6 格。<br>
+    <b>65.di 是典型：</b>容量 M ≤ 525600 × N ≤ 1000 = 5e8，超时；换成按价值和（≤ 3e4）做 DP，<code>dp[v]</code> = 拿到价值 v 的最少时间，只有 3e7。<b>容量大、价值小就换维度。</b></div>
+</section>
+
+<!-- ======================= C++ 速查 ======================= -->
+<section id="cpp" class="key-section">
+  <h2>⚡ C++ 速查（Python → C++）</h2>
+  <p class="lead">你习惯用 Python 想题，这里是翻译成 C++ 时最常查的东西。</p>
+
+  <details open><summary>开头模板</summary><div class="body">
+<script type="text/plain" class="code">
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    // 关了同步以后，不要再混用 scanf/printf 和 cin/cout
+}
+</script>
+  </div></details>
+
+  <details open class="key"><summary>输入输出</summary><div class="body"><table>
+    <tr><th>Python</th><th>C++</th></tr>
+    <tr><td><code>a, b = map(int, input().split())</code></td><td><code>cin &gt;&gt; a &gt;&gt; b;</code></td></tr>
+    <tr><td><code>input()</code> 整行，含空格</td><td><code>getline(cin, s);</code><br><span class="tag bad">坑</span> 前面用过 <code>cin &gt;&gt;</code> 要先 <code>cin.ignore();</code>，或者写 <code>getline(cin &gt;&gt; ws, s)</code></td></tr>
+    <tr><td>读到 EOF</td><td><code>while (cin &gt;&gt; x) { … }</code></td></tr>
+    <tr><td><code>f'{x:.2f}'</code></td><td><code>printf("%.2f\n", x);</code> 或 <code>cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; x;</code></td></tr>
+    <tr><td><code>f'{x:05d}'</code></td><td><code>printf("%05d", x);</code></td></tr>
+    <tr><td><code>print(*a)</code></td><td><code>for (int i = 0; i &lt; n; i++) cout &lt;&lt; (i ? " " : "") &lt;&lt; a[i];</code></td></tr>
+    <tr><td><code>h, m, s = map(int, t.split(':'))</code></td><td><code>sscanf(t.c_str(), "%d:%d:%d", &amp;h, &amp;m, &amp;s);</code></td></tr>
+    <tr><td><code>int(s)</code> / <code>str(x)</code></td><td><code>stoi(s)</code> · <code>stoll(s)</code> · <code>to_string(x)</code></td></tr>
+    <tr><td><code>s[::-1]</code></td><td><code>reverse(s.begin(), s.end());</code></td></tr>
+    <tr><td><code>t in s</code></td><td><code>s.find(t) != string::npos</code></td></tr>
+    <tr><td><code>s[a:b]</code></td><td><code>s.substr(a, b - a)</code> <span class="tag warn">第二个参数是长度</span></td></tr>
+    <tr><td><code>s.lower()</code></td><td><code>for (auto&amp; c : s) c = tolower(c);</code></td></tr>
+  </table>
+  <div class="note warn"><b>PTA 格式错误：</b>行末多一个空格、少一个换行都会判错。默认按「数字间一个空格，行首尾没有多余空格」输出。</div>
+  </div></details>
+
+  <details open><summary>容器</summary><div class="body"><table>
+    <tr><th>Python</th><th>C++</th></tr>
+    <tr><td><code>[0] * n</code></td><td><code>vector&lt;int&gt; a(n, 0);</code></td></tr>
+    <tr><td>二维 list</td><td><code>vector&lt;vector&lt;ll&gt;&gt; dp(n + 1, vector&lt;ll&gt;(m + 1, 0));</code></td></tr>
+    <tr><td><code>dict</code></td><td><code>unordered_map&lt;string, int&gt;</code>；要按 key 有序遍历用 <code>map</code></td></tr>
+    <tr><td><code>defaultdict(list)</code></td><td><code>unordered_map&lt;int, vector&lt;int&gt;&gt; g;</code>（<code>g[x]</code> 自动建空 vector）</td></tr>
+    <tr><td><code>x in d</code></td><td><code>d.count(x)</code> <span class="tag bad">坑</span> 别用 <code>d[x]</code> 判断，会插入默认值</td></tr>
+    <tr><td><code>set</code></td><td><code>unordered_set</code> / <code>set</code>（有序，能 lower_bound）</td></tr>
+    <tr><td><code>deque</code></td><td><code>deque&lt;int&gt;</code> / <code>queue&lt;int&gt;</code></td></tr>
+    <tr><td><code>heapq</code>（小根堆）</td><td><code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; pq;</code></td></tr>
+    <tr><td><code>Counter</code></td><td><code>map&lt;int, int&gt; cnt; cnt[x]++;</code></td></tr>
+    <tr><td><code>bisect_left(a, x)</code></td><td><code>lower_bound(a.begin(), a.end(), x) - a.begin()</code></td></tr>
+    <tr><td>tuple 比较</td><td><code>tie(a.x, a.y) &lt; tie(b.x, b.y)</code></td></tr>
+    <tr><td><code>@cache</code></td><td><code>memo</code> 初始化为 -1，<code>ll&amp; res = memo[i][j]; if (res != -1) return res;</code></td></tr>
+  </table></div></details>
+
+  <details><summary>多关键字排序</summary><div class="body">
+<script type="text/plain" class="code">
+struct Stu { string id; int score, age; };
+sort(v.begin(), v.end(), [](const Stu& a, const Stu& b) {
+    if (a.score != b.score) return a.score > b.score;   // 分数降序
+    return a.id < b.id;                                  // 学号升序
+});
+</script>
+    <div class="note bad">比较函数必须是严格弱序：两个元素相等时要返回 <code>false</code>。写成 <code>&lt;=</code> 可能直接段错误。</div>
+  </div></details>
+
+  <div class="card key">
+    <h4>C++ 特有的坑</h4>
+    <ul>
+      <li><b>溢出：</b>乘积、累加、计数类 DP 一律 <code>long long</code>；<code>1 &lt;&lt; 40</code> 要写 <code>1LL &lt;&lt; 40</code>。</li>
+      <li><code>v.size() - 1</code> 在空 vector 上是一个超大数 → 先转 <code>(int)v.size()</code>。</li>
+      <li>大数组开在 main 里会爆栈 → 开全局或者用 vector。</li>
+      <li><code>memset</code> 只能设 0 和 -1，其他值用 <code>fill</code> / <code>assign</code>。</li>
+      <li>浮点比较用 <code>fabs(a - b) &lt; 1e-8</code>。</li>
+      <li>负数 <code>/</code> 向 0 取整，<code>%</code> 结果可能是负数。</li>
+      <li>C++ 的 <code>&amp;&amp;</code> <code>||</code> 也会短路：递归求值时（比如 50 题）<b>先把左右两边都算出来再合并</b>，不然读输入的下标会错位。</li>
+      <li>多组数据时，全局变量记得重置。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= 模板 ======================= -->
+<section id="tpl">
+  <h2>🧩 算法模板</h2>
+  <p class="lead">都是 C++ 写法，会写就行，考场上不用想语法。</p>
+
+  <details><summary>凑硬币 · 字典序最小方案（63 的正确写法，已实测）</summary><div class="body">
+<script type="text/plain" class="code">
+sort(v.begin(), v.end());
+// can[i][s]：只用 v[i..n-1] 能否恰好凑出 s
+vector<vector<char>> can(n + 1, vector<char>(m + 1, 0));
+can[n][0] = 1;
+for (int i = n - 1; i >= 0; i--)
+    for (int s = 0; s <= m; s++)
+        can[i][s] = can[i + 1][s] || (s >= v[i] && can[i + 1][s - v[i]]);
+if (!can[0][m]) { cout << "No Solution\n"; return 0; }
+
+vector<int> ans;
+int s = m;
+for (int i = 0; i < n && s > 0; i++)        // 从小到大，能拿就拿 → 字典序最小
+    if (s >= v[i] && can[i + 1][s - v[i]]) { ans.push_back(v[i]); s -= v[i]; }
+</script>
+    <div class="note ok">套路：<b>先从后往前算可行性，再从前往后贪心构造</b>。所有「输出字典序最小方案」的 DP 都能这么写。</div>
+  </div></details>
+
+  <details><summary>0/1 背包 · 完全背包</summary><div class="body">
+<script type="text/plain" class="code">
+vector<ll> dp(W + 1, 0);
+for (int i = 0; i < n; i++)
+    for (int j = W; j >= w[i]; j--)          // 0/1 背包：倒序
+        dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+// 完全背包：for (int j = w[i]; j <= W; j++)  正序
+</script>
+  </div></details>
+
+  <details><summary>树：找根 + BFS 求最深结点（44 的正确写法）</summary><div class="body">
+<script type="text/plain" class="code">
+int root = 1;
+while (root <= n && indeg[root] != 0) root++;
+
+queue<int> q;
+q.push(root);
+int last = root;
+while (!q.empty()) {
+    int u = q.front(); q.pop();
+    last = u;                                // 最后出队的就是最深的
+    for (int v : g[u]) q.push(v);
+}
+cout << last << "\n";
+</script>
+  </div></details>
+
+  <details><summary>中序 + 后序建树（49）</summary><div class="body">
+<script type="text/plain" class="code">
+unordered_map<int, int> pos;                 // 值 → 中序下标，免得每次 find 是 O(n)
+for (int i = 0; i < n; i++) pos[in[i]] = i;
+
+Node* build(int il, int ir, int pl, int pr) {
+    if (il > ir) return nullptr;
+    Node* root = new Node(post[pr]);
+    int k = pos[post[pr]];
+    int L = k - il;                          // 左子树大小
+    root->left = build(il, k - 1, pl, pl + L - 1);
+    root->right = build(k + 1, ir, pl + L, pr - 1);
+    return root;
+}
+</script>
+  </div></details>
+
+  <details><summary>并查集</summary><div class="body">
+<script type="text/plain" class="code">
+vector<int> fa(n + 1);
+iota(fa.begin(), fa.end(), 0);
+function<int(int)> find = [&](int x) { return fa[x] == x ? x : fa[x] = find(fa[x]); };
+auto unite = [&](int a, int b) { fa[find(a)] = find(b); };
+</script>
+  </div></details>
+
+  <details><summary>Dijkstra（堆优化）</summary><div class="body">
+<script type="text/plain" class="code">
+vector<ll> dist(n, LLONG_MAX);
+priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;
+dist[s] = 0;
+pq.push({0, s});
+while (!pq.empty()) {
+    auto [d, u] = pq.top(); pq.pop();
+    if (d > dist[u]) continue;
+    for (auto [v, w] : g[u])
+        if (dist[u] + w < dist[v]) { dist[v] = dist[u] + w; pq.push({dist[v], v}); }
+}
+</script>
+  </div></details>
+
+  <details><summary>拓扑排序</summary><div class="body">
+<script type="text/plain" class="code">
+queue<int> q;
+for (int i = 0; i < n; i++) if (indeg[i] == 0) q.push(i);
+vector<int> order;
+while (!q.empty()) {
+    int u = q.front(); q.pop();
+    order.push_back(u);
+    for (int v : g[u]) if (--indeg[v] == 0) q.push(v);
+}
+bool hasCycle = (int)order.size() < n;
+</script>
+  </div></details>
+
+  <details><summary>记忆化搜索（Python @cache 的 C++ 写法）</summary><div class="body">
+<script type="text/plain" class="code">
+vector<vector<ll>> memo(n, vector<ll>(m + 1, -1));
+
+ll dfs(int i, int space) {
+    if (i < 0) return 0;
+    ll& res = memo[i][space];                // 引用：改 res 就是改 memo
+    if (res != -1) return res;
+    res = dfs(i - 1, space);
+    if (space >= w[i]) res = max(res, dfs(i - 1, space - w[i]) + v[i]);
+    return res;
+}
+</script>
+  </div></details>
+</section>
+
+<!-- ======================= 考场清单 ======================= -->
+<section id="exam" class="key-section" data-prog="exam">
+  <h2>✅ 考场清单</h2>
+  <p class="lead">考试前一晚勾一遍。考试当天可以点上方「清空本页勾选」重新用。</p>
+  <div class="card key" id="examList">
+    <label class="chk"><input type="checkbox"><span>编译器选 <b>C++ (g++)</b>，不要选成 C 或 clang</span></label>
+    <label class="chk"><input type="checkbox"><span>函数题：没有重复写 main 或题目已给的类</span></label>
+    <label class="chk"><input type="checkbox"><span>函数题：输出和样例逐字符对照（大小写、空格、冒号、换行）</span></label>
+    <label class="chk"><input type="checkbox"><span>编程题：先看数据范围 → 定复杂度 → 定语言</span></label>
+    <label class="chk"><input type="checkbox"><span>计数、乘积用 <code>long long</code></span></label>
+    <label class="chk"><input type="checkbox"><span>行末没有多余空格；<code>No Solution</code> 这类特殊输出和题面一字不差</span></label>
+    <label class="chk"><input type="checkbox"><span>边界：n = 0 / 1、全部相同、无解</span></label>
+    <label class="chk"><input type="checkbox"><span>难题卡住超过 20 分钟 → 先交暴力拿部分分</span></label>
+    <label class="chk"><input type="checkbox"><span>提交前删掉调试输出</span></label>
+    <button class="btn" style="margin-top:8px" onclick="clearChecks('#examList')">清空本页勾选</button>
+  </div>
+</section>
+
+<!-- ======================= 环境 ======================= -->
+<section id="env">
+  <h2>💻 本地环境（Mac）</h2>
+  <p class="lead">Mac 自带的 <code>g++</code> 其实是 clang，没有 <code>bits/stdc++.h</code>，所以 44、46、48、62、64、65.di、66、67.matrix 本地编译不过。PTA 上没问题。</p>
+<script type="text/plain" class="code" data-lang="sh">
+# 办法一：装真正的 GCC（推荐）
+brew install gcc            # 之后用 g++-14 或 g++-15 编译
+
+# 办法二：自己建一个 bits/stdc++.h
+mkdir -p ~/include/bits      # 在里面写常用的 #include
+g++ -std=c++17 -I ~/include a.cpp -o a
+
+# 平时编译加 -Wall：能提前发现 -Wreorder、空语句、漏写 return
+g++ -std=c++17 -Wall -O2 a.cpp -o a && ./a < in.txt
+</script>
+</section>
+
+</div></main>
+
+<script>
+/* ---------- 题库数据 ---------- */
+const BANK = [
+  ["1",  "幸运彩票", "模拟", "易", "Py", ""],
+  ["2",  "方差", "模拟", "易", "Py", ""],
+  ["3",  "排队分糖", "模拟", "易", "Py", ""],
+  ["16", "黑幕（字符串查找）", "模拟", "易", "Py", ""],
+  ["22", "图像模糊", "模拟", "易", "Py", ""],
+  ["32", "数字统计", "模拟", "易", "Py", ""],
+  ["38", "胖不胖（BMI）", "模拟", "易", "Py", ""],
+  ["53", "年龄统计", "模拟", "易", "Py", ""],
+  ["56", "火柴棍等式（暴力枚举）", "模拟", "易", "Py", ""],
+  ["57", "两数之和", "模拟", "易", "Py", "哈希"],
+  ["54", "注释 + 括号匹配", "栈", "中", "Py", "getline 读行 + 双字符 token，练 C++ 字符串", true],
+  ["55", "栈的合法操作序列", "栈", "易", "Py", ""],
+  ["43", "五服之内", "树", "中", "Py", "unordered_map + 往上 BFS 5 层 + 集合求交", true],
+  ["44", "最深的门", "树", "中", "C++ ✗", "输出不对，改 BFS", true],
+  ["48", "最长变异链", "树", "中", "C++ ✗", "比较写反 + 空语句", true],
+  ["49", "中后序建树 + 左右视图", "树", "中", "C++", "用哈希表存中序下标"],
+  ["50", "逻辑电路求值", "树", "中", "Py", "&& || 短路导致读输入错位", true],
+  ["51", "养老树（修改 + 统计）", "树", "中", "Py", "map<string,…> + 沿父指针更新", true],
+  ["52", "k 叉树先序", "树", "易", "Py", ""],
+  ["42", "分书（全部方案）", "搜索", "中", "C++", "回溯 + 字典序输出"],
+  ["47", "N 位可整除数", "搜索", "中", "C++", "逐位回溯剪枝"],
+  ["62", "循环赛哈密顿回路", "搜索", "难", "C++", "状态压缩记录失败状态"],
+  ["63", "凑硬币（字典序最小）", "DP", "难", "Py", "答案对，无解数据会超时 → 可行性 DP", true],
+  ["45", "X 填数字后整除计数", "DP", "中", "Py", "数位 DP；串长时递归会爆", true],
+  ["64", "至多删 3 个字符", "DP", "难", "C++", "去重计数，long long"],
+  ["65", "打卡卷（0/1 背包）", "DP", "难", "C++", "容量大 → 按价值做 DP"],
+  ["67", "矩阵链乘 + 输出括号", "DP", "难", "C++", "区间 DP + 记录切分点"],
+  ["68", "0/1 背包 + 输出方案", "DP", "中", "C++", "倒推方案"],
+  ["46", "区间最大重叠", "贪心", "中", "C++", "扫描线，同一时刻先处理结束还是开始要想清楚"],
+  ["58", "分数背包", "贪心", "易", "Py", "按单价排序"],
+  ["59", "活动选择（= 60）", "贪心", "易", "Py", "按结束时间排序"],
+  ["61", "分数背包 + 输出比例", "贪心", "中", "Py", ""],
+  ["66", "矩形消除", "贪心", "难", "C++", "二维压成一维 + 最大子段和 + 模拟下落"],
+];
+const diffTag = d => d === "易" ? "ok" : d === "中" ? "" : "warn";
+const nowTag = s => s.includes("✗") ? "bad" : s.startsWith("C++") ? "ok" : "";
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+document.querySelector("#bankTable tbody").innerHTML = BANK.map(([no, name, cat, diff, now, memo, redo]) =>
+  `<tr class="${redo ? "redo" : ""}" data-cat="${cat}" data-redo="${redo ? 1 : 0}">
+     <td><label class="chk" style="padding:0"><input type="checkbox" data-k="bank-${no}"><span></span></label></td>
+     <td><b>${no}</b></td><td>${esc(name)}</td><td>${cat}</td>
+     <td><span class="tag ${diffTag(diff)}">${diff}</span></td>
+     <td><span class="tag ${nowTag(now)}">${now}</span></td>
+     <td style="color:var(--muted)">${esc(memo)}</td></tr>`).join("");
+
+document.querySelectorAll("#chips .btn").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#chips .btn").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  const c = b.dataset.cat;
+  document.querySelectorAll("#bankTable tbody tr").forEach(tr => {
+    tr.style.display = c === "all" || tr.dataset.cat === c || (c === "redo" && tr.dataset.redo === "1") ? "" : "none";
+  });
+});
+
+/* ---------- 代码块：缩进整理 + 高亮 + 复制 ---------- */
+const KW = "int|long|double|float|char|bool|void|auto|const|static|virtual|class|struct|public|private|protected|return|if|else|for|while|do|new|delete|template|typename|using|namespace|friend|operator|this|true|false|nullptr|NULL|override|inline|enum|break|continue|sizeof|unsigned|string|vector|map|set|unordered_map|unordered_set|queue|priority_queue|pair|deque|stack|ll|function|ostream|istream|cout|cin|endl";
+const TOKEN = new RegExp(String.raw`(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*')|(^[ \t]*#[^\n]*)|\b(\d+(?:\.\d+)?(?:LL|ll|e\d+)?)\b|\b(${KW})\b`, "gm");
+function highlight(src, lang) {
+  if (lang === "sh") {
+    return esc(src).replace(/(^|\s)(#[^\n]*)/g, '$1<span class="hl-com">$2</span>');
+  }
+  let out = "", last = 0, m;
+  TOKEN.lastIndex = 0;
+  while ((m = TOKEN.exec(src))) {
+    out += esc(src.slice(last, m.index));
+    const cls = m[1] ? "com" : m[2] ? "str" : m[3] ? "pre" : m[4] ? "num" : "kw";
+    out += `<span class="hl-${cls}">${esc(m[0])}</span>`;
+    last = TOKEN.lastIndex;
+  }
+  return out + esc(src.slice(last));
+}
+document.querySelectorAll('script.code').forEach(s => {
+  let lines = s.textContent.replace(/^\n+|\s+$/g, "").split("\n");
+  const ind = Math.min(...lines.filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+  const src = lines.map(l => l.slice(ind)).join("\n");
+  const box = document.createElement("div");
+  box.className = "codebox";
+  box.innerHTML = `<button class="btn copy">复制</button><pre><code>${highlight(src, s.dataset.lang)}</code></pre>`;
+  box.querySelector(".copy").onclick = e => {
+    navigator.clipboard.writeText(src).then(() => {
+      e.target.textContent = "已复制 ✓";
+      setTimeout(() => e.target.textContent = "复制", 1200);
+    });
+  };
+  s.replaceWith(box);
+});
+
+/* ---------- 勾选进度（保存在浏览器里） ---------- */
+const store = {
+  get: k => localStorage.getItem("pta:" + k),
+  set: (k, v) => localStorage.setItem("pta:" + k, v),
+};
+const allChecks = [...document.querySelectorAll('input[type=checkbox]')];
+allChecks.forEach((cb, i) => {
+  if (!cb.dataset.k) {
+    const sec = cb.closest("section").id;
+    const day = cb.closest("[data-day]");
+    const text = cb.closest("label").textContent.trim().slice(0, 40);
+    cb.dataset.k = `${sec}-${day ? day.dataset.day : ""}-${text}`;
+  }
+  cb.checked = store.get(cb.dataset.k) === "1";
+  cb.onchange = () => { store.set(cb.dataset.k, cb.checked ? "1" : "0"); updateProgress(); };
+});
+function updateProgress() {
+  let done = 0, total = 0;
+  document.querySelectorAll("[data-prog]").forEach(sec => {
+    const cbs = [...sec.querySelectorAll("input[type=checkbox]")];
+    const d = cbs.filter(c => c.checked).length;
+    const badge = document.querySelector(`[data-badge="${sec.dataset.prog}"]`);
+    if (badge) badge.textContent = `${d}/${cbs.length}`;
+    if (sec.id !== "exam") { done += d; total += cbs.length; }
+  });
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById("totalPct").textContent = pct + "%";
+  document.getElementById("totalBar").style.width = pct + "%";
+  document.getElementById("totalTxt").textContent = `计划 + Bug 本 + 题库：${done} / ${total}`;
+}
+function clearChecks(sel) {
+  document.querySelectorAll(sel + " input[type=checkbox]").forEach(cb => { cb.checked = false; store.set(cb.dataset.k, "0"); });
+  updateProgress();
+}
+updateProgress();
+
+/* ---------- 计划切换 + 倒计时 + 今天 ---------- */
+function showPlan(id) {
+  document.querySelectorAll("[data-plan]").forEach(b => b.classList.toggle("on", b.dataset.plan === id));
+  document.getElementById("p7").style.display = id === "p7" ? "" : "none";
+  document.getElementById("p3").style.display = id === "p3" ? "" : "none";
+  store.set("plan", id);
+}
+document.querySelectorAll("[data-plan]").forEach(b => b.onclick = () => { showPlan(b.dataset.plan); markToday(); });
+showPlan(store.get("plan") || "p7");
+
+const dateInput = document.getElementById("examDate");
+dateInput.value = store.get("examDate") || "";
+dateInput.onchange = () => { store.set("examDate", dateInput.value); markToday(); };
+function markToday() {
+  document.querySelectorAll(".day").forEach(d => d.classList.remove("today"));
+  const cd = document.getElementById("countdown"), hint = document.getElementById("todayHint");
+  if (!dateInput.value) { cd.textContent = "—"; return; }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const exam = new Date(dateInput.value + "T00:00:00");
+  const left = Math.round((exam - today) / 86400000);
+  if (left < 0) { cd.textContent = "已结束"; hint.textContent = "考完啦 🎉"; return; }
+  if (left === 0) { cd.textContent = "今天"; hint.innerHTML = '只看 <a href="#bugs">Bug 本</a> 和 <a href="#exam">考场清单</a>，点「考前 30 分钟」。'; return; }
+  cd.textContent = left + " 天";
+  const plan = left <= 3 ? "p3" : "p7";
+  if (plan === "p3" && store.get("plan") !== "p3") showPlan("p3");
+  const len = plan === "p3" ? 3 : 7;
+  if (left > len) {
+    hint.innerHTML = `时间充裕：先按 7 天版过一轮，最后 7 天再从 D1 开始第二轮。`;
+    return;
+  }
+  const idx = len - left + 1;
+  const card = document.querySelector(`.day[data-day="${len}-${idx}"]`);
+  if (card) {
+    card.classList.add("today");
+    hint.innerHTML = `<a href="#plan">${card.querySelector("h4").textContent}</a>`;
+  }
+}
+markToday();
+
+/* ---------- 主题 / 字号 / 展开 / 考前模式 ---------- */
+const root = document.documentElement;
+function setTheme(t) {
+  root.dataset.theme = t; store.set("theme", t);
+  document.getElementById("themeBtn").textContent = t === "dark" ? "☀️ 浅色" : "🌙 深色";
+}
+setTheme(store.get("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+document.getElementById("themeBtn").onclick = () => setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+
+let fs = +(store.get("fs") || 16);
+const applyFs = () => { root.style.setProperty("--fs", fs + "px"); store.set("fs", fs); };
+applyFs();
+document.getElementById("fsUp").onclick = () => { fs = Math.min(fs + 1, 22); applyFs(); };
+document.getElementById("fsDown").onclick = () => { fs = Math.max(fs - 1, 13); applyFs(); };
+
+const expandBtn = document.getElementById("expandBtn");
+expandBtn.onclick = () => {
+  const open = expandBtn.textContent === "全部展开";
+  document.querySelectorAll("details").forEach(d => d.open = open);
+  expandBtn.textContent = open ? "全部收起" : "全部展开";
+};
+
+const focusBtn = document.getElementById("focusBtn");
+focusBtn.onclick = () => {
+  const on = document.body.classList.toggle("focus");
+  focusBtn.classList.toggle("on", on);
+  if (on) document.querySelectorAll(".key-section details.key").forEach(d => d.open = true);
+  window.scrollTo(0, 0);
+};
+
+/* ---------- 搜索 ---------- */
+document.getElementById("search").oninput = e => {
+  const q = e.target.value.trim().toLowerCase();
+  const items = document.querySelectorAll(".main .card:not(.table-card), .main details, .main .note, #bankTable tbody tr");
+  items.forEach(el => {
+    const hit = !q || el.textContent.toLowerCase().includes(q);
+    el.classList.toggle("hidden-by-search", !hit);
+    if (hit && q && el.tagName === "DETAILS") el.open = true;
+  });
+};
+
+/* ---------- 目录高亮 + 手机端点击收起 ---------- */
+const links = [...document.querySelectorAll("#nav a")];
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+  });
+}, { rootMargin: "-20% 0px -70% 0px" });
+document.querySelectorAll("main section").forEach(s => obs.observe(s));
+links.forEach(a => a.addEventListener("click", () => document.querySelector(".side").classList.remove("open")));
+</script>
+</body>
+</html>
