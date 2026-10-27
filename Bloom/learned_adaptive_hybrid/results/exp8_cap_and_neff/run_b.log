@@ -1,0 +1,91 @@
+cod setup ready in 1.9s; members=3000000, neg_val=400393, neg_test=999621
+cod uniform-1万 done at 4.1s (2 model evals)
+cod zipf0.8-1万 done at 6.1s (2 model evals)
+cod zipf1.1-1万 done at 7.6s (2 model evals)
+cod zipf1.5-1万 done at 8.7s (2 model evals)
+cod uniform-10万 done at 9.3s (4 model evals)
+cod zipf0.8-10万 done at 11.7s (4 model evals)
+cod zipf1.1-10万 done at 13.4s (4 model evals)
+cod zipf1.5-10万 done at 14.6s (6 model evals)
+cod uniform-全部 done at 15.4s (8 model evals)
+cod zipf0.8-全部 done at 18.3s (8 model evals)
+cod zipf1.1-全部 done at 20.6s (10 model evals)
+cod zipf1.5-全部 done at 22.0s (12 model evals)
+cod 每key一次 done at 22.1s (12 model evals)
+cod 全新对抗 done at 22.1s (14 model evals)
+cod 向难负例漂移 done at 22.8s (14 model evals)
+caida setup ready in 1.2s; members=1196194, neg_val=729006, neg_test=5837574
+caida uniform-1万 done at 28.1s (3 model evals)
+caida zipf0.8-1万 done at 30.2s (3 model evals)
+caida zipf1.1-1万 done at 31.8s (3 model evals)
+caida zipf1.5-1万 done at 32.9s (3 model evals)
+caida uniform-10万 done at 34.3s (6 model evals)
+caida zipf0.8-10万 done at 36.7s (6 model evals)
+caida zipf1.1-10万 done at 38.5s (6 model evals)
+caida zipf1.5-10万 done at 40.6s (9 model evals)
+caida uniform-100万 done at 42.2s (12 model evals)
+caida zipf0.8-100万 done at 45.4s (12 model evals)
+caida zipf1.1-100万 done at 48.7s (15 model evals)
+caida zipf1.5-100万 done at 50.5s (18 model evals)
+caida uniform-全部 done at 52.6s (21 model evals)
+caida zipf0.8-全部 done at 58.4s (24 model evals)
+caida zipf1.1-全部 done at 61.5s (24 model evals)
+caida zipf1.5-全部 done at 63.4s (24 model evals)
+caida 每key一次 done at 65.3s (27 model evals)
+caida 全新对抗 done at 65.8s (30 model evals)
+caida 向难负例漂移 done at 67.5s (33 model evals)
+shalla setup ready in 0.6s; members=2926705, neg_val=97747, neg_test=783073
+shalla uniform-1万 done at 71.3s (6 model evals)
+shalla zipf0.8-1万 done at 73.4s (6 model evals)
+shalla zipf1.1-1万 done at 75.0s (6 model evals)
+shalla zipf1.5-1万 done at 76.2s (6 model evals)
+shalla uniform-10万 done at 77.3s (9 model evals)
+shalla zipf0.8-10万 done at 80.0s (9 model evals)
+shalla zipf1.1-10万 done at 81.9s (9 model evals)
+shalla zipf1.5-10万 done at 83.7s (12 model evals)
+shalla uniform-全部 done at 85.3s (15 model evals)
+shalla zipf0.8-全部 done at 89.2s (18 model evals)
+shalla zipf1.1-全部 done at 92.1s (21 model evals)
+shalla zipf1.5-全部 done at 93.6s (24 model evals)
+shalla 每key一次 done at 93.7s (24 model evals)
+shalla 全新对抗 done at 94.0s (27 model evals)
+shalla 向难负例漂移 done at 94.9s (27 model evals)
+# 实验 8b：N_eff 直接代入模型
+
+代价相对“实验 7、8、8b 所有候选比例里该负载最好的那个”。“实验7规则(上限40%)”是事后挑上限的参照。
+
+| 数据集 | 预算 | 选法 | 比例范围 | 最坏相对 | 相对中位数 | 最坏绝对（/百万） | 绝对中位数 |
+|---|---:|---|---|---:|---:|---:|---:|
+| cod | 256KiB | 模型(N_eff=HLL全程) | 1.0%–11.0% | 1.30×（每key一次） | 1.03× | 5,360 | 1.8 |
+| cod | 256KiB | 规则+HLL(全程,上限=全集模型) | 0.9%–9.5% | 1.26×（每key一次） | 1.03× | 3,180 | 1.5 |
+| cod | 256KiB | 模型(全集N) | 9.5%–9.5% | 1.35×（zipf1.5-1万） | 1.20× | 25,580 | 9.4 |
+| cod | 256KiB | 实验7规则(上限40%) | 9.4%–9.4% | 1.37×（zipf1.5-1万） | 1.19× | 25,580 | 9.6 |
+| cod | 1024KiB | 模型(N_eff=HLL全程) | 1.0%–1.0% | 3.00×（uniform-1万） | 1.32× | 440 | 0.4 |
+| cod | 1024KiB | 规则+HLL(全程,上限=全集模型) | 0.2%–0.2% | 1.50×（uniform-1万） | 1.18× | 200 | 0.2 |
+| cod | 1024KiB | 模型(全集N) | 0.5%–0.5% | 1.50×（uniform-1万） | 1.14× | 280 | 0.1 |
+| cod | 1024KiB | 实验7规则(上限40%) | 0.1%–0.1% | 1.00×（uniform-10万） | 1.00× | 0 | 0.0 |
+| caida | 128KiB | 模型(N_eff=HLL全程) | 3.0%–18.0% | 1.89×（向难负例漂移） | 1.03× | 113,040 | 2.4 |
+| caida | 128KiB | 规则+HLL(全程,上限=全集模型) | 2.6%–7.5% | 32.00×（uniform-10万） | 1.05× | 122,948 | 110.6 |
+| caida | 128KiB | 模型(全集N) | 7.5%–7.5% | 31.92×（uniform-10万） | 1.08× | 122,910 | 111.0 |
+| caida | 128KiB | 实验7规则(上限40%) | 40.0%–40.0% | 1.64×（uniform-1万） | 1.38× | 24,960 | 177.8 |
+| caida | 256KiB | 模型(N_eff=HLL全程) | 2.0%–27.0% | 7.53×（向难负例漂移） | 1.05× | 167,601 | 7.9 |
+| caida | 256KiB | 规则+HLL(全程,上限=全集模型) | 1.0%–6.5% | 8.04×（向难负例漂移） | 1.04× | 180,872 | 6.7 |
+| caida | 256KiB | 模型(全集N) | 6.5%–6.5% | 8.04×（向难负例漂移） | 1.11× | 180,784 | 14.0 |
+| caida | 256KiB | 实验7规则(上限40%) | 40.0%–40.0% | 1.80×（zipf1.5-100万） | 1.68× | 86,000 | 90.4 |
+| caida | 1024KiB | 模型(N_eff=HLL全程) | 1.0%–3.0% | 1.18×（uniform-1万） | 1.04× | 3,240 | 0.5 |
+| caida | 1024KiB | 规则+HLL(全程,上限=全集模型) | 0.2%–2.5% | 1.27×（uniform-1万） | 1.01× | 400 | 0.3 |
+| caida | 1024KiB | 模型(全集N) | 2.5%–2.5% | 1.14×（zipf1.5-100万） | 1.04× | 5,920 | 0.8 |
+| caida | 1024KiB | 实验7规则(上限40%) | 2.4%–2.4% | 1.12×（zipf1.5-100万） | 1.02× | 5,920 | 0.7 |
+| shalla | 256KiB | 模型(N_eff=HLL全程) | 4.0%–41.0% | 1.24×（向难负例漂移） | 1.02× | 54,423 | 22.5 |
+| shalla | 256KiB | 规则+HLL(全程,上限=全集模型) | 3.5%–23.0% | 25.02×（uniform-10万） | 1.02× | 62,785 | 1,886.3 |
+| shalla | 256KiB | 模型(全集N) | 23.0%–23.0% | 25.00×（uniform-10万） | 1.13× | 62,731 | 1,879.8 |
+| shalla | 256KiB | 实验7规则(上限40%) | 40.0%–40.0% | 1.30×（每key一次） | 1.12× | 60,355 | 59.5 |
+| shalla | 1024KiB | 模型(N_eff=HLL全程) | 1.0%–23.0% | 1.45×（每key一次） | 1.03× | 24,046 | 17.2 |
+| shalla | 1024KiB | 规则+HLL(全程,上限=全集模型) | 0.4%–18.8% | 1.35×（每key一次） | 1.01× | 18,911 | 7.2 |
+| shalla | 1024KiB | 模型(全集N) | 19.0%–19.0% | 1.37×（zipf1.5-10万） | 1.30× | 115,060 | 184.2 |
+| shalla | 1024KiB | 实验7规则(上限40%) | 19.7%–19.7% | 1.38×（zipf1.5-10万） | 1.33× | 116,160 | 84.5 |
+| shalla | 2048KiB | 模型(N_eff=HLL全程) | 1.0%–2.0% | 1.09×（每key一次） | 1.05× | 2,800 | 3.4 |
+| shalla | 2048KiB | 规则+HLL(全程,上限=全集模型) | 0.1%–1.7% | 1.08×（每key一次） | 1.01× | 965 | 1.2 |
+| shalla | 2048KiB | 模型(全集N) | 2.0%–2.0% | 1.20×（zipf1.5-1万） | 1.11× | 5,340 | 7.1 |
+| shalla | 2048KiB | 实验7规则(上限40%) | 1.7%–1.7% | 1.16×（zipf1.5-1万） | 1.09× | 4,080 | 10.3 |
+total 94.9s
