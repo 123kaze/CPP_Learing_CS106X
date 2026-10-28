@@ -36,7 +36,7 @@ from exp8_cap_and_neff import S_RANGE, FastEst, model_fp, zipf_bins
 
 
 SETTINGS = {"cod": (256, 1024), "caida": (128, 256, 1024), "shalla": (256, 1024, 2048),
-            "caida_flow": (48, 64, 128)}
+            "caida_flow": (48, 64, 128), "mawi2020_flow": (40, 48, 64), "mawi2021_flow": (40, 48, 64)}
 HLL_P = 10                                              # 1024 个寄存器（1 字节），误差约 3%
 SS_K = 256
 SKETCH_BYTES = 2 * (1 << HLL_P) + 8 + SS_K * 12         # 两个 HLL + 计数器 + Space-Saving 表（4B 指纹、4B 计数、4B 误差）
@@ -277,8 +277,11 @@ def region_fpr(kind, param):
     return np.where(kind == C.BF, C.bf_fpr(np.maximum(param, 0.25)), np.where(kind == C.PASS, 1.0, 0.0))
 
 
-def run_controller(setup, est, kib, stream, bbar, bins, base):
-    """base：预算扣掉草图后分配好的 PLBF（cache_frac = 草图占比，但缓存容量从 0 开始）。"""
+def run_controller(setup, est, kib, stream, bbar, bins, base, tail_from=None, damp=False, thresh=0.0, init_cap=0):
+    """base：预算扣掉草图后分配好的 PLBF（cache_frac = 草图占比，但缓存容量从 0 开始）。
+    tail_from 给定时，返回的 FPR 只统计第 tail_from 条之后的查询（前面当预热）。
+    damp：每次只走到目标增量的一半（按腾出的位数）；thresh：预测误报至少下降这个比例才增加。
+    init_cap：初始缓存容量（bit）。从离线结果出发时，base 应按该缓存比例分配，init_cap = base.cache_bits − 草图位数。"""
     n_pool = setup.q_score.size
     kind = base.kind.copy()
     param = base.param.astype(np.float64)
@@ -294,14 +297,20 @@ def run_controller(setup, est, kib, stream, bbar, bins, base):
     tk = np.full(SS_K, -1, np.int64)
     tc = np.zeros(SS_K, np.int64)
     te = np.zeros(SS_K, np.int64)
-    cap = 0
+    cap = int(init_cap)
     fp_total = hits_total = 0
     reserve = SKETCH_BYTES / (kib * 1024)
     budget_bits = kib * 1024 * 8
     start = 0
-    for seen in checkpoints(stream.size):
+    fp_tail = 0
+    cps = checkpoints(stream.size)
+    if tail_from:
+        cps = sorted(set(cps) | {tail_from})
+    for seen in cps:
         r = lru_phase(stream[start:seen], fp_static, setup.cache_cost, cap, setup.h1q, in_cache, prv, nx, meta,
                       regs_neg, regs_fp, HLL_P, tk, tc, te)
+        if tail_from is not None and start >= tail_from:
+            fp_tail += int(r[0])
         start = seen
         fp_total += int(r[0])
         hits_total += int(r[1])
@@ -326,14 +335,24 @@ def run_controller(setup, est, kib, stream, bbar, bins, base):
             p_path += est.h[g] * (1 - fr[g])
             if j % max(1, len(order) // 30) == 0 or j == len(order):
                 cand.append((j, freed, p_path))
-        best_j, best_m = 0, np.inf
+        best_j, best_m, m_stay = 0, np.inf, None
+        freed_at = {}
         for j, fd, pj in cand:
             if (cap + fd) / budget_bits + reserve > 0.8:
                 break
             dp = pj - p_cur
             m = fp_stream_misses(W + n_eff * dp, s_F, QF_obs + seen * dp, (cap + fd) / bbar, bins)
+            freed_at[j] = fd
+            if j == 0:
+                m_stay = m
             if m < best_m:
                 best_m, best_j = m, j
+        if best_j and thresh and m_stay is not None and best_m > (1 - thresh) * m_stay:
+            best_j = 0                                  # 预测收益不够大，不动
+        if best_j and damp:                             # 只走一半：腾出的位数不超过目标的一半
+            half = freed_at[best_j] / 2
+            best_j = max((j for j, fd in freed_at.items() if 0 < j and fd <= half),
+                         default=min(j for j in freed_at if j > 0))   # 最小一步都超过一半时，就走最小一步
         for g in order[:best_j]:                       # 只增不减：把这些分段改成直接放行
             kind[g] = C.PASS
             cap += int(bits[g])
@@ -341,6 +360,8 @@ def run_controller(setup, est, kib, stream, bbar, bins, base):
             fp_static |= reg_q == g
     f_final = cap / budget_bits + reserve
     p_final = float((est.h * region_fpr(kind, param))[est.n > 0].sum())
+    if tail_from is not None:
+        return fp_tail / (stream.size - tail_from), f_final, p_final / est(kib, f_final)
     return fp_total / stream.size, f_final, p_final / est(kib, f_final)
 
 
@@ -361,7 +382,7 @@ def main():
         bins = BinMemo()
         n_pool = setup.q_score.size
         order = np.argsort(setup.q_score, kind="stable")
-        if ds == "caida_flow":
+        if ds.endswith("_flow"):
             wls = [("真实轨迹", None)]
         else:
             pools = {"1万": 10_000, "10万": 100_000, **({"100万": 1_000_000} if n_pool > 1_500_000 else {}),
@@ -378,7 +399,7 @@ def main():
 
         for kib in budgets:
             bases[kib] = structure(kib, round(SKETCH_BYTES / (kib * 1024), 6))
-        seeds = 1 if ds == "caida_flow" else args.seeds
+        seeds = 1 if ds.endswith("_flow") else args.seeds
         for name, spec in wls:
             for seed in range(seeds):
                 stream = (C.load_flow_trace(setup) if spec is None

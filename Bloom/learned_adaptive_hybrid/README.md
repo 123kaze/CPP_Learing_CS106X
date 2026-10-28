@@ -26,6 +26,12 @@ learned_adaptive_hybrid/
 │   ├── exp8b_model_neff.py      实验 8b：HLL 估出的 N_eff 直接代入模型
 │   ├── exp9_fp_stream_controller.py 实验 9：误报流模型、只增不减控制器、真实轨迹（caida_flow）
 │   ├── exp9b_sensitivity.py     实验 9b：8b 模型对偏斜度范围和 Q 的敏感性
+│   ├── exp10_baselines.py       实验 10：与基线对比（PLBF、TODS-CAF、SkiQF 式准入、纯 AQF/SkiQF、learned stacked）
+│   ├── exp11_original_baselines.py 实验 11：原版 Stacked（Deeds 等人 C++）与原版 Gama（模型大小搜索）
+│   ├── exp12_gama_cache.py      实验 12：Gama＋缓存（Gama 是 r=0 的特例）；报告合并实验 10–12、含高预算
+│   ├── exp13_deployable.py      实验 13：只用学习期测量的可部署版本；控制器的阻尼 / 阈值修正
+│   ├── exp14_warm_controller.py 实验 14：控制器从学习期校准的结果出发（离线校准＋在线补充）
+│   ├── prepare_mawi.py          MAWI tcpdump 文本 → 与 caida.csv 同格式的 CSV（第二条真实轨迹）
 │   ├── validate_aqf.py          抽象 AQF 与作者 AdaptiveQF 的对照
 │   ├── bench_cache_overhead.py  负例缓存的查询开销
 │   └── plot_figures.py          从 results/*/rows.json 画 figures/ 下的全部图
@@ -41,12 +47,20 @@ learned_adaptive_hybrid/
 │   ├── exp8_cap_and_neff/       （含 8b 的 report_b.md）
 │   ├── exp9_fp_stream_controller/
 │   ├── exp9b_sensitivity/
+│   ├── exp10_baselines/
+│   ├── exp11_original_baselines/
+│   ├── exp12_gama_cache/
+│   ├── exp13_deployable/
+│   ├── exp14_warm_controller/
+│   ├── real_traces/             真实轨迹（Caida 流、MAWI 2020）汇总结论
 │   ├── validate_aqf/
 │   └── bench_cache_overhead/
-├── figures/                     fig1–fig12，编号按实验顺序
+├── figures/                     fig1–fig15，编号按实验顺序
 ├── external/                    （不进 git）
 │   ├── How-to-Train-Your-Filter/  论文 benchmark 仓库（含 Caida/URL 等数据，解压在 data/raw/）
-│   └── aqf_port/                  AdaptiveQF 的 ARM 移植副本 + aqf_driver.c
+│   ├── aqf_port/                  AdaptiveQF 的 ARM 移植副本 + aqf_driver.c
+│   ├── stacked_port/              原版 StackedFilter 的驱动 + 头文件兼容副本（patch/）
+│   └── mawi/                      MAWI 轨迹的 tcpdump 文本与转换后的 CSV
 └── cache/                       （不进 git）cache/<数据集>/{data.npz, scores.npz, model48.txt}
 ```
 
@@ -70,12 +84,28 @@ cd Bloom/learned_adaptive_hybrid
 ../.condaenv/bin/python -u src/exp8b_model_neff.py --seeds 3     # 约 1.5 分钟，依赖实验 7、8
 ../.condaenv/bin/python -u src/exp9_fp_stream_controller.py --seeds 2   # 约 8 分钟
 ../.condaenv/bin/python -u src/exp9b_sensitivity.py              # 约 2 分钟，依赖实验 7、8、8b
+for d in caida_flow cod caida shalla; do ../.condaenv/bin/python -u src/exp10_baselines.py --dataset $d; done   # Caida 约 40 分钟
+../.condaenv/bin/python src/exp10_baselines.py --report
+for d in caida_flow cod caida shalla; do ../.condaenv/bin/python -u src/exp11_original_baselines.py --dataset $d; done   # 需先编译 stacked_driver
+../.condaenv/bin/python src/exp11_original_baselines.py --report
+# 高预算（每成员 ≥10 bit）的基线
+for x in "cod 4096" "caida 2048" "shalla 4096" "caida_flow 256"; do set -- $x
+  ../.condaenv/bin/python -u src/exp10_baselines.py --dataset $1 --budgets $2 --suffix _hi
+  ../.condaenv/bin/python -u src/exp11_original_baselines.py --dataset $1 --budgets $2 --suffix _hi; done
+../.condaenv/bin/python -u src/exp12_gama_cache.py --dataset cod --budgets 256,1024,4096      # 其余数据集同理
+../.condaenv/bin/python src/exp12_gama_cache.py --report
+for d in caida_flow cod caida shalla; do ../.condaenv/bin/python -u src/exp13_deployable.py --dataset $d; done
+../.condaenv/bin/python src/exp13_deployable.py --report
+for d in caida_flow cod caida shalla; do ../.condaenv/bin/python -u src/exp14_warm_controller.py --dataset $d; done
+../.condaenv/bin/python src/exp14_warm_controller.py --report
 ../.condaenv/bin/python src/validate_aqf.py            # 需要先编译 external/aqf_port/aqf_driver（命令见下）
 ../.condaenv/bin/python src/bench_cache_overhead.py --dataset cod   # 计时请在空闲机器上跑
 ../.condaenv/bin/python src/plot_figures.py
 ```
 
 - Caida 数据：`git clone https://github.com/saltsystemslab/How-to-Train-Your-Filter external/How-to-Train-Your-Filter`（本地固定在 c970c34），再把 `data/compressed/caida.tar.gz` 解压到 `data/raw/`。
+- Stacked 驱动：在 `external/stacked_port` 下执行
+  `S=../How-to-Train-Your-Filter/adaptiveqf/external/StackedFilters; c++ -O3 -std=c++17 -w -include cassert -Ipatch -Ipatch/StackedFilter -I$S/wrapper -I$S/include/StackedFilter -I$S/include/BloomFilter -I$S/include/Optimization stacked_driver.cpp $S/wrapper/stacked_wrapper.cpp -o stacked_driver`
 - AQF 驱动：在 `external/aqf_port` 下执行
   `cc -O3 -DNDEBUG -std=gnu11 -w -Wno-error=int-conversion -Wno-error=incompatible-function-pointer-types -Wno-error=implicit-function-declaration '-Dposix_fallocate(fd,off,len)=ftruncate((fd),(off)+(len))' -I. -Iinclude -I../../../.condaenv/include aqf_driver.c src/{gqf,gqf_file,hashutil,partitioned_counter,exp_utility,rand_util,ll_table}.c -L../../../.condaenv/lib -lcrypto -lssl -lpthread -lm -Wl,-rpath,$PWD/../../../.condaenv/lib -o aqf_driver`
 
@@ -93,3 +123,24 @@ cd Bloom/learned_adaptive_hybrid
 - AQF 是抽象实现：每槽 r+3 bit，负载 0.95，另留 5% 预留槽给扩展用，预留槽计入内存；没有计入反向映射的成本。
 - 负例缓存：每条记录取与全部成员都不冲突的最短前缀，再加 6 bit 长度字段，实测约 27.5–29 bit/条，FIFO 淘汰。
 - BF：每个探测位独立混合（`common.bf_pos`）。早期的双重哈希实现有缺陷，已修复并重跑，见决策记录。
+
+## 运行注意
+
+- 长任务请在前台或用会保持前台优先级的方式运行。用 `&` 挂到后台后再退出 shell，macOS 会把进程当成低优先级任务，放到能效核上调度，速度可能慢 5–10 倍。
+- Mac 合盖或长时间闲置会休眠并暂停进程，可以用 `caffeinate -s -i -w <pid>` 保持唤醒，直到该进程结束。
+- 等待实验结束时，检查结果文件是否已生成，不要用 `pgrep -f <模式>`：等待循环自己的命令行也包含这个模式，会一直匹配到自己，永远不结束。
+
+## 真实轨迹：MAWI
+
+```bash
+# 只下载开头 250MB（约 1000 万个包）；MAWI 服务器会限速，下载可能很慢
+cd external/mawi
+curl -s -r 0-250000000 -o mawi2020.gz https://mawi.wide.ad.jp/mawi/samplepoint-F/2020/202004081400.pcap.gz
+gunzip -c mawi2020.gz > mawi2020.pcap            # 截断的尾部会报错，可忽略
+tcpdump -r mawi2020.pcap -nn -q -tt -c 10000000 > mawi2020.txt   # 注意：从管道读（-r -）在本机不工作
+cd ../..
+../.condaenv/bin/python src/prepare_mawi.py external/mawi/mawi2020.txt external/mawi/mawi2020.csv
+# 之后数据集名为 mawi2020_flow，实验 10–14 的脚本都可以直接用 --dataset mawi2020_flow
+```
+
+MAWI 2021（`mawi2021_flow`）的配置已经登记好，下载 `2021/202104141400.pcap.gz` 的前 120MB 后按同样步骤处理即可。

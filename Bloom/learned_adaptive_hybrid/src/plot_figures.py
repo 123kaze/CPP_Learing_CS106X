@@ -340,7 +340,7 @@ def fig_exp9(t):
         ax.scatter(x + (i - 1) * 0.15, y, s=38, marker=MARKERS[i], color=SERIES[i], edgecolor=SURFACE,
                    linewidth=1, label=labels[pk], zorder=3)
     ax.axhline(1, color=MUTED, lw=1, ls=(0, (4, 3)))
-    real = [j for j, k in enumerate(keys) if k[0] == "caida_flow"]
+    real = [j for j, k in enumerate(keys) if k[0].endswith("_flow")]
     ax.axvspan(min(real) - 0.5, max(real) + 0.5, color=GRID, alpha=0.5, zorder=0)
     ax.text((min(real) + max(real)) / 2, 0.97, "真实轨迹", ha="center", va="top", fontsize=8, color=INK2,
             transform=ax.get_xaxis_transform())
@@ -354,11 +354,12 @@ def fig_exp9(t):
     save(fig, "fig12_exp9_fp_stream.png")
 
 
-def fig_exp10(a):
-    picks = ["误报流模型", "在线控制器", "learned stacked(事后最优)", "SkiQF式二次准入", "PLBF(0%缓存)"]
+def fig_exp10(a, picks=("误报流模型", "在线控制器", "learned stacked(事后最优)", "SkiQF式二次准入", "PLBF(0%缓存)"),
+              fname="fig13_exp10_baselines.png", title="实验 10：与基线对比（5 个种子；越低越好）"):
+    picks = list(picks)
     w = a[a.method.isin(picks)].groupby(["dataset", "budget_kib", "method"]).rel.max().reset_index()
     keys = w[["dataset", "budget_kib"]].drop_duplicates().values.tolist()
-    fig, ax = plt.subplots(figsize=(12, 4.4))
+    fig, ax = plt.subplots(figsize=(max(12, 1.0 * len(keys)), 4.4))
     x = np.arange(len(keys))
     for i, pk in enumerate(picks):
         g = w[w.method == pk].set_index(["dataset", "budget_kib"])
@@ -366,19 +367,19 @@ def fig_exp10(a):
         ax.scatter(x + (i - 2) * 0.13, y, s=36, marker=MARKERS[i], color=SERIES[i], edgecolor=SURFACE,
                    linewidth=1, label=pk, zorder=3)
     ax.axhline(1, color=MUTED, lw=1, ls=(0, (4, 3)))
-    real = [j for j, k in enumerate(keys) if k[0] == "caida_flow"]
+    real = [j for j, k in enumerate(keys) if k[0].endswith("_flow")]
     if real:
         ax.axvspan(min(real) - 0.5, max(real) + 0.5, color=GRID, alpha=0.5, zorder=0)
-        ax.text((min(real) + max(real)) / 2, 0.97, "真实轨迹", ha="center", va="top", fontsize=8, color=INK2,
+        ax.text((min(real) + max(real)) / 2, 1.01, "真实轨迹", ha="center", va="bottom", fontsize=8, color=INK2,
                 transform=ax.get_xaxis_transform())
     ax.set_yscale("log")
     ax.yaxis.set_major_formatter(lambda v, _: f"{v:g}×")
     ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_xticks(x, [f"{d}\n{b}KiB" for d, b in keys], fontsize=8)
     ax.set_ylabel("所有负载上的最坏相对代价（对数轴）")
-    ax.legend(loc="upper left", ncol=5, bbox_to_anchor=(0, 1.13), fontsize=8)
-    ax.set_title("实验 10：与基线对比（5 个种子；越低越好）", loc="left", pad=30)
-    save(fig, "fig13_exp10_baselines.png")
+    ax.legend(loc="upper left", ncol=5, bbox_to_anchor=(0, 1.17), fontsize=8)
+    ax.set_title(title, loc="left", pad=40)
+    save(fig, fname)
 
 
 def main():
@@ -415,6 +416,16 @@ def main():
         fig_exp9(pd.read_json(C.RESULTS / "exp9_fp_stream_controller" / "summary.json"))
     if (C.RESULTS / "exp10_baselines" / "summary.json").exists():
         fig_exp10(pd.read_json(C.RESULTS / "exp10_baselines" / "summary.json"))
+    if (C.RESULTS / "exp11_original_baselines" / "summary.json").exists():
+        fig_exp10(pd.read_json(C.RESULTS / "exp11_original_baselines" / "summary.json"),
+                  picks=("误报流模型", "在线控制器", "Gama-PLBF", "learned stacked(事后最优)", "Stacked(原版)"),
+                  fname="fig14_exp11_original_baselines.png",
+                  title="实验 11：加入原版 Gama 与原版 Stacked 后的对比（5 个种子；>2000× 截断；越低越好）")
+    if (C.RESULTS / "exp12_gama_cache" / "summary.json").exists():
+        fig_exp10(pd.read_json(C.RESULTS / "exp12_gama_cache" / "summary.json"),
+                  picks=("Gama＋缓存", "Gama-PLBF", "误报流模型", "learned stacked(事后最优)", "Stacked(原版)"),
+                  fname="fig15_exp12_gama_cache.png",
+                  title="实验 12：Gama＋缓存（Gama 是 r=0 的特例），含每成员 ≥8 bit 的高预算点（>2000× 截断；越低越好）")
 
 
 if __name__ == "__main__":

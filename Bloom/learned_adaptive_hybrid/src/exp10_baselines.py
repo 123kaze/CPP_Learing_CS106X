@@ -13,6 +13,9 @@
                                 缓存比例 f 与负例层每 key 位数都取事后最好（对基线有利）
 参照：网格上各比例（LRU）里该负载最好的那个。
 
+评估窗口：前 25% 查询是所有方法共同的学习期——stacked 用它离线建负例层，缓存类方法在线预热（状态延续）；
+所有方法只比较后 75% 的误报率。缓存类方法的后 75% 误报 = 整条流的误报 − 前 25% 单独跑的误报（模拟是确定性的）。
+
 用法：python src/exp10_baselines.py --dataset caida [--seeds 5]
       python src/exp10_baselines.py --report
 """
@@ -104,10 +107,10 @@ def stacked_fpr(setup, base, kib, f, b2, stream):
     l3_fp = query_bf(l3, setup.h1q, setup.h2q, m3, k3) if n3 else np.zeros(setup.h1q.size, np.bool_)
     assert query_bf(l3, setup.h1m[mem_hit], setup.h2m[mem_hit], m3, k3).all()   # 零漏判
     fp = base.fp_static & (~in_l2 | l3_fp)
-    return float(fp[stream].mean())
+    return float(fp[stream[stream.size // 4:]].mean())                 # 只算后 75%
 
 
-def run(ds, seeds):
+def run(ds, seeds, budgets=None, suffix=""):
     t0 = time.time()
     setup = C.Setup(ds)
     est = FastEst(setup)
@@ -116,7 +119,7 @@ def run(ds, seeds):
     n_pool = setup.q_score.size
     n_mem = setup.mem_score.size
     order = np.argsort(setup.q_score, kind="stable")
-    if ds == "caida_flow":
+    if ds.endswith("_flow"):
         wls, seeds = [("真实轨迹", None)], 1
     else:
         pools = {"1万": 10_000, "10万": 100_000, **({"100万": 1_000_000} if n_pool > 1_500_000 else {}),
@@ -139,17 +142,22 @@ def run(ds, seeds):
             stream = (C.load_flow_trace(setup) if spec is None
                       else make_stream(spec, n_pool, np.random.default_rng(2000 + seed), order))
             q = stream.size
+            tail = q // 4
+            qt = q - tail
 
             def add(kib, method, f, fpr):
                 rows.append({"dataset": ds, "budget_kib": kib, "workload": name, "seed": seed,
                              "method": method, "frac": f, "fpr": fpr})
 
+            def tail_rate(fn):
+                return (fn(stream) - fn(stream[:tail])) / qt
+
             def lru(kib, f, base=None):
                 s = base or plbf(kib, f)
-                r = simulate_policy(stream, s.fp_static, s.cache_cost, s.cache_bits, 1, dummy, np.zeros(1, np.bool_))
-                return int(r[0]) / q
+                return tail_rate(lambda st: int(simulate_policy(st, s.fp_static, s.cache_cost, s.cache_bits, 1,
+                                                                dummy, np.zeros(1, np.bool_))[0]))
 
-            for kib in budgets_of(ds):
+            for kib in budgets or budgets_of(ds):
                 fits = lambda f: kib * 1024 * (1 - f) > C.N_TREES * C.TREE_BYTES
                 for f in GRID:
                     if fits(f):
@@ -167,7 +175,7 @@ def run(ds, seeds):
                 W, s_F = fit_stream(QF, D_F, space_saving_top_mass(fs, SS_K)) if QF else (1.0, 0.0)
                 f_ours = pick_static(est, kib, bbar, W, QF, s_F, bins, max(n_eff, W / max(p0, 1e-12)), q)
                 add(kib, "误报流模型", f_ours, lru(kib, f_ours))
-                fpr_c, f_c, _ = run_controller(setup, est, kib, stream, bbar, bins, base)
+                fpr_c, f_c, _ = run_controller(setup, est, kib, stream, bbar, bins, base, tail_from=tail)
                 add(kib, "在线控制器", f_c, fpr_c)
                 # 基线
                 add(kib, "PLBF(0%缓存)", 0.0, lru(kib, 0.0))
@@ -177,17 +185,15 @@ def run(ds, seeds):
                 if f_tods < 1:
                     add(kib, "TODS-CAF(BF)", f_tods, lru(kib, None, plbf(kib, round(f_tods, 6), "bf", False)))
                 s = plbf(kib, f_ours)
-                r = simulate_split(stream, s.reg_q, s.kind.astype(np.int64), s.bf_fp_q, s.h1q, s.h2q, s.space,
-                                   s.rbits, s.aqf_off, s.mem_f, s.mem_h2, s.reserve0.copy(), s.cache_bits,
-                                   setup.cache_cost, False, 2)
-                add(kib, "SkiQF式二次准入", f_ours, int(r[0]) / q)
+                add(kib, "SkiQF式二次准入", f_ours, tail_rate(lambda st: int(simulate_split(
+                    st, s.reg_q, s.kind.astype(np.int64), s.bf_fp_q, s.h1q, s.h2q, s.space, s.rbits, s.aqf_off,
+                    s.mem_f, s.mem_h2, s.reserve0.copy(), s.cache_bits, setup.cache_cost, False, 2)[0])))
                 aqf = plbf(kib, 0.0, "aqf", False)
                 if aqf.feasible:
                     for method, after in (("纯AQF", 1), ("纯SkiQF(α=1)", 2)):
-                        fp = simulate_aqf_ski(stream, aqf.reg_q, aqf.kind.astype(np.int64), aqf.h1q, aqf.h2q,
-                                              aqf.space, aqf.rbits, aqf.aqf_off, aqf.mem_f, aqf.mem_h2,
-                                              aqf.reserve0.copy(), after)
-                        add(kib, method, 0.0, fp / q)
+                        add(kib, method, 0.0, tail_rate(lambda st: simulate_aqf_ski(
+                            st, aqf.reg_q, aqf.kind.astype(np.int64), aqf.h1q, aqf.h2q, aqf.space, aqf.rbits,
+                            aqf.aqf_off, aqf.mem_f, aqf.mem_h2, aqf.reserve0.copy(), after)))
                 best_st = None
                 for f in STACK_F:
                     if not fits(f):
@@ -200,7 +206,7 @@ def run(ds, seeds):
                     add(kib, "learned stacked(事后最优)", best_st[1], best_st[0])
         print(f"{ds} {name} done at {time.time() - t0:.1f}s", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame(rows).to_json(OUT / f"rows_{ds}.json", orient="records", force_ascii=False, indent=1)
+    pd.DataFrame(rows).to_json(OUT / f"rows_{ds}{suffix}.json", orient="records", force_ascii=False, indent=1)
 
 
 def budgets_of(ds):
@@ -215,10 +221,14 @@ def report():
     df = pd.concat([pd.read_json(p) for p in sorted(OUT.glob("rows_*.json"))])
     a = df.groupby(["dataset", "budget_kib", "workload", "method"]).fpr.agg(["mean", "std"]).reset_index()
     best = a.groupby(["dataset", "budget_kib", "workload"])["mean"].transform("min")
-    a["rel"] = np.where(best > 0, a["mean"] / best.where(best > 0, 1), np.where(a["mean"] > 0, np.inf, 1.0))
+    # +1 次误报的平滑（按后 75% 查询数），避免最好者为 0 时除零
+    qt = {"真实轨迹": 0.75 * 5_775_801}
+    eps = a.workload.map(lambda w: 1 / qt.get(w, 0.75 * 10_000_000))
+    a["rel"] = (a["mean"] + eps) / (best + eps)
     a.to_json(OUT / "summary.json", orient="records", force_ascii=False, indent=1)
     lines = ["# 实验 10：与基线对比", "",
-             "每格：该方法在该设置所有负载上的最坏相对代价 / 中位数（相对“网格比例与所有方法里该负载最好的那个”）。"
+             "每格：该方法在该设置所有负载上的最坏相对代价 / 中位数（相对“网格比例与所有方法里该负载最好的那个”，"
+             "分子分母各加 1 次误报平滑）。只比较后 75% 查询（前 25% 是共同学习期）。"
              "合成负载 5 个种子取均值，真实轨迹 1 次。“—”表示该预算下放不下。", "",
              "| 数据集 | 预算 | " + " | ".join(ORDER) + " |", "|---|---:|" + "---|" * len(ORDER)]
     for (ds, kib), g in a.groupby(["dataset", "budget_kib"], sort=False):
@@ -231,7 +241,7 @@ def report():
     ours = a[a.method.isin(["误报流模型", "在线控制器"]) & a["std"].notna() & (a["mean"] > 0)]
     cv = (ours["std"] / ours["mean"])
     lines += ["", f"种子间波动（我们的两种方法，标准差 ÷ 均值）：中位数 {cv.median():.1%}，90 分位 {cv.quantile(0.9):.1%}。"]
-    real = a[a.dataset == "caida_flow"]
+    real = a[a.dataset.str.endswith("_flow")]
     lines += ["", "## 真实轨迹（绝对 FPR）", "", "| 预算 | " + " | ".join(ORDER) + " |", "|---:|" + "---:|" * len(ORDER)]
     for kib, g in real.groupby("budget_kib"):
         cells = [("—" if g[g.method == m].empty else f"{g[g.method == m]['mean'].iloc[0]:.4%}") for m in ORDER]
@@ -245,8 +255,10 @@ if __name__ == "__main__":
     ap.add_argument("--dataset")
     ap.add_argument("--seeds", type=int, default=5)
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--budgets", help="KiB，逗号分隔；默认用 SETTINGS")
+    ap.add_argument("--suffix", default="")
     args = ap.parse_args()
     if args.report:
         report()
     else:
-        run(args.dataset, args.seeds)
+        run(args.dataset, args.seeds, [int(b) for b in args.budgets.split(",")] if args.budgets else None, args.suffix)

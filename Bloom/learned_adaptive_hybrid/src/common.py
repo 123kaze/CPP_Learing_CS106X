@@ -23,6 +23,9 @@ DATASETS = {
     "shalla": {"raw": HTTYF_DATA / "shalla_combined.csv", "member_train": 0.5, "neg_cuts": (0.10, 0.20)},
     # 同一份 Caida，key 改成流（源, 目的, 协议）；TCP 包按时间顺序构成真实查询轨迹（见 load_flow_trace）
     "caida_flow": {"raw": HTTYF_DATA / "caida.csv", "member_train": 0.5, "neg_cuts": (0.10, 0.20)},
+    # MAWI（WIDE 骨干网）两天的前 1000 万个包，经 src/prepare_mawi.py 转成与 caida.csv 同格式；处理流程同 caida_flow
+    "mawi2020_flow": {"raw": PROJECT / "external" / "mawi" / "mawi2020.csv", "member_train": 0.5, "neg_cuts": (0.10, 0.20)},
+    "mawi2021_flow": {"raw": PROJECT / "external" / "mawi" / "mawi2021.csv", "member_train": 0.5, "neg_cuts": (0.10, 0.20)},
 }
 
 
@@ -78,7 +81,7 @@ def load_dataset(name):
         assert set(df["type"].unique()) == {"galaxy", "star"}, df["type"].unique()
         key, member = "objID", (df["type"] == "galaxy").to_numpy()
         drop = ("objID", "type")
-    elif name == "caida_flow":
+    elif name.endswith("_flow"):
         pk = pd.read_csv(raw)
         flow = pk["Source"].astype(str) + ">" + pk["Destination"].astype(str) + "#" + pk["Label"].astype(str)
         codes, uniq = pd.factorize(flow, sort=False)
@@ -150,8 +153,8 @@ def split_and_score(ids, y, X, name="cod"):
 
 
 def load_flow_trace(setup):
-    """caida_flow 的真实查询轨迹：TCP 包按时间顺序，映射成测试查询池里的下标；不在测试池的流的包丢掉。"""
-    trace = np.load(CACHE / "caida_flow" / "trace.npy")
+    """*_flow 数据集的真实查询轨迹：TCP 包按时间顺序，映射成测试查询池里的下标；不在测试池的流的包丢掉。"""
+    trace = np.load(CACHE / setup.name / "trace.npy")
     pos = np.full(setup.ids.size, -1, np.int64)
     pos[np.flatnonzero(setup.split["neg_test"])] = np.arange(int(setup.split["neg_test"].sum()))
     q = pos[trace]
@@ -420,11 +423,11 @@ class Structure:
     """
 
     def __init__(self, name, filt, use_model, budget_bytes, setup, cache_frac=0.0,
-                 free_cache=False):
+                 free_cache=False, n_trees=None):
         self.name = name
         self.budget_kib = budget_bytes // 1024
         self.cache_frac = cache_frac
-        self.model_bytes = N_TREES * TREE_BYTES if use_model else 0
+        self.model_bytes = (n_trees or N_TREES) * TREE_BYTES if use_model else 0   # n_trees：Gama 的模型大小搜索用
         self.cache_bits = int(budget_bytes * cache_frac) * 8
         budget_bits = (budget_bytes - self.model_bytes) * 8 - self.cache_bits
         if free_cache:
