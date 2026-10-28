@@ -1,0 +1,901 @@
+{
+  "metadata": {
+    "dataset": "caida",
+    "queries": 1000000,
+    "repeats": 3,
+    "python": "3.13.5",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "query_input_bytes": 212349350,
+    "external_member_index_bytes": 9569552,
+    "backend_latency_measured": false,
+    "timing": "median of repeats; JIT and 25% warmup excluded; single-thread compiled live traversal",
+    "included_costs": "key hashing, live tree traversal, packed BF, cache lookup/insertion/replacement, member-index search on insertion, sketch updates",
+    "excluded_costs": "feature extraction from original objects, input trace generation, compilation, model construction, network/disk/backend I/O",
+    "sketch_bytes": 5128,
+    "sketch_semantics": "negative HLL on every known negative; FP sketch on backend false positives and cache hits",
+    "placement_equivalence": "Prefixes can hit additional negatives; recency may make placements diverge. Counts are independently measured."
+  },
+  "rows": [
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "uniform",
+      "positive_fraction": 0.1,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1804.2901333333334,
+      "repeat_mean_query_ns": [
+        1804.2901333333334,
+        1849.1152,
+        1678.0014666666666
+      ],
+      "measured_throughput_qps": 554234.5887313319,
+      "accepted": 107218,
+      "false_positives": 31994,
+      "false_negatives": 0,
+      "cache_hits": 1076,
+      "insertions": 31994,
+      "evictions": 31994,
+      "member_index_searches": 31994,
+      "model_calls": 748924,
+      "cache_probes": 750000,
+      "negative_queries": 674776,
+      "fpr": 0.04741425302618943,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1947.2474666666667,
+          "projected_throughput_qps": 513545.4106980137
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 3233.8634666666667,
+          "projected_throughput_qps": 309227.64993253065
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 16100.023466666667,
+          "projected_throughput_qps": 62111.71071088128
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "uniform",
+      "positive_fraction": 0.1,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1525.0265333333334,
+      "repeat_mean_query_ns": [
+        1557.4853333333333,
+        1525.0265333333334,
+        1515.9122666666667
+      ],
+      "measured_throughput_qps": 655726.2959971231,
+      "accepted": 107218,
+      "false_positives": 31994,
+      "false_negatives": 0,
+      "cache_hits": 256,
+      "insertions": 31994,
+      "evictions": 31994,
+      "member_index_searches": 31994,
+      "model_calls": 750000,
+      "cache_probes": 107474,
+      "negative_queries": 674776,
+      "fpr": 0.04741425302618943,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1667.9838666666667,
+          "projected_throughput_qps": 599526.1824674723
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2954.5998666666665,
+          "projected_throughput_qps": 338455.3053297821
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 15820.759866666667,
+          "projected_throughput_qps": 63208.08914538525
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "uniform",
+      "positive_fraction": 0.5,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1971.7197333333334,
+      "repeat_mean_query_ns": [
+        1971.7197333333334,
+        1945.246,
+        1995.506
+      ],
+      "measured_throughput_qps": 507171.47224034136,
+      "accepted": 392981,
+      "false_positives": 17776,
+      "false_negatives": 0,
+      "cache_hits": 619,
+      "insertions": 17776,
+      "evictions": 17775,
+      "member_index_searches": 17776,
+      "model_calls": 749381,
+      "cache_probes": 750000,
+      "negative_queries": 374795,
+      "fpr": 0.04742859429821636,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2495.6944000000003,
+          "projected_throughput_qps": 400690.0844911139
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 7211.4664,
+          "projected_throughput_qps": 138668.05231180164
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 54369.186400000006,
+          "projected_throughput_qps": 18392.77109359135
+        }
+      ],
+      "paired_false_positive_difference": 1
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "uniform",
+      "positive_fraction": 0.5,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1831.4353333333333,
+      "repeat_mean_query_ns": [
+        1831.4353333333333,
+        1833.8694666666668,
+        1788.7417333333333
+      ],
+      "measured_throughput_qps": 546019.824887802,
+      "accepted": 392980,
+      "false_positives": 17775,
+      "false_negatives": 0,
+      "cache_hits": 160,
+      "insertions": 17775,
+      "evictions": 17774,
+      "member_index_searches": 17775,
+      "model_calls": 750000,
+      "cache_probes": 393140,
+      "negative_queries": 374795,
+      "fpr": 0.04742592617297456,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2355.4086666666667,
+          "projected_throughput_qps": 424554.7764818164
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 7071.1686666666665,
+          "projected_throughput_qps": 141419.33917005514
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 54228.76866666666,
+          "projected_throughput_qps": 18440.396575234798
+        }
+      ],
+      "paired_false_positive_difference": 1
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1121.032,
+      "repeat_mean_query_ns": [
+        1145.1753333333334,
+        1121.032,
+        1100.8849333333333
+      ],
+      "measured_throughput_qps": 892035.196140699,
+      "accepted": 75295,
+      "false_positives": 71,
+      "false_negatives": 0,
+      "cache_hits": 30248,
+      "insertions": 71,
+      "evictions": 28,
+      "member_index_searches": 71,
+      "model_calls": 719752,
+      "cache_probes": 750000,
+      "negative_queries": 674776,
+      "fpr": 0.00010522010267110863,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1221.4253333333334,
+          "projected_throughput_qps": 818715.620766558
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2124.9653333333335,
+          "projected_throughput_qps": 470595.91246665036
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 11160.365333333333,
+          "projected_throughput_qps": 89602.80153313978
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1128.8138666666666,
+      "repeat_mean_query_ns": [
+        1123.0010666666667,
+        1150.6790666666666,
+        1128.8138666666666
+      ],
+      "measured_throughput_qps": 885885.6446837884,
+      "accepted": 75295,
+      "false_positives": 71,
+      "false_negatives": 0,
+      "cache_hits": 29965,
+      "insertions": 71,
+      "evictions": 28,
+      "member_index_searches": 71,
+      "model_calls": 750000,
+      "cache_probes": 105260,
+      "negative_queries": 674776,
+      "fpr": 0.00010522010267110863,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1229.2072,
+          "projected_throughput_qps": 813532.4947657319
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2132.7472,
+          "projected_throughput_qps": 468878.8244570196
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 11168.147200000001,
+          "projected_throughput_qps": 89540.36708971743
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1675.114,
+      "repeat_mean_query_ns": [
+        1675.114,
+        1668.4,
+        1675.7581333333333
+      ],
+      "measured_throughput_qps": 596974.2954807852,
+      "accepted": 375309,
+      "false_positives": 104,
+      "false_negatives": 0,
+      "cache_hits": 22356,
+      "insertions": 104,
+      "evictions": 13,
+      "member_index_searches": 104,
+      "model_calls": 727644,
+      "cache_probes": 750000,
+      "negative_queries": 374795,
+      "fpr": 0.0002774850251470804,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2175.526,
+          "projected_throughput_qps": 459658.95144438633
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6679.234,
+          "projected_throughput_qps": 149717.76703735787
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 51716.314,
+          "projected_throughput_qps": 19336.2581873101
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 128,
+      "trees": 48,
+      "cache_bytes": 13107,
+      "cache_allocated_bytes": 10256,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1631.1558666666667,
+      "repeat_mean_query_ns": [
+        1696.8714666666667,
+        1624.8945333333334,
+        1631.1558666666667
+      ],
+      "measured_throughput_qps": 613062.1974486967,
+      "accepted": 375309,
+      "false_positives": 104,
+      "false_negatives": 0,
+      "cache_hits": 22354,
+      "insertions": 104,
+      "evictions": 13,
+      "member_index_searches": 104,
+      "model_calls": 750000,
+      "cache_probes": 397663,
+      "negative_queries": 374795,
+      "fpr": 0.0002774850251470804,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 75121,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 128220,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2131.5678666666668,
+          "projected_throughput_qps": 469138.2412157461
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6635.275866666667,
+          "projected_throughput_qps": 150709.6343987225
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 51672.355866666665,
+          "projected_throughput_qps": 19352.707714360095
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "uniform",
+      "positive_fraction": 0.1,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1671.6344,
+      "repeat_mean_query_ns": [
+        1682.3632,
+        1653.648,
+        1671.6344
+      ],
+      "measured_throughput_qps": 598216.930687715,
+      "accepted": 90204,
+      "false_positives": 14980,
+      "false_negatives": 0,
+      "cache_hits": 2152,
+      "insertions": 14980,
+      "evictions": 14542,
+      "member_index_searches": 14980,
+      "model_calls": 747848,
+      "cache_probes": 750000,
+      "negative_queries": 674776,
+      "fpr": 0.022199959690326863,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1791.9063999999998,
+          "projected_throughput_qps": 558064.8632093731
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2874.3544,
+          "projected_throughput_qps": 347904.21111606836
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 13698.8344,
+          "projected_throughput_qps": 72998.91149863086
+        }
+      ],
+      "paired_false_positive_difference": 3
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "uniform",
+      "positive_fraction": 0.1,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1517.6618666666666,
+      "repeat_mean_query_ns": [
+        1543.7870666666668,
+        1515.6822666666667,
+        1517.6618666666666
+      ],
+      "measured_throughput_qps": 658908.2996440842,
+      "accepted": 90201,
+      "false_positives": 14977,
+      "false_negatives": 0,
+      "cache_hits": 483,
+      "insertions": 14977,
+      "evictions": 14539,
+      "member_index_searches": 14977,
+      "model_calls": 750000,
+      "cache_probes": 90684,
+      "negative_queries": 674776,
+      "fpr": 0.02219551377049569,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1637.9298666666666,
+          "projected_throughput_qps": 610526.7510843362
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2720.3418666666666,
+          "projected_throughput_qps": 367600.8564413767
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 13544.461866666667,
+          "projected_throughput_qps": 73830.91405506707
+        }
+      ],
+      "paired_false_positive_difference": 3
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "uniform",
+      "positive_fraction": 0.5,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1978.2558666666666,
+      "repeat_mean_query_ns": [
+        1933.1032,
+        1997.5089333333333,
+        1978.2558666666666
+      ],
+      "measured_throughput_qps": 505495.7838618651,
+      "accepted": 383627,
+      "false_positives": 8422,
+      "false_negatives": 0,
+      "cache_hits": 1132,
+      "insertions": 8422,
+      "evictions": 6989,
+      "member_index_searches": 8422,
+      "model_calls": 748868,
+      "cache_probes": 750000,
+      "negative_queries": 374795,
+      "fpr": 0.022470950786429914,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2489.758533333333,
+          "projected_throughput_qps": 401645.37508831517
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 7093.282533333333,
+          "projected_throughput_qps": 140978.45324794526
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 53128.52253333334,
+          "projected_throughput_qps": 18822.28137198038
+        }
+      ],
+      "paired_false_positive_difference": -1
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "uniform",
+      "positive_fraction": 0.5,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1839.6102666666666,
+      "repeat_mean_query_ns": [
+        1949.6262666666667,
+        1839.6102666666666,
+        1816.4352
+      ],
+      "measured_throughput_qps": 543593.4002542712,
+      "accepted": 383628,
+      "false_positives": 8423,
+      "false_negatives": 0,
+      "cache_hits": 266,
+      "insertions": 8423,
+      "evictions": 6990,
+      "member_index_searches": 8423,
+      "model_calls": 750000,
+      "cache_probes": 383894,
+      "negative_queries": 374795,
+      "fpr": 0.022473618911671715,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2351.1142666666665,
+          "projected_throughput_qps": 425330.2419953274
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6954.6502666666665,
+          "projected_throughput_qps": 143788.68263052078
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 52990.010266666664,
+          "projected_throughput_qps": 18871.48152958652
+        }
+      ],
+      "paired_false_positive_difference": -1
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1172.1772,
+      "repeat_mean_query_ns": [
+        1154.7053333333333,
+        1172.1772,
+        1229.4456
+      ],
+      "measured_throughput_qps": 853113.334741539,
+      "accepted": 75245,
+      "false_positives": 21,
+      "false_negatives": 0,
+      "cache_hits": 11998,
+      "insertions": 21,
+      "evictions": 0,
+      "member_index_searches": 21,
+      "model_calls": 738002,
+      "cache_probes": 750000,
+      "negative_queries": 674776,
+      "fpr": 3.112143881821523e-05,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1272.5038666666667,
+          "projected_throughput_qps": 785852.2289755453
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2175.4438666666665,
+          "projected_throughput_qps": 459676.3057519174
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 11204.843866666666,
+          "projected_throughput_qps": 89247.1159705227
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1180.3986666666667,
+      "repeat_mean_query_ns": [
+        1180.3986666666667,
+        1159.3958666666667,
+        1211.2009333333333
+      ],
+      "measured_throughput_qps": 847171.407626124,
+      "accepted": 75245,
+      "false_positives": 21,
+      "false_negatives": 0,
+      "cache_hits": 11995,
+      "insertions": 21,
+      "evictions": 0,
+      "member_index_searches": 21,
+      "model_calls": 750000,
+      "cache_probes": 87240,
+      "negative_queries": 674776,
+      "fpr": 3.112143881821523e-05,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 1280.7253333333333,
+          "projected_throughput_qps": 780807.5423926442
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2183.6653333333334,
+          "projected_throughput_qps": 457945.6314734431
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 11213.065333333332,
+          "projected_throughput_qps": 89181.67960970293
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_before",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1612.4612,
+      "repeat_mean_query_ns": [
+        1650.8529333333333,
+        1612.4612,
+        1576.8217333333334
+      ],
+      "measured_throughput_qps": 620169.9612989137,
+      "accepted": 375250,
+      "false_positives": 45,
+      "false_negatives": 0,
+      "cache_hits": 30885,
+      "insertions": 45,
+      "evictions": 0,
+      "member_index_searches": 45,
+      "model_calls": 719115,
+      "cache_probes": 750000,
+      "negative_queries": 374795,
+      "fpr": 0.00012006563588094825,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2112.794533333333,
+          "projected_throughput_qps": 473306.79070922756
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6615.794533333333,
+          "projected_throughput_qps": 151153.42457531783
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 51645.79453333333,
+          "projected_throughput_qps": 19362.660774917076
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "caida",
+      "budget_kib": 256,
+      "trees": 48,
+      "cache_bytes": 26214,
+      "cache_allocated_bytes": 19856,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_after",
+      "evaluated_queries": 750000,
+      "mean_query_ns": 1664.0358666666666,
+      "repeat_mean_query_ns": [
+        1667.6701333333333,
+        1664.0358666666666,
+        1661.1573333333333
+      ],
+      "measured_throughput_qps": 600948.5853229606,
+      "accepted": 375250,
+      "false_positives": 45,
+      "false_negatives": 0,
+      "cache_hits": 30885,
+      "insertions": 45,
+      "evictions": 0,
+      "member_index_searches": 45,
+      "model_calls": 750000,
+      "cache_probes": 406135,
+      "negative_queries": 374795,
+      "fpr": 0.00012006563588094825,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 32160,
+      "packed_bf_bytes": 193086,
+      "sketch_bytes": 5128,
+      "navigation_bytes": 3267,
+      "array_overhead_bytes": 2288,
+      "actual_filter_state_bytes": 255785,
+      "resident_accounting": "Executable packed model/BF/navigation/sketch arrays, their ndarray headers, model dictionary, and cache allocation including its header. Host interpreter/JIT/input/member index reported separately; not process RSS.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 2164.3692,
+          "projected_throughput_qps": 462028.38221870834
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6667.369199999999,
+          "projected_throughput_qps": 149984.19466556617
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 51697.369199999994,
+          "projected_throughput_qps": 19343.344070978375
+        }
+      ],
+      "paired_false_positive_difference": 0
+    }
+  ]
+}

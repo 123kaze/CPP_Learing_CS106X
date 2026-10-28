@@ -1,0 +1,225 @@
+{
+  "metadata": {
+    "dataset": "synthetic_smoke",
+    "queries": 10000,
+    "repeats": 1,
+    "python": "3.13.5",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "query_input_bytes": 58000,
+    "external_member_index_bytes": 8096,
+    "backend_latency_measured": false,
+    "timing": "median of repeats; JIT and 25% warmup excluded; single-thread compiled live traversal",
+    "included_costs": "key hashing, live tree traversal, packed BF, cache lookup/insertion/replacement, member-index search on insertion, sketch updates",
+    "excluded_costs": "feature extraction from original objects, input trace generation, compilation, model construction, network/disk/backend I/O",
+    "sketch_bytes": 5128,
+    "sketch_semantics": "negative HLL on every known negative; FP sketch on backend false positives and cache hits",
+    "placement_equivalence": "Prefixes can hit additional negatives; recency may make placements diverge. Counts are independently measured."
+  },
+  "rows": [
+    {
+      "dataset": "synthetic_smoke",
+      "budget_kib": 16,
+      "trees": 5,
+      "cache_bytes": 2048,
+      "cache_allocated_bytes": 1504,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_before",
+      "evaluated_queries": 7500,
+      "mean_query_ns": 213.4,
+      "repeat_mean_query_ns": [
+        213.4
+      ],
+      "measured_throughput_qps": 4686035.613870665,
+      "accepted": 1921,
+      "false_positives": 1158,
+      "false_negatives": 0,
+      "cache_hits": 5579,
+      "insertions": 1158,
+      "evictions": 1150,
+      "member_index_searches": 1158,
+      "model_calls": 1921,
+      "cache_probes": 7500,
+      "negative_queries": 6737,
+      "fpr": 0.1718865964078967,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 710,
+      "packed_bf_bytes": 0,
+      "sketch_bytes": 5128,
+      "physical_filter_payload_bytes": 12000,
+      "resident_accounting": "model/BF/navigation/sketch packed payload; cache additionally charges ndarray header. Host interpreter/JIT/input/member index reported separately.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 469.5333333333333,
+          "projected_throughput_qps": 2129774.243930144
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 2774.733333333333,
+          "projected_throughput_qps": 360394.9929122318
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 25826.733333333334,
+          "projected_throughput_qps": 38719.56964488992
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "synthetic_smoke",
+      "budget_kib": 16,
+      "trees": 5,
+      "cache_bytes": 2048,
+      "cache_allocated_bytes": 1504,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.1,
+      "placement": "cache_after",
+      "evaluated_queries": 7500,
+      "mean_query_ns": 439.12,
+      "repeat_mean_query_ns": [
+        439.12
+      ],
+      "measured_throughput_qps": 2277281.836400073,
+      "accepted": 1921,
+      "false_positives": 1158,
+      "false_negatives": 0,
+      "cache_hits": 5579,
+      "insertions": 1158,
+      "evictions": 1150,
+      "member_index_searches": 1158,
+      "model_calls": 7500,
+      "cache_probes": 7500,
+      "negative_queries": 6737,
+      "fpr": 0.1718865964078967,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 710,
+      "packed_bf_bytes": 0,
+      "sketch_bytes": 5128,
+      "physical_filter_payload_bytes": 12000,
+      "resident_accounting": "model/BF/navigation/sketch packed payload; cache additionally charges ndarray header. Host interpreter/JIT/input/member index reported separately.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 695.2533333333333,
+          "projected_throughput_qps": 1438324.6394599571
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 3000.453333333333,
+          "projected_throughput_qps": 333282.97057333565
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 26052.45333333333,
+          "projected_throughput_qps": 38384.1009982937
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "synthetic_smoke",
+      "budget_kib": 16,
+      "trees": 5,
+      "cache_bytes": 2048,
+      "cache_allocated_bytes": 1504,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_before",
+      "evaluated_queries": 7500,
+      "mean_query_ns": 269.6666666666667,
+      "repeat_mean_query_ns": [
+        269.6666666666667
+      ],
+      "measured_throughput_qps": 3708281.8294190355,
+      "accepted": 4431,
+      "false_positives": 681,
+      "false_negatives": 0,
+      "cache_hits": 3069,
+      "insertions": 681,
+      "evictions": 649,
+      "member_index_searches": 681,
+      "model_calls": 4431,
+      "cache_probes": 7500,
+      "negative_queries": 3750,
+      "fpr": 0.1816,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 710,
+      "packed_bf_bytes": 0,
+      "sketch_bytes": 5128,
+      "physical_filter_payload_bytes": 12000,
+      "resident_accounting": "model/BF/navigation/sketch packed payload; cache additionally charges ndarray header. Host interpreter/JIT/input/member index reported separately.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 860.4666666666667,
+          "projected_throughput_qps": 1162160.0681800572
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6177.666666666666,
+          "projected_throughput_qps": 161873.41498947825
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 59349.666666666664,
+          "projected_throughput_qps": 16849.294295390595
+        }
+      ],
+      "paired_false_positive_difference": 0
+    },
+    {
+      "dataset": "synthetic_smoke",
+      "budget_kib": 16,
+      "trees": 5,
+      "cache_bytes": 2048,
+      "cache_allocated_bytes": 1504,
+      "workload": "zipf1.1-10k",
+      "positive_fraction": 0.5,
+      "placement": "cache_after",
+      "evaluated_queries": 7500,
+      "mean_query_ns": 247.29333333333332,
+      "repeat_mean_query_ns": [
+        247.29333333333332
+      ],
+      "measured_throughput_qps": 4043780.6653367123,
+      "accepted": 4431,
+      "false_positives": 681,
+      "false_negatives": 0,
+      "cache_hits": 3069,
+      "insertions": 681,
+      "evictions": 649,
+      "member_index_searches": 681,
+      "model_calls": 7500,
+      "cache_probes": 7500,
+      "negative_queries": 3750,
+      "fpr": 0.1816,
+      "raw_score_max_error": 0.0,
+      "model_array_bytes": 710,
+      "packed_bf_bytes": 0,
+      "sketch_bytes": 5128,
+      "physical_filter_payload_bytes": 12000,
+      "resident_accounting": "model/BF/navigation/sketch packed payload; cache additionally charges ndarray header. Host interpreter/JIT/input/member index reported separately.",
+      "backend_projections": [
+        {
+          "backend_us": 1,
+          "projected_mean_query_ns": 838.0933333333332,
+          "projected_throughput_qps": 1193184.529964841
+        },
+        {
+          "backend_us": 10,
+          "projected_mean_query_ns": 6155.293333333332,
+          "projected_throughput_qps": 162461.79440135
+        },
+        {
+          "backend_us": 100,
+          "projected_mean_query_ns": 59327.293333333335,
+          "projected_throughput_qps": 16855.648451404155
+        }
+      ],
+      "paired_false_positive_difference": 0
+    }
+  ]
+}

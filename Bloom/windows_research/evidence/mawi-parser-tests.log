@@ -1,0 +1,61 @@
+PCAP linktype=1 endian=<
+{
+  "url": "https://mawi.wide.ad.jp/mawi/samplepoint-F/2021/202104141400.pcap.gz",
+  "input": "E:\\Projects\\CPP_Learing_CS106X\\Bloom\\windows_research\\tmp\\tmpp6mbiixd\\data\\mawi2021-prefix.pcap.gz",
+  "input_bytes": 104,
+  "input_sha256": "36df30ce2e44d586d784c9aeb1e94e36e92b24bbbea7f7ad51cf7de1b626eed9",
+  "csv": "E:\\Projects\\CPP_Learing_CS106X\\Bloom\\windows_research\\tmp\\tmpp6mbiixd\\data\\mawi2021.csv",
+  "csv_sha256": "d42428ea1ed4f8eae53d2373a702328903d0aebf46a5f5f326315c99fcd49fbd",
+  "predeclared_max_packet_records": 10000000,
+  "packet_records_read": 4,
+  "retained_tcp_udp_packets": 4,
+  "ipv4_headers": 3,
+  "ipv6_headers": 1,
+  "non_tcp_udp": 0,
+  "short_packets": 0,
+  "truncated_compressed_tail": false,
+  "tail_error": null,
+  "pcap_linktype": 1,
+  "elapsed_s": 0.0050318241119384766,
+  "length_semantics": "IPv4 total-length header; IPv6 fixed40+payload-length header",
+  "address_semantics": "IPv4 network-byte-order uint32; IPv6 upper32bits",
+  "protocol_membership": "UDP flows are members, TCP flows are negatives",
+  "difference_from_original": "Direct IP lengths instead of tcpdump payload+fixed transport header approximation; packet prefix unchanged.",
+  "no_model_training_or_evaluation_performed": true
+}
+PCAP linktype=1 endian=<
+{
+  "url": "https://mawi.wide.ad.jp/mawi/samplepoint-F/2021/202104141400.pcap.gz",
+  "input": "E:\\Projects\\CPP_Learing_CS106X\\Bloom\\windows_research\\tmp\\tmpp6mbiixd\\data\\mawi2021-prefix.pcap.gz",
+  "input_bytes": 96,
+  "input_sha256": "27fe466e2ceec0fa4fc263b02af8877a4d9a78d94d702ca1e353ad21ff9b4141",
+  "csv": "E:\\Projects\\CPP_Learing_CS106X\\Bloom\\windows_research\\tmp\\tmpp6mbiixd\\data\\mawi2021.csv",
+  "csv_sha256": "d42428ea1ed4f8eae53d2373a702328903d0aebf46a5f5f326315c99fcd49fbd",
+  "predeclared_max_packet_records": 10000000,
+  "packet_records_read": 4,
+  "retained_tcp_udp_packets": 4,
+  "ipv4_headers": 3,
+  "ipv6_headers": 1,
+  "non_tcp_udp": 0,
+  "short_packets": 0,
+  "truncated_compressed_tail": true,
+  "tail_error": "EOFError('Compressed file ended before the end-of-stream marker was reached')",
+  "pcap_linktype": 1,
+  "elapsed_s": 0.004362583160400391,
+  "length_semantics": "IPv4 total-length header; IPv6 fixed40+payload-length header",
+  "address_semantics": "IPv4 network-byte-order uint32; IPv6 upper32bits",
+  "protocol_membership": "UDP flows are members, TCP flows are negatives",
+  "difference_from_original": "Direct IP lengths instead of tcpdump payload+fixed transport header approximation; packet prefix unchanged.",
+  "no_model_training_or_evaluation_performed": true
+}
+{
+  "passed": true,
+  "tests": [
+    "IPv4 UDP and exact header length",
+    "TCP total length including options",
+    "Ethernet VLAN",
+    "IPv6 UDP upper32 address",
+    "truncated gzip footer retains complete records",
+    "non-IP Ethernet skipped"
+  ]
+}

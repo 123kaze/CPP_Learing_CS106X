@@ -1,0 +1,1 @@
+主表逐行dataset/budget/workload/seed/backend/method；保留FP尾数、eval查询数、FPR、树数/比例、实际cache/模型/BF/导航/数组头/草图bytes、外部索引bytes及选择耗时。跨种子先取FP和FPR均值，报告标准差及smoothed ratio，不合并不同查询分母。端到端表按预算/负载/正例率/位置列三次query-ns、其中位数、吞吐、FP/FN、模型及cache调用次数；后端1/10/100us投影标注projected。源结果JSON不手工回填数字。

@@ -1,0 +1,26 @@
+{
+  "args": {
+    "dataset": "mawi2021_flow",
+    "budgets": null,
+    "queries": 1000000,
+    "seeds": 3,
+    "workloads": "representative",
+    "backend": "clock"
+  },
+  "completed": true,
+  "rows": 11,
+  "infeasible": [
+    {
+      "dataset": "mawi2021_flow",
+      "budget_kib": 40,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "backend": "clock",
+      "method": "TODS式比例学习期网格",
+      "reason": "Fixed 48-tree baseline cannot fit the charged physical budget, even with zero cache."
+    }
+  ],
+  "semantics": "cold suffix cache for all methods; front-cache replay; global_lru full-hash, clock verified prefixes",
+  "member_index_scope": "shared authoritative auxiliary index excluded from filter-state budget and reported separately",
+  "fn_scope": "all members accepted by each packed filter; cache invariant proven by member-disjoint prefixes and tested independently"
+}

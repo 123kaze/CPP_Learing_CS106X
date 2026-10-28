@@ -1,0 +1,378 @@
+{
+  "status": "passed",
+  "checks": [
+    "512 unaligned bitfield round trips including uint64 maximum width",
+    "member-verified lengths match independent exhaustive prefix definition; collisions bypass",
+    "packed CLOCK and timestamp bucket-LRU match independent references over 8 x 40000 queries",
+    "exact global LRU matches OrderedDict over 4 x 20000 queries with hostile table collisions",
+    "zero cached-prefix matches for all 5000 members after saturation, both policies",
+    "new-member prefix invalidation removes the conflict before publication; length65 bypass does not mutate cache",
+    "global-LRU dynamic member collision safely flushes before publication and remains usable"
+  ],
+  "elapsed_seconds": 17.842646598815918,
+  "random_seed": 20261028,
+  "comparisons": [
+    {
+      "backend": "clock",
+      "budget": 0,
+      "counts": [
+        27904,
+        20834,
+        0,
+        0,
+        0,
+        0,
+        27904,
+        0
+      ],
+      "layout": {
+        "qbits": 0,
+        "rbits": 0,
+        "slot_bits": 0,
+        "policy_code": 0,
+        "buckets": 0,
+        "slots": 0,
+        "slab_bytes": 0,
+        "allocated_bytes": 0,
+        "payload_bytes": 0,
+        "ndarray_header_bytes": 0,
+        "format_header_bytes": 0,
+        "prefix_bits": 40,
+        "policy": "clock",
+        "max_occupancy_bits_per_slot": 0.0,
+        "budget_bytes": 0
+      }
+    },
+    {
+      "backend": "clock",
+      "budget": 255,
+      "counts": [
+        27677,
+        20664,
+        255,
+        190,
+        27677,
+        27661,
+        0,
+        16
+      ],
+      "layout": {
+        "qbits": 2,
+        "rbits": 38,
+        "slot_bits": 46,
+        "policy_code": 0,
+        "buckets": 4,
+        "slots": 16,
+        "slab_bytes": 125,
+        "allocated_bytes": 237,
+        "payload_bytes": 93,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "clock",
+        "max_occupancy_bits_per_slot": 118.5,
+        "budget_bytes": 255
+      }
+    },
+    {
+      "backend": "clock",
+      "budget": 1024,
+      "counts": [
+        26111,
+        19517,
+        2041,
+        1508,
+        26111,
+        25983,
+        0,
+        128
+      ],
+      "layout": {
+        "qbits": 5,
+        "rbits": 35,
+        "slot_bits": 43,
+        "policy_code": 0,
+        "buckets": 32,
+        "slots": 128,
+        "slab_bytes": 728,
+        "allocated_bytes": 840,
+        "payload_bytes": 696,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "clock",
+        "max_occupancy_bits_per_slot": 52.5,
+        "budget_bytes": 1024
+      }
+    },
+    {
+      "backend": "clock",
+      "budget": 4096,
+      "counts": [
+        21176,
+        15760,
+        7656,
+        5804,
+        21176,
+        20664,
+        0,
+        512
+      ],
+      "layout": {
+        "qbits": 7,
+        "rbits": 33,
+        "slot_bits": 41,
+        "policy_code": 0,
+        "buckets": 128,
+        "slots": 512,
+        "slab_bytes": 2688,
+        "allocated_bytes": 2800,
+        "payload_bytes": 2656,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "clock",
+        "max_occupancy_bits_per_slot": 43.75,
+        "budget_bytes": 4096
+      }
+    },
+    {
+      "backend": "bucket_lru",
+      "budget": 0,
+      "counts": [
+        27904,
+        20834,
+        0,
+        0,
+        0,
+        0,
+        27904,
+        0
+      ],
+      "layout": {
+        "qbits": 0,
+        "rbits": 0,
+        "slot_bits": 0,
+        "policy_code": 1,
+        "buckets": 0,
+        "slots": 0,
+        "slab_bytes": 0,
+        "allocated_bytes": 0,
+        "payload_bytes": 0,
+        "ndarray_header_bytes": 0,
+        "format_header_bytes": 0,
+        "prefix_bits": 40,
+        "policy": "bucket_lru",
+        "max_occupancy_bits_per_slot": 0.0,
+        "budget_bytes": 0
+      }
+    },
+    {
+      "backend": "bucket_lru",
+      "budget": 255,
+      "counts": [
+        27778,
+        20738,
+        138,
+        103,
+        27778,
+        27770,
+        0,
+        8
+      ],
+      "layout": {
+        "qbits": 1,
+        "rbits": 39,
+        "slot_bits": 110,
+        "policy_code": 1,
+        "buckets": 2,
+        "slots": 8,
+        "slab_bytes": 142,
+        "allocated_bytes": 254,
+        "payload_bytes": 110,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "bucket_lru",
+        "max_occupancy_bits_per_slot": 254.0,
+        "budget_bytes": 255
+      }
+    },
+    {
+      "backend": "bucket_lru",
+      "budget": 1024,
+      "counts": [
+        27037,
+        20196,
+        992,
+        734,
+        27037,
+        26973,
+        0,
+        64
+      ],
+      "layout": {
+        "qbits": 4,
+        "rbits": 36,
+        "slot_bits": 107,
+        "policy_code": 1,
+        "buckets": 16,
+        "slots": 64,
+        "slab_bytes": 888,
+        "allocated_bytes": 1000,
+        "payload_bytes": 856,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "bucket_lru",
+        "max_occupancy_bits_per_slot": 125.0,
+        "budget_bytes": 1024
+      }
+    },
+    {
+      "backend": "bucket_lru",
+      "budget": 4096,
+      "counts": [
+        24383,
+        18204,
+        4004,
+        3001,
+        24383,
+        24127,
+        0,
+        256
+      ],
+      "layout": {
+        "qbits": 6,
+        "rbits": 34,
+        "slot_bits": 105,
+        "policy_code": 1,
+        "buckets": 64,
+        "slots": 256,
+        "slab_bytes": 3392,
+        "allocated_bytes": 3504,
+        "payload_bytes": 3360,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "prefix_bits": 40,
+        "policy": "bucket_lru",
+        "max_occupancy_bits_per_slot": 109.5,
+        "budget_bytes": 4096
+      }
+    },
+    {
+      "backend": "global_lru",
+      "budget": 0,
+      "counts": [
+        15878,
+        11935,
+        0,
+        0,
+        0,
+        0,
+        15878,
+        0
+      ],
+      "layout": {
+        "capacity": 0,
+        "slots": 0,
+        "table_slots": 0,
+        "slab_bytes": 0,
+        "allocated_bytes": 0,
+        "payload_bytes": 0,
+        "ndarray_header_bytes": 0,
+        "format_header_bytes": 0,
+        "policy": "global_lru",
+        "budget_bytes": 0,
+        "max_occupancy_bits_per_slot": 0.0
+      }
+    },
+    {
+      "backend": "global_lru",
+      "budget": 255,
+      "counts": [
+        15342,
+        11544,
+        536,
+        391,
+        15342,
+        15338,
+        0,
+        4
+      ],
+      "layout": {
+        "capacity": 4,
+        "slots": 4,
+        "table_slots": 8,
+        "slab_bytes": 128,
+        "allocated_bytes": 240,
+        "payload_bytes": 96,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "policy": "global_lru",
+        "budget_bytes": 255,
+        "max_occupancy_bits_per_slot": 480.0
+      }
+    },
+    {
+      "backend": "global_lru",
+      "budget": 1024,
+      "counts": [
+        10667,
+        7994,
+        5211,
+        3941,
+        10667,
+        10628,
+        0,
+        39
+      ],
+      "layout": {
+        "capacity": 39,
+        "slots": 39,
+        "table_slots": 64,
+        "slab_bytes": 912,
+        "allocated_bytes": 1024,
+        "payload_bytes": 880,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "policy": "global_lru",
+        "budget_bytes": 1024,
+        "max_occupancy_bits_per_slot": 210.05128205128204
+      }
+    },
+    {
+      "backend": "global_lru",
+      "budget": 4096,
+      "counts": [
+        119,
+        0,
+        15759,
+        11935,
+        119,
+        0,
+        0,
+        119
+      ],
+      "layout": {
+        "capacity": 179,
+        "slots": 179,
+        "table_slots": 256,
+        "slab_bytes": 3920,
+        "allocated_bytes": 4032,
+        "payload_bytes": 3888,
+        "ndarray_header_bytes": 112,
+        "format_header_bytes": 32,
+        "policy": "global_lru",
+        "budget_bytes": 4096,
+        "max_occupancy_bits_per_slot": 180.20111731843576
+      }
+    }
+  ],
+  "caveats": [
+    "bucket_lru is per-bucket LRU; global_lru is exact global LRU",
+    "format reserves maximum remainder width; actual per-entry length varies but storage width does not",
+    "correctness is with respect to uint64 member hashes; exact equal hashes bypass",
+    "sorted member index is authoritative backend state, separate from cache allocation"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "frozen_utc": "2026-10-28T12:48:21.336951+00:00",
+  "sources": {
+    "src/runtime.py": "a3b4597836d9e4369ced248948c2bda486a78cc301fccce5df5ee5e93e58cf60",
+    "src/run_experiments.py": "30413de470dec56939232e57dd281b903ba50251f1af82dc1fa7edfa104a157f",
+    "src/compact_cache.py": "cb8ea152b849f9f4b08efe9cf03a8f27bc7d1902ad03165f27e7131e9f15cd9a",
+    "src/global_lru.py": "1d8af7412fdd552bbddc18298feb875d3c3ca3fbb90295c5e582722dd461d814",
+    "src/end_to_end.py": "298a73f5b517490f6de016308b529d56ce62c7bedc507c3e34aba33ec978aede",
+    "src/fetch_mawi.py": "f5668a8ee859f37e8723d51a62ac027f2575713fd97e258507c21c53a39c2625",
+    "plan/experiment-protocol.md": "e3023c74ad535ddf2f61d8379335cf5cc4308ab32c842abb25a308e87faad3b1",
+    "data/mawi2021-source.json": "931c27387ae25407dd6f1b898e61d0be67f3006ed603973bec7b9fef5dd15f3b",
+    "data/mawi2021-download.json": "a9ff507b35e5d0a71129546fb32f0096e88263ede40cd3933469f5d98956cde3"
+  },
+  "dataset": "mawi2021_flow",
+  "budgets_kib": [
+    40,
+    48,
+    64
+  ],
+  "backends": [
+    "clock",
+    "global_lru"
+  ],
+  "selection_window_fraction": 0.25,
+  "suffix_start": "cold_cache",
+  "fracs": [
+    0,
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.6
+  ],
+  "trees": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96,
+    128,
+    160,
+    200
+  ],
+  "permitted_repair": "Only run-blocking correctness bugs; record amended version and invalidate strict one-shot claim if changed after outcome inspection."
+}
