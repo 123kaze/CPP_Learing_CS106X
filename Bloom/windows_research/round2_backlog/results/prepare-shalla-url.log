@@ -1,0 +1,27 @@
+shalla columns ['url', 'label', 'score']
+Traceback (most recent call last):
+  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\round2_backlog\src\prepare_datasets.py", line 52, in <module>
+    for ds in a.datasets:prepare(ds)
+                         ~~~~~~~^^^^
+  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\round2_backlog\src\prepare_datasets.py", line 48, in prepare
+    return R.prepare(ds,threads=8)
+           ~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\src\runtime.py", line 33, in prepare
+    ids, y, X, features = C.load_dataset(ds)
+                          ~~~~~~~~~~~~~~^^^^
+  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\vendor\original_src\common.py", line 75, in load_dataset
+    return d["ids"], d["y"], d["X"], [str(c) for c in d["features"]]
+                                                      ~^^^^^^^^^^^^
+  File "E:\Conda\Lib\site-packages\numpy\lib\_npyio_impl.py", line 258, in __getitem__
+    return format.read_array(bytes,
+           ~~~~~~~~~~~~~~~~~^^^^^^^
+                             allow_pickle=self.allow_pickle,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                             pickle_kwargs=self.pickle_kwargs,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                             max_header_size=self.max_header_size)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Conda\Lib\site-packages\numpy\lib\format.py", line 822, in read_array
+    raise ValueError("Object arrays cannot be loaded when "
+                     "allow_pickle=False")
+ValueError: Object arrays cannot be loaded when allow_pickle=False
