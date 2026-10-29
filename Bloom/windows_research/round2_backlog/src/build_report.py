@@ -46,6 +46,10 @@ def run():
             for g,b in zip(gama['backend_projections'],r['backend_projections']):
                 perf.append(dict(dataset=key[0],budget_kib=key[1],workload=key[2],positive_fraction=key[3],method=name,placement=placement,backend_us=b['backend_us'],projected_speedup=g['projected_ns']/b['projected_ns'],cpu_speedup=gama['mean_query_ns']/r['mean_query_ns'],false_positives=r['fp'],queries=r['evaluation_queries']))
     csvout('live_projected_speedups.csv',perf)
+    projection_summary=[]
+    for name in ('StreamModel','LearnGrid'):
+        for placement in ('before','after'):
+            projection_summary.append([name,placement,*[f"{statistics.median(r['projected_speedup'] for r in perf if r['method']==name and r['placement']==placement and r['backend_us']==us):.3f}" for us in (1,10,100)]])
     latency=[]
     sql=load(ROOT/'results'/'sqlite_backend.json')
     for method in ('NoFilter','Gama','StreamModel','LearnGrid'):
@@ -89,7 +93,10 @@ def run():
     notes={'B2':'采用清单允许的倍率标注方案；由原实现内部记账反推，非本轮物理堆内存；旧超预算结果不进入严格同预算排名','B6':'采用清单允许的明确说明复现方式方案；并非逐字复现原作者Hybrid','E1':'C臂按用户要求排除；后端延迟为投影','E2':'实际SQLite文件KV，OS缓存未清空','R3':'首次训练/评估前冻结执行代码；只报告固定日期固定配置','A3':'两组同布局控制及跨编码实现敏感性，不能混为纯替换策略差异','O5':'顺序发布正确性，不覆盖并发原子性','O6':'使用过去窗口20MB轨迹；重建双状态峰值另报'}
     tasks=[]
     for t in load(ROOT/'plan'/'backlog.json')['tasks']:
-        if t['in_scope']:tasks.append(dict(id=t['id'],title=t['title'],source_row=t['source_row'],status='completed',evidence=task_evidence[t['id']],qualification=notes.get(t['id'],'')))
+        if t['in_scope']:
+            qualification=notes.get(t['id'],'')
+            if t['id'] in ('B1','R3'):qualification+='；MAWI2022的Stacked16KiB冻结实现重建失败，原样保留、不补跑，也不据此宣称优于该基线'
+            tasks.append(dict(id=t['id'],title=t['title'],source_row=t['source_row'],status='executed_with_recorded_failure' if t['id'] in ('B1','R3') else 'completed',evidence=task_evidence[t['id']],qualification=qualification))
     assert len(tasks)==26
     csvout('task_status.csv',tasks);(ROOT/'results'/'task_status.json').write_text(json.dumps(tasks,ensure_ascii=False,indent=2),encoding='utf-8')
     h=load(ROOT/'results'/'F4_mawi_hotspots.json')['rows']
@@ -110,7 +117,7 @@ def run():
         reconfig.append([ds,sum(r['frozen_fp'] for r in rows),sum(r['periodic_fp'] for r in rows),f"{sum(p['calibration_seconds']+p['rebuild_seconds'] for r in rows for p in r['intervals']):.3f}",max(r['atomic_rebuild_peak_filter_state_bytes'] for r in rows)])
     report=f'''# PassCache 第二轮：非 C 实验结果
 
-源任务为用户提供的 `PassCache全部待办.xlsx` 总任务表，本轮完成26项实验；C1–C5及理论、论文写作、仓库权限、联系他人等非实验任务未纳入。实验均保存在本目录。结论是：**缓存有效，但当前误报流模型选配置的精度经常不如学习期网格，现有证据不足以声称它达到网格效果。** 这不是新增C方法的验证，也不是可投稿性或整体净收益结论。
+源任务为用户提供的 `PassCache全部待办.xlsx` 总任务表，本轮执行完26项非C实验，其中最终留出的Stacked16KiB有1个建层失败点，保留并排除其效果比较；C1–C5及理论、论文写作、仓库权限、联系他人等非实验任务未纳入。实验均保存在本目录。结论是：**缓存有效，但当前误报流模型选配置的精度经常不如学习期网格，现有证据不足以声称它达到网格效果。** 这不是新增C方法的验证，也不是可投稿性或整体净收益结论。
 
 ## 1. 完成范围与数据
 
@@ -164,6 +171,10 @@ B6按清单的说明路径完成：本轮复现为14个前缀树数搜索、100�
 
 E1共80条路径，每条3次冷缓存尾段计时，COD256/1024、Caida128/256，10%/50%正查询、uniform/Zipf两类。执行hash、实时树遍历、BF、缓存、成员前缀校验与负反馈，原始分数与LightGBM最大误差小于1e-10；特征提取和输入I/O不在计时内。前置和后置用各方法自己的学习期选择配置，不能借用不匹配的FPR主表配置。1/10/100微秒后端是`CPU时间+真实访问率×设定延迟`的明确投影，不是实际磁盘测量。原始重复时长、命中、推理和后端访问次数均保留。
 
+{table(['方法','缓存位置','1us后端速度比中位数','10us','100us'],projection_summary)}
+
+速度比以同场景Gama为1，跨16场景的中位数只作描述；总体未体现普遍加速，接近1的计时差不能据3次重复宣称显著。FPR改善不能直接等同于吞吐净收益。
+
 E2采用真实SQLite文件KV、同步SELECT、8MiB页缓存、mmap关闭，未刷新OS页缓存。每条评估100,000次请求、3轮轮转顺序，包含Python/Numba/SQL调度成本；不是冷盘延迟，也不能直接与E1融合内核的CPU单价互换。
 
 {table(['方法','每次查询ns中位数','实际get次数/10万','实际miss次数','重复'],[[r['method'],f"{r['median_query_ns']:.1f}",r['backend_gets'],r['backend_misses'],r['repeats']] for r in latency])}
@@ -190,11 +201,13 @@ MAWI2022-04-13固定前120,000,000压缩字节，下载后未训练/查看模型
 
 这是冻结方法在新数据划分上的一次评价，按同一协议在2022划分的训练/验证部分学习模型并选配置；不是把2021训练的模型直接迁移到2022，也不是无标签的新日在线评估。新数据未用于外层设计选择的保证限于本轮可核验的本地记录。
 
+**保留的实现失败：** MAWI2022的学习Stacked16KiB在内层半学习验证中选出的侧层，使用全部学习期负例重建后无法放进预算；冻结实现此时返回失败，未走文档所述零侧层退化分支。这是该实现的鲁棒性缺陷，不能解释成所有Stacked方案都不可行，更不能记为零误报。24/32KiB照常成功；该失败已计入核验JSON与任务表，没有修改冻结代码、补跑留出或把Gama结果冒充一次成功的Stacked测量。后续若修复，应在另一份独立留出上重新验证。
+
 flow成员集合由协议离线定义；地址特征不使用整段聚合，但原始包本身含协议时，应用能直接区分UDP/TCP。因此它是静态成员集合/不透明key压力测试，不能据此声称完整在线网络分类方案的必要性或普遍净收益。
 
 ## 8. 完整性与逐项证据
 
-源工作簿SHA256：`{verified['workbook_sha256']}`，原件未写入。`research/`与`learned_adaptive_hybrid/`共{verified['protected']['after_files']:,}文件、{verified['protected']['bytes']:,}字节，内容hash与修改时间均与本轮开始前一致。失败和被纠正的数据/调度尝试保留在evidence，未用删除失败重试来声称零重启。新代码、结果、表格、原始日志及模型hash全部在本轮目录；本轮没有自动推送新的研究内容到公开远端。
+源工作簿SHA256：`{verified['workbook_sha256']}`，原件未写入。`research/`与`learned_adaptive_hybrid/`共{verified['protected']['after_files']:,}文件、{verified['protected']['bytes']:,}字节，内容hash与修改时间均与本轮开始前一致。失败和被纠正的数据/调度尝试保留在evidence，未用删除失败重试来声称零重启。新代码、结果、表格、原始日志及模型hash全部在本轮目录，并按用户明确要求提交到现有GitHub仓库；本轮提交范围仅round2_backlog，原research、数据/缓存、临时文件和外部源码检出未加入提交。
 
 {table(['任务','状态','证据','限定'],[[r['id']+' '+r['title'],r['status'],r['evidence'],r['qualification']] for r in tasks])}
 

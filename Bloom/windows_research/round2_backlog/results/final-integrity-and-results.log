@@ -1,16 +1,70 @@
-cod setup ready in 2.0s; members=3000000, neg_val=400393, neg_test=999621
-caida setup ready in 2.4s; members=1196194, neg_val=729006, neg_test=5837574
-shalla setup ready in 1.0s; members=2926705, neg_val=97747, neg_test=783073
+cod setup ready in 2.4s; members=3000000, neg_val=400393, neg_test=999621
+caida setup ready in 2.8s; members=1196194, neg_val=729006, neg_test=5837574
+shalla setup ready in 0.9s; members=2926705, neg_val=97747, neg_test=783073
 url setup ready in 0.2s; members=213045, neg_val=42567, neg_test=342660
 caida_flow setup ready in 0.1s; members=210110, neg_val=21305, neg_test=169695
 mawi2021_flow setup ready in 0.1s; members=40411, neg_val=32978, neg_test=264365
 mawi2022_flow setup ready in 0.1s; members=36449, neg_val=46732, neg_test=378032
-SCORE AGREEMENT mawi2022_flow 0.0
-Traceback (most recent call last):
-  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\round2_backlog\src\verify_round2.py", line 134, in <module>
-    if __name__=='__main__':verify()
-                            ~~~~~~^^
-  File "E:\Projects\CPP_Learing_CS106X\Bloom\windows_research\round2_backlog\src\verify_round2.py", line 52, in verify
-    o=read(p);assert o['completed'] and not o['infeasible']
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError
+hashed 500 files (71,510,451 bytes)
+hashed 1000 files (510,050,563 bytes)
+hashed 1500 files (795,750,368 bytes)
+hashed 2000 files (1,168,400,915 bytes)
+hashed 2500 files (1,907,714,379 bytes)
+hashed 3000 files (2,868,864,001 bytes)
+hashed 3500 files (4,451,816,394 bytes)
+hashed 4000 files (4,487,288,319 bytes)
+hashed 4500 files (5,286,367,944 bytes)
+hashed 5000 files (6,963,176,453 bytes)
+hashed 5500 files (20,360,529,606 bytes)
+hashed 6000 files (26,601,080,969 bytes)
+hashed 6500 files (27,019,401,425 bytes)
+hashed 7000 files (27,125,956,954 bytes)
+hashed 7500 files (27,330,496,422 bytes)
+hashed 8000 files (27,383,100,510 bytes)
+{
+  "status": "passed",
+  "counts": {
+    "primary_rows": 5685,
+    "stacked_rows": 948,
+    "stacked_failed_cases": 1,
+    "native_aqf_rows": 342,
+    "ablation_rows": 1152,
+    "hash_sensitivity_rows": 150,
+    "live_rows": 80,
+    "real_backend_rows": 12,
+    "dynamic_insertions": 1000,
+    "periodic_recalibration_rows": 10
+  },
+  "recorded_experiment_failures": [
+    {
+      "dataset": "mawi2022_flow",
+      "budget_kib": 16,
+      "source": "results\\stacked\\mawi2022_flow\\16.json",
+      "reason": "Frozen implementation selected a feasible half-learning side layer whose all-learning rebuild cannot fit. It returned failure instead of the documented zero-layer fallback. Original result retained; no holdout replay or algorithm repair after seeing its outcome."
+    }
+  ],
+  "checks": [
+    "20 main dataset/budget settings complete: 10M repeated workloads, paired seeds, cold suffixes, component byte sums, no false negatives",
+    "All seven dataset splits disjoint; all three real-trace models use addresses only",
+    "All14 saved model prefixes agree with cached scores on >=5000 deterministic rows per dataset",
+    "Learning-tuned stacked:948 valid runs and one explicitly retained frozen-holdout construction failure; failed case excluded from FPR comparisons",
+    "Native upstream AdaptiveQF actual heap allocation fits high budgets; full members checked before/after; reverse-map allocation separate",
+    "32 ablation cases complete; all learning fractions share the same cold final50% window",
+    "80 live paths with3 repeats,12 real SQLite runs,1000 sequential member insertions and10 drift recalibration runs verified",
+    "Operational code/protocol freeze unchanged after first MAWI2022 evaluation",
+    "User source workbook unchanged",
+    "Protected research/ and learned_adaptive_hybrid/ hashes and modification times unchanged"
+  ],
+  "protected": {
+    "unchanged": true,
+    "before_files": 8018,
+    "after_files": 8018,
+    "bytes": 27383286883,
+    "added": [],
+    "missing": [],
+    "changed": [],
+    "metadata_changed": []
+  },
+  "workbook_sha256": "b9aaf732de7cd16abfb09328ae04ada952a603d54987e938c437836af93d4183",
+  "verified_local": "2026-10-29 10:47:34"
+}

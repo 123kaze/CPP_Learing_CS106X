@@ -1,0 +1,210 @@
+[
+  {
+    "id": "F1",
+    "title": "Gama 不扣草图",
+    "source_row": 5,
+    "status": "completed",
+    "evidence": "results/main; tables/main_metrics.csv",
+    "qualification": ""
+  },
+  {
+    "id": "F2",
+    "title": "修正 CLOCK 分桶浪费",
+    "source_row": 6,
+    "status": "completed",
+    "evidence": "results/main（cache_returned_bytes）",
+    "qualification": ""
+  },
+  {
+    "id": "F3",
+    "title": "“TODS 式”改名",
+    "source_row": 7,
+    "status": "completed",
+    "evidence": "results/main（Fixed48Grid）",
+    "qualification": ""
+  },
+  {
+    "id": "F4",
+    "title": "MAWI 倍数复核",
+    "source_row": 8,
+    "status": "completed",
+    "evidence": "results/F4_mawi_hotspots.json",
+    "qualification": ""
+  },
+  {
+    "id": "M1",
+    "title": "恢复完整规模",
+    "source_row": 14,
+    "status": "completed",
+    "evidence": "results/main; results/verification.json",
+    "qualification": ""
+  },
+  {
+    "id": "M2",
+    "title": "加回 Shalla、加入 URL",
+    "source_row": 15,
+    "status": "completed",
+    "evidence": "cache/url/preparation.json; cache/shalla/preparation.json; data/*-source.json",
+    "qualification": ""
+  },
+  {
+    "id": "M3",
+    "title": "统计显著性",
+    "source_row": 16,
+    "status": "completed",
+    "evidence": "tables/main_metrics.csv; tables/paired_comparisons.csv; tables/aqf_metrics.csv",
+    "qualification": ""
+  },
+  {
+    "id": "B1",
+    "title": "learned stacked 改为学习期调参",
+    "source_row": 17,
+    "status": "executed_with_recorded_failure",
+    "evidence": "results/stacked; tables/main_metrics.csv",
+    "qualification": "；MAWI2022的Stacked16KiB冻结实现重建失败，原样保留、不补跑，也不据此宣称优于该基线"
+  },
+  {
+    "id": "B2",
+    "title": "原版 Stacked 压回预算",
+    "source_row": 18,
+    "status": "completed",
+    "evidence": "tables/historical_stacked_memory.csv",
+    "qualification": "采用清单允许的倍率标注方案；由原实现内部记账反推，非本轮物理堆内存；旧超预算结果不进入严格同预算排名"
+  },
+  {
+    "id": "B3",
+    "title": "AQF 用真实实现重跑",
+    "source_row": 19,
+    "status": "completed",
+    "evidence": "results/aqf; results/aqf_preflight.json; tables/aqf_metrics.csv",
+    "qualification": ""
+  },
+  {
+    "id": "B4",
+    "title": "SkiQF 准入重跑",
+    "source_row": 20,
+    "status": "completed",
+    "evidence": "results/main（SkiQFAdmission2）",
+    "qualification": ""
+  },
+  {
+    "id": "B5",
+    "title": "真正的 TODS-CAF",
+    "source_row": 21,
+    "status": "completed",
+    "evidence": "results/main（BFCacheGrid）",
+    "qualification": ""
+  },
+  {
+    "id": "B6",
+    "title": "原版 Gama 代码选树数",
+    "source_row": 22,
+    "status": "completed",
+    "evidence": "evidence/B6-gama-reproduction.md",
+    "qualification": "采用清单允许的明确说明复现方式方案；并非逐字复现原作者Hybrid"
+  },
+  {
+    "id": "E1",
+    "title": "和 Gama 对比吞吐",
+    "source_row": 23,
+    "status": "completed",
+    "evidence": "results/live; tables/live_projected_speedups.csv",
+    "qualification": "C臂按用户要求排除；后端延迟为投影"
+  },
+  {
+    "id": "E2",
+    "title": "真实后端实测一个点",
+    "source_row": 24,
+    "status": "completed",
+    "evidence": "results/sqlite_backend.json; tables/sqlite_metrics.csv",
+    "qualification": "实际SQLite文件KV，OS缓存未清空"
+  },
+  {
+    "id": "R1",
+    "title": "特征不看未来",
+    "source_row": 25,
+    "status": "completed",
+    "evidence": "cache/*_flow/preparation.json; results/verification.json",
+    "qualification": ""
+  },
+  {
+    "id": "R2",
+    "title": "至少两条、预算有区分度",
+    "source_row": 26,
+    "status": "completed",
+    "evidence": "results/main/caida_flow; results/main/mawi2021_flow; results/hash_sensitivity",
+    "qualification": ""
+  },
+  {
+    "id": "R3",
+    "title": "最终独立验证",
+    "source_row": 27,
+    "status": "executed_with_recorded_failure",
+    "evidence": "plan/final-holdout-freeze.json; results/main/mawi2022_flow; results/stacked/mawi2022_flow",
+    "qualification": "首次训练/评估前冻结执行代码；只报告固定日期固定配置；MAWI2022的Stacked16KiB冻结实现重建失败，原样保留、不补跑，也不据此宣称优于该基线"
+  },
+  {
+    "id": "A1",
+    "title": "学习期长度",
+    "source_row": 28,
+    "status": "completed",
+    "evidence": "results/ablations; evidence/A1-original-variable-windows",
+    "qualification": ""
+  },
+  {
+    "id": "A2",
+    "title": "选择器剪枝",
+    "source_row": 29,
+    "status": "completed",
+    "evidence": "results/ablations（A2）",
+    "qualification": ""
+  },
+  {
+    "id": "A3",
+    "title": "淘汰策略",
+    "source_row": 30,
+    "status": "completed",
+    "evidence": "results/ablations（A3）",
+    "qualification": "两组同布局控制及跨编码实现敏感性，不能混为纯替换策略差异"
+  },
+  {
+    "id": "A4",
+    "title": "成员校验",
+    "source_row": 31,
+    "status": "completed",
+    "evidence": "results/ablations（A4）; evidence/A4-injected-prehash-collision.json",
+    "qualification": ""
+  },
+  {
+    "id": "A5",
+    "title": "缓存位置",
+    "source_row": 32,
+    "status": "completed",
+    "evidence": "results/live（before/after）",
+    "qualification": ""
+  },
+  {
+    "id": "A6",
+    "title": "实现参数",
+    "source_row": 33,
+    "status": "completed",
+    "evidence": "results/ablations（A6）",
+    "qualification": ""
+  },
+  {
+    "id": "O5",
+    "title": "动态插入成员",
+    "source_row": 46,
+    "status": "completed",
+    "evidence": "results/dynamic_members.json",
+    "qualification": "顺序发布正确性，不覆盖并发原子性"
+  },
+  {
+    "id": "O6",
+    "title": "定期重新校准",
+    "source_row": 47,
+    "status": "completed",
+    "evidence": "results/recalibration_cod.json; results/recalibration_caida.json",
+    "qualification": "使用过去窗口20MB轨迹；重建双状态峰值另报"
+  }
+]

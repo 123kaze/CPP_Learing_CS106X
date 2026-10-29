@@ -1,0 +1,27 @@
+﻿id,title,source_row,status,evidence,qualification
+F1,Gama 不扣草图,5,completed,results/main; tables/main_metrics.csv,
+F2,修正 CLOCK 分桶浪费,6,completed,results/main（cache_returned_bytes）,
+F3,“TODS 式”改名,7,completed,results/main（Fixed48Grid）,
+F4,MAWI 倍数复核,8,completed,results/F4_mawi_hotspots.json,
+M1,恢复完整规模,14,completed,results/main; results/verification.json,
+M2,加回 Shalla、加入 URL,15,completed,cache/url/preparation.json; cache/shalla/preparation.json; data/*-source.json,
+M3,统计显著性,16,completed,tables/main_metrics.csv; tables/paired_comparisons.csv; tables/aqf_metrics.csv,
+B1,learned stacked 改为学习期调参,17,executed_with_recorded_failure,results/stacked; tables/main_metrics.csv,；MAWI2022的Stacked16KiB冻结实现重建失败，原样保留、不补跑，也不据此宣称优于该基线
+B2,原版 Stacked 压回预算,18,completed,tables/historical_stacked_memory.csv,采用清单允许的倍率标注方案；由原实现内部记账反推，非本轮物理堆内存；旧超预算结果不进入严格同预算排名
+B3,AQF 用真实实现重跑,19,completed,results/aqf; results/aqf_preflight.json; tables/aqf_metrics.csv,
+B4,SkiQF 准入重跑,20,completed,results/main（SkiQFAdmission2）,
+B5,真正的 TODS-CAF,21,completed,results/main（BFCacheGrid）,
+B6,原版 Gama 代码选树数,22,completed,evidence/B6-gama-reproduction.md,采用清单允许的明确说明复现方式方案；并非逐字复现原作者Hybrid
+E1,和 Gama 对比吞吐,23,completed,results/live; tables/live_projected_speedups.csv,C臂按用户要求排除；后端延迟为投影
+E2,真实后端实测一个点,24,completed,results/sqlite_backend.json; tables/sqlite_metrics.csv,实际SQLite文件KV，OS缓存未清空
+R1,特征不看未来,25,completed,cache/*_flow/preparation.json; results/verification.json,
+R2,至少两条、预算有区分度,26,completed,results/main/caida_flow; results/main/mawi2021_flow; results/hash_sensitivity,
+R3,最终独立验证,27,executed_with_recorded_failure,plan/final-holdout-freeze.json; results/main/mawi2022_flow; results/stacked/mawi2022_flow,首次训练/评估前冻结执行代码；只报告固定日期固定配置；MAWI2022的Stacked16KiB冻结实现重建失败，原样保留、不补跑，也不据此宣称优于该基线
+A1,学习期长度,28,completed,results/ablations; evidence/A1-original-variable-windows,
+A2,选择器剪枝,29,completed,results/ablations（A2）,
+A3,淘汰策略,30,completed,results/ablations（A3）,两组同布局控制及跨编码实现敏感性，不能混为纯替换策略差异
+A4,成员校验,31,completed,results/ablations（A4）; evidence/A4-injected-prehash-collision.json,
+A5,缓存位置,32,completed,results/live（before/after）,
+A6,实现参数,33,completed,results/ablations（A6）,
+O5,动态插入成员,46,completed,results/dynamic_members.json,顺序发布正确性，不覆盖并发原子性
+O6,定期重新校准,47,completed,results/recalibration_cod.json; results/recalibration_caida.json,使用过去窗口20MB轨迹；重建双状态峰值另报

@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "counts": {
+    "primary_rows": 5685,
+    "stacked_rows": 948,
+    "stacked_failed_cases": 1,
+    "native_aqf_rows": 342,
+    "ablation_rows": 1152,
+    "hash_sensitivity_rows": 150,
+    "live_rows": 80,
+    "real_backend_rows": 12,
+    "dynamic_insertions": 1000,
+    "periodic_recalibration_rows": 10
+  },
+  "recorded_experiment_failures": [
+    {
+      "dataset": "mawi2022_flow",
+      "budget_kib": 16,
+      "source": "results\\stacked\\mawi2022_flow\\16.json",
+      "reason": "Frozen implementation selected a feasible half-learning side layer whose all-learning rebuild cannot fit. It returned failure instead of the documented zero-layer fallback. Original result retained; no holdout replay or algorithm repair after seeing its outcome."
+    }
+  ],
+  "checks": [
+    "20 main dataset/budget settings complete: 10M repeated workloads, paired seeds, cold suffixes, component byte sums, no false negatives",
+    "All seven dataset splits disjoint; all three real-trace models use addresses only",
+    "All14 saved model prefixes agree with cached scores on >=5000 deterministic rows per dataset",
+    "Learning-tuned stacked:948 valid runs and one explicitly retained frozen-holdout construction failure; failed case excluded from FPR comparisons",
+    "Native upstream AdaptiveQF actual heap allocation fits high budgets; full members checked before/after; reverse-map allocation separate",
+    "32 ablation cases complete; all learning fractions share the same cold final50% window",
+    "80 live paths with3 repeats,12 real SQLite runs,1000 sequential member insertions and10 drift recalibration runs verified",
+    "Operational code/protocol freeze unchanged after first MAWI2022 evaluation",
+    "User source workbook unchanged",
+    "Protected research/ and learned_adaptive_hybrid/ hashes and modification times unchanged"
+  ],
+  "protected": {
+    "unchanged": true,
+    "before_files": 8018,
+    "after_files": 8018,
+    "bytes": 27383286883,
+    "added": [],
+    "missing": [],
+    "changed": [],
+    "metadata_changed": []
+  },
+  "workbook_sha256": "b9aaf732de7cd16abfb09328ae04ada952a603d54987e938c437836af93d4183",
+  "verified_local": "2026-10-29 10:47:34"
+}
