@@ -1,0 +1,113 @@
+--- ../repos/splatlab__adaptiveqf/src/aqf.c	2026-10-29 12:59:16
++++ port/aqf.c	2026-10-29 14:04:34
+@@ -103,11 +103,7 @@
+ 
+ static inline int popcnt(uint64_t val)
+ {
+-	asm("popcnt %[val], %[val]"
+-			: [val] "+r" (val)
+-			:
+-			: "cc");
+-	return val;
++	return __builtin_popcountll(val);  // PORT: arm64, was x86 popcnt
+ }
+ 
+ static inline int64_t bitscanreverse(uint64_t val)
+@@ -115,11 +111,7 @@
+ 	if (val == 0) {
+ 		return -1;
+ 	} else {
+-		asm("bsr %[val], %[val]"
+-				: [val] "+r" (val)
+-				:
+-				: "cc");
+-		return val;
++		return 63 - __builtin_clzll(val);  // PORT: arm64, was x86 bsr
+ 	}
+ }
+ 
+@@ -133,11 +125,7 @@
+ 
+ static inline int bitrank(uint64_t val, int pos) {
+ 	val = val & ((2ULL << pos) - 1);
+-	asm("popcnt %[val], %[val]"
+-			: [val] "+r" (val)
+-			:
+-			: "cc");
+-	return val;
++	return __builtin_popcountll(val);  // PORT: arm64, was x86 popcnt
+ }
+ 
+ /**
+--- ../repos/splatlab__adaptiveqf/src/gqf.c	2026-10-29 12:59:16
++++ port/gqf.c	2026-10-29 14:05:37
+@@ -67,7 +67,7 @@
+ static __inline__ unsigned long long rdtsc(void)
+ {
+ 	unsigned hi, lo;
+-	__asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
++	hi = 0; lo = 0;  // PORT: arm64 has no rdtsc; only referenced from commented-out timing code
+ 	return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
+ }
+ 
+@@ -272,11 +272,7 @@
+ 
+ static inline int popcnt(uint64_t val)
+ {
+-	asm("popcnt %[val], %[val]"
+-			: [val] "+r" (val)
+-			:
+-			: "cc");
+-	return val;
++	return __builtin_popcountll(val);  // PORT: arm64, was x86 popcnt
+ }
+ 
+ static inline int64_t bitscanreverse(uint64_t val)
+@@ -284,11 +280,7 @@
+ 	if (val == 0) {
+ 		return -1;
+ 	} else {
+-		asm("bsr %[val], %[val]"
+-				: [val] "+r" (val)
+-				:
+-				: "cc");
+-		return val;
++		return 63 - __builtin_clzll(val);  // PORT: arm64, was x86 bsr
+ 	}
+ }
+ 
+@@ -304,11 +296,7 @@
+ // Bits are numbered from 0
+ static inline int bitrank(uint64_t val, int pos) {
+ 	val = val & ((2ULL << pos) - 1);
+-	asm("popcnt %[val], %[val]"
+-			: [val] "+r" (val)
+-			:
+-			: "cc");
+-	return val;
++	return __builtin_popcountll(val);  // PORT: arm64, was x86 popcnt
+ }
+ 
+ /**
+--- ../repos/splatlab__adaptiveqf/src/partitioned_counter.c	2026-10-29 12:59:16
++++ port/partitioned_counter.c	2026-10-29 14:04:34
+@@ -3,8 +3,8 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <sched.h>
+-#include <sys/sysinfo.h>
+-#include <linux/unistd.h>
++// PORT: macOS has no sys/sysinfo.h
++// PORT: macOS has no linux/unistd.h
+ #include <sys/syscall.h>
+ #include <errno.h>
+ 
+@@ -45,7 +45,7 @@
+ }
+ 	
+ void pc_add(pc_t *pc, int64_t count) {
+-	int cpuid = sched_getcpu();
++	int cpuid = 0;  // PORT: macOS has no sched_getcpu; single-threaded use
+ 	uint32_t counter_id = cpuid % pc->num_counters;
+ 	int64_t cur_count =
+ 		__atomic_add_fetch(&pc->local_counters[counter_id].counter, count,

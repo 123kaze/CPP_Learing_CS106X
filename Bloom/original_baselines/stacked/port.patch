@@ -1,0 +1,26 @@
+--- ../repos/HarvardDASlab__stackedfilters/include/StackedFilter/StackedFilter.h	2026-10-29 12:59:02
++++ overlay/StackedFilter/StackedFilter.h	2026-10-29 14:01:54
+@@ -115,7 +115,7 @@
+             layer_fprs.push_back(fpr);
+         }
+     }
+-    num_chosen_negatives = std::min(negatives.size(), num_chosen_negatives);
++    num_chosen_negatives = std::min<size_t>(negatives.size(), num_chosen_negatives);  // PORT: size_t vs uint64 on macOS
+     std::vector<element_type> chosen_negatives(negatives.begin(), negatives.begin() + num_chosen_negatives);
+     InitStackedAMQ(layer_fprs, integral_parameters, positives, chosen_negatives, insert_capacity);
+ }
+@@ -313,8 +313,10 @@
+ template
+ class StackedFilter<BloomFilterLayer, StringElement>;
+ 
+-template
+-class StackedFilter<CQFilterLayer, IntElement>;
++// PORT: CQFilterLayer not built (Bloom layers only)
++// template
++// class StackedFilter<CQFilterLayer, IntElement>;
+ 
+-template
+-class StackedFilter<CuckooFilterLayer, IntElement>;
++// PORT: CuckooFilterLayer not built (Bloom layers only)
++// template
++// class StackedFilter<CuckooFilterLayer, IntElement>;

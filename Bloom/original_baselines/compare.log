@@ -1,0 +1,65 @@
+cod setup ready in 1.6s; members=3000000, neg_val=400393, neg_test=999621
+cod 256 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+cod 1024 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+cod 4096 960 {}
+caida setup ready in 2.2s; members=1196194, neg_val=729006, neg_test=5837574
+caida 128 900 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+caida 256 900 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+caida 1024 900 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+caida 2048 1200 {}
+shalla setup ready in 0.7s; members=2926705, neg_val=97747, neg_test=783073
+shalla 256 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+shalla 1024 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+shalla 2048 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+shalla 4096 960 {}
+url setup ready in 0.1s; members=213045, neg_val=42567, neg_test=342660
+url 64 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+url 128 720 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+url 256 960 {}
+caida_flow setup ready in 0.1s; members=210110, neg_val=21305, neg_test=169695
+caida_flow 16 7 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'Gama(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+caida_flow 24 8 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+caida_flow 32 9 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+caida_flow 256 12 {}
+mawi2021_flow setup ready in 0.0s; members=40411, neg_val=32978, neg_test=264365
+mawi2021_flow 16 7 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'Gama(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+mawi2021_flow 24 8 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+mawi2021_flow 32 9 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+mawi2021_flow 128 12 {}
+mawi2022_flow setup ready in 0.1s; members=36449, neg_val=46732, neg_test=378032
+mawi2022_flow 16 7 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'Gama(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+mawi2022_flow 24 8 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible', 'PLBF(original,48树)': 'infeasible'}
+mawi2022_flow 32 9 {'AdaptiveQF(original)': 'infeasible', 'SkiQF(original)': 'infeasible', 'HybridSkiQF(original)': 'infeasible'}
+mawi2022_flow 128 12 {}
+# 原版代码基线与方法 C 的对比（尾段误报总数）
+
+对种子取均值再对负载求和（真实轨迹为一次运行）。"放不下"表示原版在该预算下无法构造；括号表示只完成了部分负载。★ 为每 key ≥8 bit 的高预算点。
+
+| 设置 | RA-PLBF+G | RA-PLBF | LearnGrid | Gama | Gama(original) | PLBF(original,Gama式树数) | PLBF(original,48树) | Stacked(original) | AdaptiveQF(original) | SkiQF(original) | HybridSkiQF(original) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| cod 256 | 98,721 | 109,674 | 103,749 | 1,904,458 | 2,944,550 | 1,161,936 | 1,751,804 | 105,787,216 | 放不下 | 放不下 | 放不下 |
+| cod 1024 | 341 | 378 | 362 | 765,104 | 483,088 | 202,800 | 237,231 | 30,546,487 | 放不下 | 放不下 | 放不下 |
+| cod 4096 ★ | 1 | 1 | 138,512 | 738,575 | 0 | 461 | 0 | 72,048 | 75,581 | 154,130 | 106,923 |
+| caida 128 | 3,919,689 | 3,920,161 | 4,445,556 | 7,960,880 | 14,897,417 | 6,965,163 | 8,614,169 | 92,167,048 | 放不下 | 放不下 | 放不下 |
+| caida 256 | 1,411,507 | 1,419,346 | 1,421,796 | 4,103,412 | 10,240,868 | 3,920,040 | 5,627,132 | 57,156,656 | 放不下 | 放不下 | 放不下 |
+| caida 1024 | 34,066 | 45,665 | 14,404 | 1,248,999 | 902,215 | 332,957 | 580,106 | 1,106,293 | 放不下 | 放不下 | 放不下 |
+| caida 2048 ★ | 359 | 699 | 390 | 755,298 | 29,290 | 6,642 | 16,013 | 39,280 | 498,218 | 830,374 | 580,776 |
+| shalla 256 | 8,058,503 | 7,632,775 | 8,029,808 | 23,150,731 | 25,823,959 | 22,942,219 | 24,242,703 | 105,624,805 | 放不下 | 放不下 | 放不下 |
+| shalla 1024 | 720,592 | 736,536 | 706,217 | 7,757,280 | 7,321,061 | 7,544,490 | 8,300,360 | 23,227,854 | 放不下 | 放不下 | 放不下 |
+| shalla 2048 | 71,407 | 76,136 | 79,309 | 2,213,365 | 2,102,140 | 1,918,572 | 1,918,572 | 224,061 | 放不下 | 放不下 | 放不下 |
+| shalla 4096 ★ | 3,265 | 3,524 | 3,376 | 818,194 | 123,599 | 123,932 | 123,932 | 118,932 | 53,787 | 103,591 | 74,788 |
+| url 64 | 60,523 | 61,366 | 59,318 | 1,202,208 | 1,469,730 | 729,800 | 1,273,762 | 89,693,788 | 放不下 | 放不下 | 放不下 |
+| url 128 | 791 | 831 | 785 | 848,446 | 367,229 | 152,635 | 140,230 | 979,471 | 放不下 | 放不下 | 放不下 |
+| url 256 | 16 | 15 | 26 | 752,550 | 85,883 | 6,185 | 2,515 | 9,038 | 23,883 | 39,753 | 30,563 |
+| caida_flow 16 | 604,183 | 604,183 | 606,231 | 2,181,215 | 放不下 | 2,040,117 | 放不下 | 4,331,851 | 放不下 | 放不下 | 放不下 |
+| caida_flow 24 | 391,914 | 391,914 | 394,371 | 1,670,193 | 2,478,667 | 1,643,176 | 放不下 | 2,743,308 | 放不下 | 放不下 | 放不下 |
+| caida_flow 32 | 281,393 | 281,393 | 284,969 | 1,380,973 | 1,968,273 | 1,331,054 | 3,775,028 | 2,302,666 | 放不下 | 放不下 | 放不下 |
+| caida_flow 256 ★ | 470 | 470 | 505 | 16,989 | 24,880 | 20,806 | 11,614 | 6,901 | 5,074 | 9,221 | 5,920 |
+| mawi2021_flow 16 | 35,127 | 35,127 | 40,546 | 627,712 | 放不下 | 581,941 | 放不下 | 127,825 | 放不下 | 放不下 | 放不下 |
+| mawi2021_flow 24 | 8,827 | 8,827 | 9,565 | 267,742 | 804,380 | 334,885 | 放不下 | 138,887 | 放不下 | 放不下 | 放不下 |
+| mawi2021_flow 32 | 2,654 | 2,654 | 2,680 | 138,076 | 410,516 | 74,676 | 2,379,059 | 28,193 | 放不下 | 放不下 | 放不下 |
+| mawi2021_flow 128 ★ | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 3 | 37 | 36 | 49 |
+| mawi2022_flow 16 | 62,858 | 62,858 | 71,023 | 349,066 | 放不下 | 400,216 | 放不下 | 192,493 | 放不下 | 放不下 | 放不下 |
+| mawi2022_flow 24 | 18,889 | 18,889 | 20,708 | 157,145 | 503,966 | 135,871 | 放不下 | 133,214 | 放不下 | 放不下 | 放不下 |
+| mawi2022_flow 32 | 6,384 | 6,384 | 6,454 | 122,496 | 341,455 | 77,356 | 1,853,519 | 61,615 | 放不下 | 放不下 | 放不下 |
+| mawi2022_flow 128 ★ | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 5 | 33 | 52 | 66 |
