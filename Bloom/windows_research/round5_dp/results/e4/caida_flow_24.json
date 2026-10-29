@@ -1,0 +1,45 @@
+{
+  "dataset": "caida_flow",
+  "budget_kib": 24,
+  "workload": "真实轨迹",
+  "learning_queries": 1443950,
+  "distinct_learning_keys": 63792,
+  "t_train_s": 0.42384183300237055,
+  "t_score_members_val_s": 1.0239299589993607,
+  "t_score_learning_keys_s": 0.3475307080007042,
+  "methods": {
+    "Gama": {
+      "select_s": 0.07929920899914578,
+      "build_s": 0.007721499998297077,
+      "trees": 4,
+      "select_peak_bytes": 146006
+    },
+    "LearnGrid": {
+      "select_s": 5.616062166998745,
+      "trees": 4,
+      "frac": 0.4,
+      "held_candidate_bytes": 7155835,
+      "one_candidate_bytes": 85063,
+      "trace_bytes": 11551600,
+      "build_s": 0.00981537500047125,
+      "select_peak_bytes_materialized": 26819028,
+      "select_peak_bytes_streaming": 19757428
+    },
+    "RA4": {
+      "select_s": 1.6693694579989824,
+      "trees": 4,
+      "frac": 0.4,
+      "build_s": 0.008158624998031883,
+      "select_peak_bytes": 20060643
+    },
+    "RA4-fast": {
+      "select_s": 0.6220586249983171,
+      "trees": 4,
+      "frac": 0.4,
+      "same_choice_as_RA4": true,
+      "select_peak_bytes": 34879122
+    }
+  },
+  "hardware": "Apple M4 Pro",
+  "threads": 1
+}
