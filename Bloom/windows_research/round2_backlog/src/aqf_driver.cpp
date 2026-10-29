@@ -39,9 +39,9 @@ int main(int argc,char**argv){try{
  uint64_t budget=std::stoull(argv[1]),tail=std::stoull(argv[5]);
  auto members=read<uint64_t>(argv[2]),queries=read<uint64_t>(argv[3]);auto stream=read<int64_t>(argv[4]);
  uint64_t slots=64;int qbits=6;while(double(members.size())/slots>.90){slots*=2;qbits++;}
- int chosen=0;uint64_t chosen_bytes=0;
- for(int r=2;r<=24;r++){QF test{};filter_bytes=sizeof(QF);tracking=true;bool ok=qf_malloc(&test,slots,qbits+r,0,QF_HASH_NONE,17);tracking=false;if(!ok)throw std::runtime_error("allocation");uint64_t used=filter_bytes;cleanup(test);if(used<=budget){chosen=r;chosen_bytes=used;}}
- if(!chosen){std::ofstream(argv[6])<<"{\"feasible\":false,\"reason\":\"minimum real AQF allocation exceeds budget\"}";return 0;}
+ int chosen=0;uint64_t chosen_bytes=0,minimum_bytes=UINT64_MAX;
+ for(int r=2;r<=24;r++){QF test{};filter_bytes=sizeof(QF);tracking=true;bool ok=qf_malloc(&test,slots,qbits+r,0,QF_HASH_NONE,17);tracking=false;if(!ok)throw std::runtime_error("allocation");uint64_t used=filter_bytes;minimum_bytes=std::min(minimum_bytes,used);cleanup(test);if(used<=budget){chosen=r;chosen_bytes=used;}}
+ if(!chosen){std::ofstream(argv[6])<<"{\"feasible\":false,\"minimum_allocated_bytes\":"<<minimum_bytes<<",\"slots\":"<<slots<<",\"reason\":\"minimum real AQF allocation exceeds budget\"}";return 0;}
  QF q{};filter_bytes=sizeof(QF);tracking=true;qf_malloc(&q,slots,qbits+chosen,0,QF_HASH_NONE,17);tracking=false;
  Map reverse;reverse.reserve(members.size()*1.2);
  uint64_t collisions=0;

@@ -38,7 +38,11 @@ def choose(setup,scores,kib,gama_t,learn,fracs=(.02,.05,.1,.2,.4,.6),b2s=(.5,1,2
     start=time.perf_counter();split=len(learn)//2
     counts=np.bincount(learn[split:],minlength=len(setup.h1q))
     observed=np.flatnonzero(counts)
-    best=None;records=[];bases={}
+    fallback=E.R.structure(setup,scores,gama_t,kib*1024,0,sketch_bytes=0)
+    fallback_fp=int(counts[observed][fallback.fp_static[observed]].sum())
+    best=((fallback_fp,fallback.est_fpr,0.,0.),0.,0.)
+    records=[dict(frac=0.,b2=0.,validation_fp=fallback_fp,known=0)]
+    bases={0.:fallback}
     for f in fracs:
         side=int(kib*1024*f)
         key=(id(setup),kib,gama_t,f)
@@ -57,6 +61,10 @@ def choose(setup,scores,kib,gama_t,learn,fracs=(.02,.05,.1,.2,.4,.6),b2s=(.5,1,2
             if best is None or key<best[0]:best=(key,f,b2)
     if best is None:return None
     _,f,b2=best;base=bases[f]
+    if f==0:
+        return dict(base=base,frac=0.,b2=0.,selected_trees=gama_t,fp_static=base.fp_static,
+                    state_bytes=base.used_bytes,learning_seconds=time.perf_counter()-start,
+                    layers=dict(side_bytes=0,negative_bytes=0,positive_bytes=0,known_negatives=0),grid=records)
     known=np.unique(learn[base.fp_static[learn]])
     result=layers(setup,base,known,int(kib*1024*f),b2)
     if result is None:return None

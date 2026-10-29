@@ -125,18 +125,38 @@ def evaluate(c,stream,setup,safe,frequencies=None):
     return result
 
 def exact_grid(ordered,learn,setup,safe,track48=True):
-    start=time.perf_counter();best=None;fixed=None;records=[]
+    start=time.perf_counter();best=None;fixed=None;records=[];memo={}
+    frequencies=np.bincount(learn,minlength=len(setup.h1q))
     for item in ordered:
         c=item[-1] if isinstance(item,tuple) else item
         threshold=best[0] if best is not None else 2**62
         if track48 and c['trees']==48:threshold=max(threshold,fixed[0] if fixed is not None else 2**62)
-        out=simulate(c,learn,setup,safe,limit=threshold)
+        identity=(c['trees'],c['cache_bytes'],c['policy'],c['prefix_bits'],c['ways'],c['admit'])
+        reused=identity in memo
+        if reused:out=memo[identity]
+        else:
+            fp=c['structure'].fp_static
+            keys=np.flatnonzero((frequencies>0)&fp)
+            spec=F.layout(c['cache_bytes'],c['prefix_bits'],c['policy'],c['ways'])
+            if c['admit']==2:
+                secondary=256*9+2*F.ARRAY_HEADER
+                spec=F.layout(max(0,c['cache_bytes']-secondary),c['prefix_bits'],c['policy'],c['ways'])
+            bounded=False
+            if spec['qbits']:
+                buckets=(setup.h1q[keys]>>np.uint64(64-spec['qbits'])).astype(np.int64)
+                bounded=int(np.bincount(buckets,minlength=spec['buckets']).max(initial=0))<=c['ways']
+            if c['cache_bytes']==0:
+                out=dict(fp=int(frequencies[keys].sum()),cutoff=0,processed=0)
+            elif bounded:
+                out=simulate(c,learn[fp[learn]],setup,safe,limit=threshold)
+            else:out=simulate(c,learn,setup,safe,limit=threshold)
+            memo[identity]=out
         key=(out['fp'],c['structure'].est_fpr,c['trees'],c['frac'],c)
         if not out['cutoff']:
             if best is None or key[:4]<best[:4]:best=key
             if c['trees']==48 and (fixed is None or key[:4]<fixed[:4]):fixed=key
         records.append(dict(trees=c['trees'],frac=c['frac'],fp_or_lower_bound=out['fp'],
-                            exact=not bool(out['cutoff']),processed=out['processed']))
+                            exact=not bool(out['cutoff']),processed=0 if reused else out['processed'],identical_layout_reused=reused))
     return best[-1],fixed[-1] if fixed else None,time.perf_counter()-start,records
 
 def workload_specs(n):
