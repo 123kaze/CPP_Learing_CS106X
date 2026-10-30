@@ -60,7 +60,7 @@ def main():
         for g in (grp(k[2]), '合计'):
             G[g]['grid'].append(lr(ra6, grid))
             G[g]['gama'].append(lr(ra6, gama))
-    L += ['## Wilcoxon 符号秩检验（每个案例一个对数比值）', '',
+    L += ['## Wilcoxon 符号秩检验（每个案例一个对数比值；探索性，案例之间不独立）', '',
           '| 分组 | 案例 | RA6 对网格：几何平均比值 | 双侧 p | 单侧 p（RA6 更好） | 单侧 p（RA6 更差） | RA6 对 Gama：几何平均比值 | 单侧 p（RA6 更好） |',
           '|---|---:|---:|---:|---:|---:|---:|---:|']
     order = ['1万 key 池', '10万 key 池', '100万 key 池', '全部 key 池', '每key一次/全新对抗', '真实轨迹', '合计']
@@ -75,6 +75,41 @@ def main():
         L.append(f"| {g} | {len(x)} | {np.exp(x.mean()):.3f} | {w(x, 'two-sided'):.2g} | {w(x, 'less'):.2g} | {w(x, 'greater'):.2g} | "
                  f"{np.exp(y.mean()):.3f} | {w(y, 'less'):.2g} |")
     L += ['', '无重复负载上 RA6 与 Gama 逐位相同，对 Gama 的比值全为 1，因此该组对 Gama 的检验没有意义。', '']
+    # ---- clustered analysis: cases are not independent (same dataset / workload / structure family)
+    CL = defaultdict(list)
+    for k in keys:
+        a_, b_ = r5[k], r6[k]
+        o = a_['RA4']['fp_oracle']
+        ref = float(o) if o != '' else float(a_['LearnGrid']['fp_tail'])
+        if ref < MIN_REF:
+            continue
+        CL[k[0], grp(k[2])].append(lr(int(b_['RA6']['fp_tail']), int(a_['LearnGrid']['fp_tail'])))
+    cl = {c: float(np.mean(v)) for c, v in CL.items()}
+    DS = defaultdict(list)
+    for (ds, g), v in cl.items():
+        DS[ds].append(v)
+    dsm = {d: float(np.mean(v)) for d, v in DS.items()}
+    def wil(v, alt):
+        v = np.array([x for x in v if x != 0])
+        return stats.wilcoxon(v, alternative=alt).pvalue if len(v) >= 6 else float('nan')
+    def sign(v):
+        v = np.array([x for x in v if x != 0])
+        return stats.binomtest(int((v < 0).sum()), len(v), .5).pvalue if len(v) else float('nan')
+    L += ['## 按簇的检验（主口径）', '',
+          '同一数据集里不同预算、种子、负载的案例共享模型、成员集合和查询池，不能当作独立样本。'
+          '所以先把案例按（数据集 × 负载组）聚成簇，每簇取对数比值的平均，再在簇之间做检验；再进一步按数据集聚合。'
+          '上面逐案例的 Wilcoxon 只作为探索性结果。', '',
+          f'- （数据集 × 负载组）簇：{len(cl)} 个，几何平均 RA6/网格 {np.exp(np.mean(list(cl.values()))):.3f}；'
+          f'RA6 更好的簇 {sum(v < 0 for v in cl.values())} 个，更差 {sum(v > 0 for v in cl.values())} 个；'
+          f'Wilcoxon 双侧 p = {wil(list(cl.values()), "two-sided"):.3g}，符号检验 p = {sign(list(cl.values())):.3g}。',
+          f'- 按数据集：{len(dsm)} 个，几何平均 {np.exp(np.mean(list(dsm.values()))):.3f}；'
+          f'RA6 更好的数据集 {sum(v < 0 for v in dsm.values())} 个；符号检验 p = {sign(list(dsm.values())):.3g}'
+          f'（8 个数据集时，即使全部同向，双侧符号检验 p 也只有 0.0078）。', '',
+          '| 数据集 | ' + ' | '.join(order[:-1]) + ' | 数据集平均 |', '|---|' + '---:|' * len(order) ]
+    for ds in sorted(dsm):
+        cells = [f'{np.exp(cl[ds, g]):.3f}' if (ds, g) in cl else '—' for g in order[:-1]]
+        L.append(f'| {ds} | ' + ' | '.join(cells) + f' | {np.exp(dsm[ds]):.3f} |')
+    L.append('')
     # ---- per (setting, workload) t intervals
     S = defaultdict(list)
     for k in keys:

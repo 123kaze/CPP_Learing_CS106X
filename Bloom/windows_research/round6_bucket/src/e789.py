@@ -304,6 +304,7 @@ def main(ds, kib, workload):
                         runs.append(ts)
                 ts = np.array(runs)
                 mean = float(np.median(ts.mean(axis=1)))
+                # ns_p50/p99_chunk = percentiles over CHUNK-query batch averages, NOT per-query latency
                 out[label] = dict(ns_mean=mean, ns_p50_chunk=float(np.median(np.median(ts, axis=1))),
                                   ns_p99_chunk=float(np.median(np.quantile(ts, .99, axis=1))), mqps=1e3 / mean)
             res['methods'][name].setdefault('e7', {})[f'pos{int(frac * 100)}'] = out
