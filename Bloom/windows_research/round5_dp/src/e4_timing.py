@@ -186,14 +186,14 @@ def main(ds, kib, workload):
     s, (t48) = med(lambda: D.allocate(tds[48].g, tds[48].v + 1.0, float((budget - tds[48].fixed) * 8)) if 48 in tds else None)
     if 48 in tds:
         res['FastPLBF48'] = dict(select_s=s, build_s=med(lambda: dp_bf(setup, tds[48], kib, 0))[0], trees=48)
-    s, g = med(lambda: grid_select(True), 3)
+    s, g = med(lambda: grid_select(True))
     res['LearnGrid'] = dict(select_s=s, trees=g[0], frac=g[1], held_candidate_bytes=g[2], one_candidate_bytes=g[3],
                             trace_bytes=learn.nbytes,
                             build_s=med(lambda: dp_bf(setup, tds[g[0]], kib, E5.cache_alloc(budget, g[1])[0]))[0])
     s, rsel = med(ra_select)
     res['RA4'] = dict(select_s=s, trees=rsel[0], frac=rsel[1],
                       build_s=med(lambda: dp_bf(setup, tds[rsel[0]], kib, rsel[3], weights=rsel[2]))[0])
-    s, r6sel = med(ra6_select, 3)
+    s, r6sel = med(ra6_select)
     res['RA6'] = dict(select_s=s, trees=r6sel[0], frac=r6sel[1], build_s=0.0,
                       note='the chosen structure is one of the 5 already built during selection')
     s, fsel = med(ra_fast_select)
