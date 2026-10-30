@@ -114,9 +114,14 @@ def main(ds, kib, workload):
     def gama_select():
         return min((D.allocate(tds[t].g, tds[t].v + 1.0, float((budget - tds[t].fixed) * 8))[2], t) for t in trees)[1]
 
+    # The grid only needs each candidate's FP flag on the distinct learning keys: replay in a
+    # local index space (keys -> 0..D-1) so that no per-candidate array is pool-sized.
+    learn_local = np.searchsorted(keys, learn).astype(np.int64)
+    h_local, safe_local = setup.h1q[keys], safe[keys]
+    freq_local = np.bincount(learn_local, minlength=len(keys))
+
     def grid_select(hold=True):
         held, best = [], None
-        freq = np.bincount(learn, minlength=len(setup.h1q))
         order = []
         for t in trees:
             for f in E5.FRACS:
@@ -124,18 +129,18 @@ def main(ds, kib, workload):
                 if (budget - tds[t].fixed - cb) * 8 <= 0:
                     continue
                 bits, flags, e, _ = dp_bf(setup, tds[t], kib, cb, query_idx=keys)
-                fp = np.zeros(len(setup.h1q), np.bool_)
-                fp[keys] = flags
-                order.append((e, t, f, cb, fp))
+                order.append((e, t, f, cb, flags))
                 if hold:
                     held.append((bits, flags))
+                else:
+                    del bits
         order.sort(key=lambda r: r[:3])
-        for e, t, f, cb, fp in order:
+        for e, t, f, cb, flags in order:
             lim = best[0] if best else 2 ** 62
             if cb == 0:
-                v, cut = int(freq[fp].sum()), False
+                v, cut = int(freq_local[flags].sum()), False
             else:
-                r = K.simulate(learn, setup.h1q, safe, fp, cb, E5.PREFIX, E5.WAYS, limit=lim)
+                r = K.simulate(learn_local, h_local, safe_local, flags, cb, E5.PREFIX, E5.WAYS, limit=lim)
                 v, cut = r['fp'], bool(r['cutoff'])
             if not cut and (best is None or (v, e, t, f) < best):
                 best = (v, e, t, f)
@@ -200,6 +205,12 @@ def main(ds, kib, workload):
     res['RA4']['select_peak_bytes'] = peak(ra_select)
     res['RA4-fast']['select_peak_bytes'] = peak(ra_fast_select)
     res['RA6']['select_peak_bytes'] = peak(ra6_select)
+    # Common inputs (computed before the selection phases, not in the peaks above):
+    out['common_bytes'] = dict(member_val_scores_all_trees=int((setup.y.sum() + setup.split['neg_val'].sum()) * len(trees) * 8),
+                               learning_key_scores_all_trees=int(len(keys) * len(trees) * 8),
+                               learning_trace=int(learn.nbytes), distinct_key_counts=int(len(keys) * 16),
+                               note='member/validation scores: all methods; learning-key scores: grid and RA; '
+                                    'learning trace: grid only (RA keeps distinct-key counts)')
     out['methods'] = res
     out['hardware'] = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string'], capture_output=True, text=True).stdout.strip()
     out['threads'] = 1
