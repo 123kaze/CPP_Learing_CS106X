@@ -8,7 +8,10 @@ Stages (seconds; selection and build: median of 5 runs after a warm-up run):
           LearnGrid: build every candidate (DP + Bloom insert + query the distinct learning keys)
                      + exact replay of the learning period (early stopping as in round 5)
           RA4:      learning statistics + candidate table (ra5.select)
-          RA4-fast: same with ra5fast.select_fast (DP only for the 10 best closed-form candidates)
+          RA4-fast: same with ra5fast.select_fast (DP only for the 10 best closed-form candidates;
+                    NOT equivalent to RA4 on 49/956 cases, reported for reference only)
+          RA6:      RA4 candidate table + build the 5 best (DP + Bloom insert + query the distinct
+                    learning keys) + per-bucket Che from the actual bucket load (round 6)
           FastPLBF48: one DP
   build   the selected structure: DP + Bloom insert (cache array allocation included)
 Memory: tracemalloc peak during selection (separate run); for the grid also the analytic size of
@@ -31,6 +34,8 @@ import ra5 as RA  # noqa: E402
 import ra5fast as RF  # noqa: E402
 import dp_alloc as D  # noqa: E402
 import cache5 as K  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'round6_bucket' / 'src'))
+import ra6 as R6  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 R, C = E5.R, E5.C
@@ -143,6 +148,28 @@ def main(ds, kib, workload):
         b = min(table, key=lambda r: (r['pred'], r['trees'], r['frac']))
         return b['trees'], b['frac'], b['weights'], b['cache_bytes']
 
+    def ra6_select():
+        lm = RA.ra4.summarize(learn, True)
+        H = len(base) - n
+        table = RA.candidate_table(setup, scores, lm, kib, H, RA.Config(new_mix=0.))
+        short = sorted(table, key=lambda r: (r['pred'], r['trees'], r['frac']))[:R6.TOPK]
+        best = None
+        for rank, row in enumerate(short):
+            td = tds[row['trees']]
+            bits, flags, _, _ = dp_bf(setup, td, kib, row['cache_bytes'], weights=row['weights'], query_idx=lm.keys)
+            lam = lm.rate[flags]
+            G = H * lm.N1 / lm.L * td.h
+            new_miss = float((row['seg_fpr_pred'] * G).sum())
+            if row['cache_bytes'] == 0:
+                pred = float((lam * H).sum()) + new_miss
+            else:
+                B = row['slots'] // R6.WAYS
+                b = R6.buckets_of(setup.h1q[lm.keys[flags]], B)
+                pred = R6.bucket_che(lam, b, B, H, new_miss / H / B) + new_miss
+            if best is None or (pred, rank) < best[0]:
+                best = ((pred, rank), row)
+        return best[1]['trees'], best[1]['frac']
+
     def ra_fast_select():
         lm = RA.ra4.summarize(learn, True)
         c, info = RF.select_fast(setup, scores, lm, kib, len(base) - n, RA.Config(new_mix=0.))
@@ -161,6 +188,9 @@ def main(ds, kib, workload):
     s, rsel = med(ra_select)
     res['RA4'] = dict(select_s=s, trees=rsel[0], frac=rsel[1],
                       build_s=med(lambda: dp_bf(setup, tds[rsel[0]], kib, rsel[3], weights=rsel[2]))[0])
+    s, r6sel = med(ra6_select, 3)
+    res['RA6'] = dict(select_s=s, trees=r6sel[0], frac=r6sel[1], build_s=0.0,
+                      note='the chosen structure is one of the 5 already built during selection')
     s, fsel = med(ra_fast_select)
     res['RA4-fast'] = dict(select_s=s, trees=fsel[0], frac=fsel[1], same_choice_as_RA4=(fsel[0], fsel[1]) == (rsel[0], rsel[1]))
     # memory peaks during selection (separate runs)
@@ -169,6 +199,7 @@ def main(ds, kib, workload):
     res['LearnGrid']['select_peak_bytes_streaming'] = peak(lambda: grid_select(False))
     res['RA4']['select_peak_bytes'] = peak(ra_select)
     res['RA4-fast']['select_peak_bytes'] = peak(ra_fast_select)
+    res['RA6']['select_peak_bytes'] = peak(ra6_select)
     out['methods'] = res
     out['hardware'] = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string'], capture_output=True, text=True).stdout.strip()
     out['threads'] = 1
