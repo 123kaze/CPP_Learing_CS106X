@@ -1,0 +1,13 @@
+{
+  "declared_at": "2026-10-29T09:58:04Z",
+  "dataset": "mawi2024_flow",
+  "url": "https://mawi.wide.ad.jp/mawi/samplepoint-F/2024/202404101400.pcap.gz",
+  "compressed_prefix_bytes": 120000000,
+  "max_packet_records": 10000000,
+  "parser": "round2_backlog/src/fetch_holdout.py parse() with only date/paths changed (same as the 2023 copy)",
+  "features": "address only (src, dst); members = UDP flows; queries = time-ordered TCP packets",
+  "budgets_kib": [16, 24, 32, 128],
+  "use": "run exactly once with the frozen round-6 code and all methods; never used for design",
+  "replaces": "MAWI 2023 (used once in round 4; no longer independent after the round-5/6 method changes)",
+  "no_model_training_or_evaluation_before_freeze": true
+}
