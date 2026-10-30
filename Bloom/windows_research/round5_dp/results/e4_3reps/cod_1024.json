@@ -1,0 +1,65 @@
+{
+  "dataset": "cod",
+  "budget_kib": 1024,
+  "workload": "zipf1.0-全部",
+  "learning_queries": 2500000,
+  "distinct_learning_keys": 391968,
+  "t_train_s": 62.44106145799742,
+  "t_score_members_val_s": 95.77435812499607,
+  "t_score_learning_keys_s": 12.34131100000377,
+  "common_bytes": {
+    "member_val_scores_all_trees": 380844016,
+    "learning_key_scores_all_trees": 43900416,
+    "learning_trace": 20000000,
+    "distinct_key_counts": 6271488,
+    "note": "member/validation scores: all methods; learning-key scores: grid and RA; learning trace: grid only (RA keeps distinct-key counts)"
+  },
+  "methods": {
+    "Gama": {
+      "select_s": 0.10316308399342233,
+      "build_s": 0.024736041006690357,
+      "trees": 160,
+      "select_peak_bytes": 145886
+    },
+    "FastPLBF48": {
+      "select_s": 0.0074758749979082495,
+      "build_s": 0.02520258400181774,
+      "trees": 48
+    },
+    "LearnGrid": {
+      "select_s": 6.311925750000228,
+      "trees": 160,
+      "frac": 0.02,
+      "held_candidate_bytes": 229619692,
+      "one_candidate_bytes": 1436357,
+      "trace_bytes": 20000000,
+      "build_s": 0.024749958000029437,
+      "select_peak_bytes_materialized": 265741517,
+      "select_peak_bytes_streaming": 107720452
+    },
+    "RA4": {
+      "select_s": 2.1512399579951307,
+      "trees": 160,
+      "frac": 0.002,
+      "build_s": 0.02382308300002478,
+      "select_peak_bytes": 34058342
+    },
+    "RA6": {
+      "select_s": 2.42022229199938,
+      "trees": 160,
+      "frac": 0.002,
+      "build_s": 0.0,
+      "note": "the chosen structure is one of the 5 already built during selection",
+      "select_peak_bytes": 50735860
+    },
+    "RA4-fast": {
+      "select_s": 1.0397884589983732,
+      "trees": 160,
+      "frac": 0.002,
+      "same_choice_as_RA4": true,
+      "select_peak_bytes": 46403620
+    }
+  },
+  "hardware": "Apple M4 Pro",
+  "threads": 1
+}

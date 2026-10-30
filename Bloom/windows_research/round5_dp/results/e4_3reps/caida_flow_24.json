@@ -1,0 +1,60 @@
+{
+  "dataset": "caida_flow",
+  "budget_kib": 24,
+  "workload": "真实轨迹",
+  "learning_queries": 1443950,
+  "distinct_learning_keys": 63792,
+  "t_train_s": 0.34992854200390866,
+  "t_score_members_val_s": 0.7304455839985167,
+  "t_score_learning_keys_s": 0.20010883400391322,
+  "common_bytes": {
+    "member_val_scores_all_trees": 14810560,
+    "learning_key_scores_all_trees": 4082688,
+    "learning_trace": 11551600,
+    "distinct_key_counts": 1020672,
+    "note": "member/validation scores: all methods; learning-key scores: grid and RA; learning trace: grid only (RA keeps distinct-key counts)"
+  },
+  "methods": {
+    "Gama": {
+      "select_s": 0.07071904100303072,
+      "build_s": 0.006911833996127825,
+      "trees": 4,
+      "select_peak_bytes": 146363
+    },
+    "LearnGrid": {
+      "select_s": 3.9839142499986337,
+      "trees": 4,
+      "frac": 0.4,
+      "held_candidate_bytes": 7155835,
+      "one_candidate_bytes": 85063,
+      "trace_bytes": 11551600,
+      "build_s": 0.006469957996159792,
+      "select_peak_bytes_materialized": 9669933,
+      "select_peak_bytes_streaming": 8498671
+    },
+    "RA4": {
+      "select_s": 1.136153583000123,
+      "trees": 4,
+      "frac": 0.4,
+      "build_s": 0.007433040998876095,
+      "select_peak_bytes": 20060357
+    },
+    "RA6": {
+      "select_s": 1.2279729159999988,
+      "trees": 4,
+      "frac": 0.4,
+      "build_s": 0.0,
+      "note": "the chosen structure is one of the 5 already built during selection",
+      "select_peak_bytes": 20059722
+    },
+    "RA4-fast": {
+      "select_s": 0.5665494999993825,
+      "trees": 4,
+      "frac": 0.4,
+      "same_choice_as_RA4": true,
+      "select_peak_bytes": 16056256
+    }
+  },
+  "hardware": "Apple M4 Pro",
+  "threads": 1
+}
