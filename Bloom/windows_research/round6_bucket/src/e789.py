@@ -3,7 +3,7 @@
 Methods, each with the structure it selects on the learning period of the negative stream
 (exactly as in the round-5/6 main tables; checked against their rows):
   FastPLBF48, Gama (no cache), Gama+10%, LearnGrid, RA6.
-Learned stacked and SkiQF-style admission live in other engines (round 2) and are not timed here.
+Learned stacked and SkiQF-style admission are timed separately in e7_extra.py.
 
 Query path (numba, one thread): cache probe (cache5, arbitrary buckets) -> on a miss, traversal of
 the compact model arrays on the query key's features -> DP region -> packed Bloom probes; a false
