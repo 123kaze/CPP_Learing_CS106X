@@ -11,11 +11,38 @@
 
 | 数据/预算KiB | 方法 | 成功重复 | FP中位数 | FPR中位数 | 构建秒 | 全池查询秒 |
 |---|---|---:|---:|---:|---:|---:|
+| paper_url 64 | G-LBF(original) | 3 | 23,981 | 7.011476% | 0.610 | 0.639 |
+| paper_url 64 | G-PLBF(original) | 3 | 19,092 | 5.582048% | 2.167 | 8.881 |
+| paper_url 64 | RA6 | 3 | 14,468 | 4.230100% | 29.763 | 0.078 |
+| paper_url 128 | G-LBF(original) | 3 | 4,063 | 1.187925% | 1.267 | 0.669 |
+| paper_url 128 | G-PLBF(original) | 3 | 2,104 | 0.615160% | 4.747 | 9.137 |
+| paper_url 128 | RA6 | 3 | 1,637 | 0.478620% | 29.086 | 0.078 |
+| paper_url 192 | G-LBF(original) | 2 | 646 | 0.188875% | 2.080 | 0.951 |
+| paper_url 192 | G-PLBF(original) | 1 | 338 | 0.098823% | 4.155 | 6.587 |
+| paper_url 192 | RA6 | 2 | 304 | 0.088882% | 30.376 | 0.061 |
 
 ## 相同学习期与评估尾段（前25%/后75%）
 
 | 数据/预算KiB | 方法 | 负载 | 成功重复 | 尾段FP | 尾段FPR | 查询秒 | ns/query |
 |---|---|---|---:|---:|---:|---:|---:|
+| paper_url 64 | G-LBF(original) | once | 3 | 17,966 | 7.003770% | 0.543 | 2,118 |
+| paper_url 64 | G-LBF(original) | zipf | 3 | 410,383 | 5.471773% | 15.620 | 2,083 |
+| paper_url 64 | G-PLBF(original) | once | 3 | 14,328 | 5.585551% | 6.685 | 26,060 |
+| paper_url 64 | G-PLBF(original) | zipf | 3 | 332,978 | 4.439707% | 184.320 | 24,576 |
+| paper_url 64 | RA6 | once | 3 | 10,827 | 4.220740% | 0.070 | 272 |
+| paper_url 64 | RA6 | zipf | 3 | 102,754 | 1.370053% | 2.566 | 342 |
+| paper_url 128 | G-LBF(original) | once | 3 | 3,052 | 1.189775% | 0.561 | 2,188 |
+| paper_url 128 | G-LBF(original) | zipf | 3 | 163,600 | 2.181333% | 16.090 | 2,145 |
+| paper_url 128 | G-PLBF(original) | once | 3 | 1,571 | 0.612430% | 6.928 | 27,008 |
+| paper_url 128 | G-PLBF(original) | zipf | 3 | 28,331 | 0.377747% | 189.240 | 25,232 |
+| paper_url 128 | RA6 | once | 3 | 1,203 | 0.468971% | 0.066 | 256 |
+| paper_url 128 | RA6 | zipf | 3 | 2,902 | 0.038693% | 1.998 | 266 |
+| paper_url 192 | G-LBF(original) | once | 2 | 461 | 0.179714% | 0.626 | 2,442 |
+| paper_url 192 | G-LBF(original) | zipf | 2 | 7,795 | 0.103933% | 18.827 | 2,510 |
+| paper_url 192 | G-PLBF(original) | once | 1 | 235 | 0.091611% | 5.154 | 20,091 |
+| paper_url 192 | G-PLBF(original) | zipf | 1 | 11,822 | 0.157627% | 237.941 | 31,725 |
+| paper_url 192 | RA6 | once | 2 | 212 | 0.082645% | 0.056 | 217 |
+| paper_url 192 | RA6 | zipf | 2 | 268 | 0.003573% | 11.570 | 1,543 |
 
 ## 预算与正确性
 
@@ -23,6 +50,15 @@
 
 | 数据/预算KiB | 方法 | 原版pickle/BF目标/BF实际payload B | RA6实际过滤器B（once/zipf） | 预算外索引B |
 |---|---|---|---|---:|
+| paper_url 64 | G-LBF(original) | 8,798/56,738/56,739 | — | 0 |
+| paper_url 64 | G-PLBF(original) | 15,745/49,791/102,000 | — | 0 |
+| paper_url 64 | RA6 | — | 64,776/64,837 | 1,701,296 |
+| paper_url 128 | G-LBF(original) | 15,745/115,327/115,327 | — | 0 |
+| paper_url 128 | G-PLBF(original) | 12,272/118,800/237,896 | — | 0 |
+| paper_url 128 | RA6 | — | 130,036/130,124 | 1,701,296 |
+| paper_url 192 | G-LBF(original) | 12,272/184,336/184,337 | — | 0 |
+| paper_url 192 | G-PLBF(original) | 12,272/184,336/367,080 | — | 0 |
+| paper_url 192 | RA6 | — | 195,298/195,476 | 1,701,296 |
 
 ## 与论文表2的 G-LBF 数字：不直接计算“复现误差”
 
