@@ -1,0 +1,115 @@
+{
+  "method": "RA6",
+  "dataset": "mawi2022_flow",
+  "budget_kib": 24,
+  "status": "ok",
+  "jit_setup_s": 0.2944297079811804,
+  "read_prepare_s": 0.017393916990840808,
+  "fixture": {
+    "dataset": "mawi2022_flow",
+    "workload": "真实轨迹",
+    "seed": 0,
+    "members": 36449,
+    "negative_pool": 378032,
+    "learning_queries": 741279,
+    "tail_queries": 2223837,
+    "prep_s": 0.44481641601305455,
+    "learn_sha256": "ee6f91407ffd01e44205d2fc9bcbe30417282abd2d34e4d6c53c3ed3ed805de8",
+    "tail_sha256": "3293ecab9f1c30150d8b34587fd95d81636ee0e43eaa7d922db4d9ffffa1a045",
+    "mixed_sha256": "d95b38f215ca442b9a5ddd3438c468b45c045daaa64ab748ff78b45fb64b8c18"
+  },
+  "train_s": 0.29020374998799525,
+  "score_prepare_s": 9.059430249995785,
+  "select_build_s": 1.8124012500047684,
+  "executable_prepare_s": 0.002478082984453067,
+  "train_to_ready_s": 11.164663707982982,
+  "query_input_prepare_s": 0.009001667000120506,
+  "trees": 1,
+  "cache_bytes": 2440,
+  "used_bytes": 24464,
+  "member_index_bytes": 291592,
+  "lightgbm": "4.7.0",
+  "shortlist": {
+    "trees": 1,
+    "frac": 0.1,
+    "predicted_fp": 35067.09012319532,
+    "ra4_rank": 0,
+    "select_seconds": 1.785491540969815,
+    "build_seconds": 0.0,
+    "candidates": 94,
+    "built": 5
+  },
+  "source_sha256": "f6ac13a5f04c664a657909fe19273ed4b8ad5189ba93b7931a8690f9d4a64ff5",
+  "member_false_negatives": 0,
+  "verification_s": 0.007542457984527573,
+  "queries": {
+    "negative_tail": {
+      "queries": 2223837,
+      "negatives": 2223837,
+      "fp": 19010,
+      "fn": 0,
+      "fpr": 0.008548288386244135,
+      "seconds": 0.3832470839843154,
+      "ns_per_query": 172.33595986770405,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 170.52100000000002,
+      "chunk_mean_ns_p99": 258.08377,
+      "cache_hits": 353335,
+      "model_calls": 1870502
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 1745,
+      "fn": 0,
+      "fpr": 0.009685942339501992,
+      "seconds": 0.03381483297562227,
+      "ns_per_query": 169.07416487811133,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 166.54149999999998,
+      "chunk_mean_ns_p99": 227.61315999999974,
+      "cache_hits": 25256,
+      "model_calls": 174744
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 228,
+      "fn": 0,
+      "fpr": 0.012658930653489534,
+      "seconds": 0.07787116599502042,
+      "ns_per_query": 3893.558299751021,
+      "batch": 1,
+      "chunk_mean_ns_p50": 3292.0,
+      "chunk_mean_ns_p99": 6500.0,
+      "cache_hits": 1153,
+      "model_calls": 18847
+    }
+  },
+  "main_table_check": {
+    "actual": [
+      1,
+      2440,
+      19010
+    ],
+    "expected": [
+      1,
+      2440,
+      19010
+    ],
+    "equal": true
+  },
+  "train_plus_tail_s": 11.547910791967297,
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "peak_rss_bytes": 425033728,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 1,
+  "process_wall_s": 13.612473500019405,
+  "loadavg_after": [
+    10.2158203125,
+    7.44921875,
+    6.060546875
+  ]
+}

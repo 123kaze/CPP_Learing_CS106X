@@ -1,0 +1,115 @@
+{
+  "method": "RA6",
+  "dataset": "caida_flow",
+  "budget_kib": 24,
+  "status": "ok",
+  "jit_setup_s": 0.4101987920003012,
+  "read_prepare_s": 0.028943167009856552,
+  "fixture": {
+    "dataset": "caida_flow",
+    "workload": "真实轨迹",
+    "seed": 0,
+    "members": 210110,
+    "negative_pool": 169695,
+    "learning_queries": 1443950,
+    "tail_queries": 4331851,
+    "prep_s": 0.507763250003336,
+    "learn_sha256": "0db1fec07d5c19ad19daf900feb8257ec85d74fa468a1298315c5b57ea02eb10",
+    "tail_sha256": "250641fa50c33fa1c085aa288766f6780e97458c6121ed855715b5e636e75a83",
+    "mixed_sha256": "df6c5852bbef7fbd62683eb5ef367757be7a071431ae9c6184bc8627457502f2"
+  },
+  "train_s": 0.5072504589916207,
+  "score_prepare_s": 13.344945083023049,
+  "select_build_s": 2.2021800000220537,
+  "executable_prepare_s": 0.01097683300031349,
+  "train_to_ready_s": 16.065452916984214,
+  "query_input_prepare_s": 0.010923666006419808,
+  "trees": 4,
+  "cache_bytes": 9824,
+  "used_bytes": 24441,
+  "member_index_bytes": 1680880,
+  "lightgbm": "4.7.0",
+  "shortlist": {
+    "trees": 4,
+    "frac": 0.4,
+    "predicted_fp": 849683.8246084375,
+    "ra4_rank": 0,
+    "select_seconds": 2.1492302929982543,
+    "build_seconds": 0.0,
+    "candidates": 94,
+    "built": 5
+  },
+  "source_sha256": "f6ac13a5f04c664a657909fe19273ed4b8ad5189ba93b7931a8690f9d4a64ff5",
+  "member_false_negatives": 0,
+  "verification_s": 0.03768041598959826,
+  "queries": {
+    "negative_tail": {
+      "queries": 4331851,
+      "negatives": 4331851,
+      "fp": 376911,
+      "fn": 0,
+      "fpr": 0.08700922538656108,
+      "seconds": 0.8808656249893829,
+      "ns_per_query": 203.3462427468957,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 200.417,
+      "chunk_mean_ns_p99": 273.02828999999997,
+      "cache_hits": 1754454,
+      "model_calls": 2577397
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 16716,
+      "fn": 0,
+      "fpr": 0.09278522186081106,
+      "seconds": 0.04608170801657252,
+      "ns_per_query": 230.4085400828626,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 224.54149999999998,
+      "chunk_mean_ns_p99": 341.23833999999954,
+      "cache_hits": 71356,
+      "model_calls": 128644
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 1945,
+      "fn": 0,
+      "fpr": 0.10798956193437344,
+      "seconds": 0.08231395797338337,
+      "ns_per_query": 4115.697898669168,
+      "batch": 1,
+      "chunk_mean_ns_p50": 3500.0,
+      "chunk_mean_ns_p99": 4875.0,
+      "cache_hits": 6651,
+      "model_calls": 13349
+    }
+  },
+  "main_table_check": {
+    "actual": [
+      4,
+      9824,
+      376911
+    ],
+    "expected": [
+      4,
+      9824,
+      376911
+    ],
+    "equal": true
+  },
+  "train_plus_tail_s": 16.946318541973596,
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "peak_rss_bytes": 525467648,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 0,
+  "process_wall_s": 19.996076791983796,
+  "loadavg_after": [
+    4.775390625,
+    4.275390625,
+    4.44677734375
+  ]
+}

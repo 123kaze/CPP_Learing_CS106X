@@ -1,0 +1,124 @@
+{
+  "method": "Gama(original)",
+  "dataset": "caida_flow",
+  "budget_kib": 24,
+  "status": "ok",
+  "source_sha256": "353e6dd08e3a75229e5b9aca65d90378e671fcbde2616a3794f55935e3c75c22",
+  "lightgbm": "4.7.0",
+  "jit_setup_s": 0.0,
+  "fixture": {
+    "dataset": "caida_flow",
+    "workload": "真实轨迹",
+    "seed": 0,
+    "members": 210110,
+    "negative_pool": 169695,
+    "learning_queries": 1443950,
+    "tail_queries": 4331851,
+    "prep_s": 0.507763250003336,
+    "learn_sha256": "0db1fec07d5c19ad19daf900feb8257ec85d74fa468a1298315c5b57ea02eb10",
+    "tail_sha256": "250641fa50c33fa1c085aa288766f6780e97458c6121ed855715b5e636e75a83",
+    "mixed_sha256": "df6c5852bbef7fbd62683eb5ef367757be7a071431ae9c6184bc8627457502f2"
+  },
+  "read_prepare_s": 0.19529908400727436,
+  "train_select_s": 0.162727541,
+  "build_s": 0.4825794580101501,
+  "train_to_ready_s": 0.645312333,
+  "trees": 2,
+  "model_pickle_bytes": 12015,
+  "bf_target_bits": 100488.0,
+  "bf_logical_bits": 115893,
+  "bf_array_payload_bytes": 28992,
+  "bf_array_with_headers_bytes": 29312,
+  "member_index_bytes": 0,
+  "evaluated_epochs": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libopenblas.0.dylib",
+      "version": "0.3.34",
+      "threading_layer": "openmp",
+      "architecture": "VORTEX"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libomp.dylib",
+      "version": null
+    }
+  ],
+  "query_input_prepare_s": 0.07064408401492983,
+  "member_false_negatives": 0,
+  "verification_s": 0.42272574998787604,
+  "queries": {
+    "negative_tail": {
+      "queries": 4331851,
+      "negatives": 4331851,
+      "fp": 2478667,
+      "fn": 0,
+      "fpr": 0.5721958119058111,
+      "seconds": 21.381822124996688,
+      "ns_per_query": 4935.9551205700955,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 4938.708500000001,
+      "chunk_mean_ns_p99": 5431.6289799999995,
+      "cache_hits": 0,
+      "model_calls": 4331851
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 99659,
+      "fn": 0,
+      "fpr": 0.5531755459097015,
+      "seconds": 0.9342959579953458,
+      "ns_per_query": 4671.479789976729,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 4680.8544999999995,
+      "chunk_mean_ns_p99": 5184.1561599999995,
+      "cache_hits": 0,
+      "model_calls": 200000
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 10125,
+      "fn": 0,
+      "fpr": 0.562156459941147,
+      "seconds": 0.533447249996243,
+      "ns_per_query": 26672.362499812152,
+      "batch": 1,
+      "chunk_mean_ns_p50": 24542.0,
+      "chunk_mean_ns_p99": 43500.82999999987,
+      "cache_hits": 0,
+      "model_calls": 20000
+    }
+  },
+  "previous_run_check": {
+    "actual": 2478667,
+    "expected": 2478667,
+    "equal": true
+  },
+  "train_plus_tail_s": 22.027134457996688,
+  "python": "3.10.22",
+  "numpy": "2.2.6",
+  "peak_rss_bytes": 300646400,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 1,
+  "process_wall_s": 26.702019749995088,
+  "loadavg_after": [
+    10.04248046875,
+    6.001953125,
+    5.087890625
+  ]
+}

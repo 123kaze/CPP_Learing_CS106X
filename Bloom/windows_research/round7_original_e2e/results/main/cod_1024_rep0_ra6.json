@@ -1,0 +1,115 @@
+{
+  "method": "RA6",
+  "dataset": "cod",
+  "budget_kib": 1024,
+  "status": "ok",
+  "jit_setup_s": 0.40890524999122135,
+  "read_prepare_s": 0.40895062501658686,
+  "fixture": {
+    "dataset": "cod",
+    "workload": "zipf1.0-全部",
+    "seed": 0,
+    "members": 3000000,
+    "negative_pool": 999621,
+    "learning_queries": 2500000,
+    "tail_queries": 7500000,
+    "prep_s": 3.1492430409998633,
+    "learn_sha256": "8184d51054c2db72511f51154056de0a00b01b5e4bb91cff3d81f8b94b140825",
+    "tail_sha256": "28e336190aee395709bd552d401ed9655052e04c8a02fef9ec161358dd731e52",
+    "mixed_sha256": "bbc7734585adc08408f3a39096a19929c3c12be074a37ba0e2b0a85200ff83ed"
+  },
+  "train_s": 87.39787074999185,
+  "score_prepare_s": 171.7690260829986,
+  "select_build_s": 7.15983225000673,
+  "executable_prepare_s": 0.15567750000627711,
+  "train_to_ready_s": 266.48254916700535,
+  "query_input_prepare_s": 0.5915000419772696,
+  "trees": 160,
+  "cache_bytes": 2080,
+  "used_bytes": 1046541,
+  "member_index_bytes": 24000000,
+  "lightgbm": "4.7.0",
+  "shortlist": {
+    "trees": 160,
+    "frac": 0.002,
+    "predicted_fp": 89.94623292170013,
+    "ra4_rank": 0,
+    "select_seconds": 7.048376167047536,
+    "build_seconds": 0.0,
+    "candidates": 182,
+    "built": 5
+  },
+  "source_sha256": "f6ac13a5f04c664a657909fe19273ed4b8ad5189ba93b7931a8690f9d4a64ff5",
+  "member_false_negatives": 0,
+  "verification_s": 18.689326874999097,
+  "queries": {
+    "negative_tail": {
+      "queries": 7500000,
+      "negatives": 7500000,
+      "fp": 45,
+      "fn": 0,
+      "fpr": 6e-06,
+      "seconds": 42.97237341699656,
+      "ns_per_query": 5729.649788932875,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 5659.333,
+      "chunk_mean_ns_p99": 6652.180000000001,
+      "cache_hits": 275,
+      "model_calls": 7499725
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 5,
+      "fn": 0,
+      "fpr": 2.7753416445564448e-05,
+      "seconds": 1.1897682080161758,
+      "ns_per_query": 5948.841040080879,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 5869.9375,
+      "chunk_mean_ns_p99": 6921.238329999999,
+      "cache_hits": 0,
+      "model_calls": 200000
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 3,
+      "fn": 0,
+      "fpr": 0.00016656487701959913,
+      "seconds": 0.20171516700065695,
+      "ns_per_query": 10085.758350032847,
+      "batch": 1,
+      "chunk_mean_ns_p50": 9083.0,
+      "chunk_mean_ns_p99": 15625.0,
+      "cache_hits": 0,
+      "model_calls": 20000
+    }
+  },
+  "main_table_check": {
+    "actual": [
+      160,
+      2080,
+      45
+    ],
+    "expected": [
+      160,
+      2080,
+      45
+    ],
+    "equal": true
+  },
+  "train_plus_tail_s": 309.4549225840019,
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "peak_rss_bytes": 4640899072,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 0,
+  "process_wall_s": 333.4857327079808,
+  "loadavg_after": [
+    8.35498046875,
+    7.0283203125,
+    6.71826171875
+  ]
+}
