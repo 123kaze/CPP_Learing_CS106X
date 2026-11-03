@@ -9,7 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRS = {'run5': 'run5/results', 'run6': 'run6/results/main', 'run10': 'run10/results/main', 'grid10': 'grid10/results/grid'}
+DIRS = {'nomodel': 'nomodel', 'run5': 'run5/results', 'run6': 'run6/results/main', 'run10': 'run10/results/main', 'grid10': 'grid10/results/grid'}
 NAMES = {'caida_tcp_flow': 'Caida', 'mawi2020_tcp_flow': 'MAWI 2020', 'mawi2021_tcp_flow': 'MAWI 2021',
          'mawi2022_tcp_flow': 'MAWI 2022'}
 
@@ -66,6 +66,28 @@ def main():
                      f"{ratio(f['RA6'], f['LearnGrid']):.3f} | {'—' if orc is None else f'{ratio(f["RA6"], orc):.3f}'} | "
                      f"{ratio(f['RA6-fp64'], f['LearnGrid-fp64']):.3f} | {'是' if ok else '否'} |")
     L += ['', f'**过关标准（按设置总量不比 Gama 差超过 1%）：{npass}/{ntot}。**', '',
+          '## 不用模型的对照：纯 BF 和 BF + 缓存（`src/nomodel11.py`）', '',
+          'Gama 和 RA6 的候选最少也有 1 棵树。这里补上 t = 0：整个预算给一个 BF（最优 k），'
+          'BF + 缓存则从同一组缓存比例里用学习期回放来选（与网格的做法相同）。', '',
+          '| 轨迹 | 预算 KiB | 纯 BF | BF + 缓存 | **RA6** | RA6 / (BF + 缓存) | BF + 缓存-fp64 | RA6-fp64 | RA6-fp64 / (BF + 缓存-fp64) |',
+          '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
+    rr, rf = [], []
+    for ds in meta:
+        for i, kib in enumerate(meta[ds]['budgets_kib']):
+            r = R.get((ds, kib), {})
+            if not all(k in r for k in ('BF', 'BF+缓存', 'BF+缓存-fp64', 'RA6', 'RA6-fp64')):
+                continue
+            f = {k: int(r[k]['fp_tail']) for k in ('BF', 'BF+缓存', 'BF+缓存-fp64', 'RA6', 'RA6-fp64')}
+            a, b = ratio(f['RA6'], f['BF+缓存']), ratio(f['RA6-fp64'], f['BF+缓存-fp64'])
+            rr.append(a)
+            rf.append(b)
+            L.append(f"| {NAMES[ds]} | {kib}{' ★' if i == 3 else ''} | {f['BF']:,} | {f['BF+缓存']:,} | **{f['RA6']:,}** | {a:.3f} | "
+                     f"{f['BF+缓存-fp64']:,} | {f['RA6-fp64']:,} | {b:.3f} |")
+    if rr:
+        import numpy as np
+        L += ['', f'RA6 / (BF + 缓存)：中位 {np.median(rr):.3f}，范围 {min(rr):.3f}–{max(rr):.3f}，≤1 的 {sum(x <= 1 for x in rr)}/{len(rr)}；'
+              f'指纹缓存版中位 {np.median(rf):.3f}，≤1 的 {sum(x <= 1 for x in rf)}/{len(rf)}。', '']
+    L += ['',
           '评估段长度（查询数）与 FPR：', '']
     for ds in meta:
         for kib in meta[ds]['budgets_kib']:
