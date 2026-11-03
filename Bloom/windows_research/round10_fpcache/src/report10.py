@@ -65,7 +65,8 @@ def decompose_section(r10, keys):
 
 def main():
     r5, r6, r10 = load(R5), load(R6 / 'results' / 'main'), load(ROOT / 'results' / 'main')
-    keys = sorted(k for k in r10 if k in r6 and k in r5 and 'LearnGrid' in r5[k])
+    gfp = load(ROOT / 'results' / 'grid')
+    keys = sorted(k for k in r10 if k in r6 and k in r5 and 'LearnGrid' in r5[k] and k in gfp)
     main_keys = [k for k in keys if k[2] != PROBE]
     G = defaultdict(lambda: defaultdict(list))
     excluded = defaultdict(int)
@@ -76,25 +77,28 @@ def main():
             excluded[g] += 1
             excluded[GROUPS[-1]] += 1
             continue
-        x, y, gama, grid = fp(c, 'RA6-fp64'), fp(b, 'RA6'), fp(a, 'Gama'), fp(a, 'LearnGrid')
+        x, y, gama, grid, gf = fp(c, 'RA6-fp64'), fp(b, 'RA6'), fp(a, 'Gama'), fp(a, 'LearnGrid'), fp(gfp[k], 'LearnGrid-fp64')
         for gg in (g, GROUPS[-1]):
             s = G[gg]
             s['fp64/RA6'].append(ratio(x, y))
             s['fp64/Gama'].append(ratio(x, gama))
             s['RA6/Gama'].append(ratio(y, gama))
-            s['fp64/网格'].append(ratio(x, grid))
+            s['fp64/网格fp64'].append(ratio(x, gf))
+            s['RA6/网格'].append(ratio(y, grid))
+            s['网格fp64/网格'].append(ratio(gf, grid))
     L = ['# 第十轮：不用成员索引的 64 位指纹缓存（RA6-fp64）', '',
          f'对齐的案例共 {len(keys)} 个，与第六轮主表的数据集、预算、负载、种子和查询流完全相同。'
-         'RA6（带索引）来自第六轮，Gama 和网格来自第五轮；网格用的是带索引的缓存。'
+         'RA6（带索引）来自第六轮，Gama 和网格（带索引）来自第五轮；网格-fp64 是同样用指纹缓存的网格（`src/grid10.py`），'
+         'RA6-fp64 只和它比，两边缓存格式相同。'
          f'主表不含探测重放。逐案例比值 = (误报+1)/(误报+1)，只统计第六轮参照值 ≥{MIN_REF} 的案例。', '',
          '## 一、逐案例比值（中位数 / 最坏 / ≤1 的比例）', '',
-         '| 分组 | 计入 | 排除 | **RA6-fp64 / RA6** | RA6-fp64 / Gama | RA6 / Gama | RA6-fp64 / 网格 |',
-         '|---|---:|---:|---:|---:|---:|---:|']
+         '| 分组 | 计入 | 排除 | **RA6-fp64 / RA6** | RA6-fp64 / Gama | RA6 / Gama | **RA6-fp64 / 网格-fp64** | RA6 / 网格 | 网格-fp64 / 网格 |',
+         '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for g in GROUPS:
         s = G.get(g)
         if s:
             L.append(f"| {g} | {len(s['fp64/RA6'])} | {excluded[g]} | **{cell(s['fp64/RA6'])}** | {cell(s['fp64/Gama'])} | "
-                     f"{cell(s['RA6/Gama'])} | {cell(s['fp64/网格'])} |")
+                     f"{cell(s['RA6/Gama'])} | **{cell(s['fp64/网格fp64'])}** | {cell(s['RA6/网格'])} | {cell(s['网格fp64/网格'])} |")
     norep = [k for k in main_keys if k[2] in NOREP]
     eq = sum(fp(r10[k], 'RA6-fp64') == fp(r5[k], 'Gama') for k in norep)
     L += ['', f'无重复负载上 RA6-fp64 与 Gama 逐位相同：{eq}/{len(norep)}。', '']
