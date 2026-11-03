@@ -5,6 +5,7 @@
 - `src/eq7_offline.py`：重建 E3 的同一批候选（合成数据种子 1–4 的前 10，MAWI 2024 的全部候选），分别用原式和修正式按实际桶负载预测。原式的预测要逐个与 E3 存档一致（断言）。
 - `src/run_all.sh`：全部任务，4 个并行，约 30 分钟。
 - `src/report.py`：生成 `results/report.md`。
+- `src/bias_split.py`、`src/report_split.py`：把 RA6 选中结构的预测和实测都拆成学习期见过 / 没见过的 key 两部分，看偏高从哪里来 → `results/bias_split.md`。运行：`src/run_all.sh bias_split.py`。
 - 结论：`results/结论.md`。
 
 ```bash
