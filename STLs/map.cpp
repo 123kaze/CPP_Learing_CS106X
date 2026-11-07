@@ -33,8 +33,9 @@ int main() {
     
     // 空map
     map<string, int> m1;
+    map<string, int>* q= &m1;
     cout << "空map大小: " << m1.size() << endl;
-    
+    cout << q<<endl;
     // 使用初始化列表
     map<string, int> m2 = {
         {"Alice", 25},
