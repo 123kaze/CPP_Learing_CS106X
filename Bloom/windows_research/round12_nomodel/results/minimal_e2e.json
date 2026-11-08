@@ -1,0 +1,49 @@
+{
+  "purpose": "end-to-end smoke only; generated data, not paper evidence",
+  "seed": 121212,
+  "rows": 20000,
+  "members": 5818,
+  "learning_queries": 50000,
+  "evaluation_queries": 150000,
+  "budget_kib": 8,
+  "data_sha256": "1ae85e8cfd48b12f5d601379ebf687b32d9e7da06c9286e15b4cacf48069dbaa",
+  "training_seconds": 0.06497895799111575,
+  "score_prepare_seconds": 2.0129210419981973,
+  "process_seconds_with_jit": 3.9558090000064112,
+  "results": [
+    {
+      "method": "RA6",
+      "trees": 1,
+      "cache_bytes": 816,
+      "total_bytes": 7956,
+      "fp": 383,
+      "native_equals_replay": true,
+      "member_checks_passed": true,
+      "selection_seconds_with_possible_jit": 0.6783952089899685
+    },
+    {
+      "method": "Gama",
+      "trees": 1,
+      "cache_bytes": 0,
+      "total_bytes": 7671,
+      "fp": 1647,
+      "native_equals_replay": true,
+      "member_checks_passed": true,
+      "selection_seconds_with_possible_jit": 0.041773332995944656
+    },
+    {
+      "method": "BF+ReplayCache",
+      "trees": 0,
+      "cache_bytes": 816,
+      "total_bytes": 8192,
+      "fp": 82,
+      "native_equals_replay": true,
+      "member_checks_passed": true,
+      "selection_seconds_with_possible_jit": 0.012225208003656007
+    }
+  ],
+  "memory_note": "Index-based variants; backend sorted member hashes excluded from filter budget",
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "lightgbm": "4.7.0"
+}
