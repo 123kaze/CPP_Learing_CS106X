@@ -34,13 +34,18 @@ python3 src/verify_baselines.py          # 无数据缓存的克隆也可核验�
 
 检查 14 个树前缀在多种块大小下与 LightGBM raw-score 位相等，以及模型重载、缺失值、空输入等情形。真实 URL 64KiB 的 pilot 也验证了完整分数摘要、once/Zipf 配置、BF 位图与原生 FP 完全一致，并与第八轮存档一致。pilot 不参与正式计时统计。
 
-## 成对完整构建计时
+## 成对完整构建计时（已完成）
+
+最终结论见 [`results/结论.md`](results/结论.md)，全部计时见 [`results/scoring_report.md`](results/scoring_report.md)。60 次构建、30 对等价检查全部通过；20 个组合的配对加速中位为 2.36–2.57×，URL 峰值 RSS 配对中位增加约 8.5%，不宣称普遍节省内存或已快于原版 Gama。
 
 先完成上面的基线任务，避免本项目的两类任务同时占用机器：
 
 ```bash
 caffeinate -s -i ../../.condaenv/bin/python -u src/run_scoring.py
 python3 src/report_scoring.py
+python3 src/verify_scoring.py         # 标准库；无原始数据也可核验存档
+python3 src/test_verify_scoring.py -v # 10 项存档回归测试
+# python3 src/verify_scoring.py --inputs  # 实验机额外核验原始缓存
 ```
 
 - paper_url / paper_cod × 5 个预算 × 3 次独立成对重建 × loop/leaf，共 60 个进程。
@@ -53,4 +58,4 @@ python3 src/report_scoring.py
 
 ## 状态与产物
 
-执行状态见 `STATUS.md`。基线、pilot 和正式评分使用独立目录；不会覆盖第八、第十二轮记录。需要原先准备好的数据缓存与主 Python 环境，不自动下载数据或安装依赖。
+两部分已完成，核验状态见 `STATUS.md`。基线、pilot 和正式评分使用独立目录；不会覆盖第八、第十二轮记录。需要原先准备好的数据缓存与主 Python 环境，不自动下载数据或安装依赖。
