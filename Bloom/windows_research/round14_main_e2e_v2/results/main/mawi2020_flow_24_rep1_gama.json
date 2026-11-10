@@ -1,0 +1,120 @@
+{
+  "method": "Gama(original)",
+  "dataset": "mawi2020_flow",
+  "budget_kib": 24,
+  "status": "ok",
+  "source_sha256": "353e6dd08e3a75229e5b9aca65d90378e671fcbde2616a3794f55935e3c75c22",
+  "lightgbm": "4.7.0",
+  "jit_setup_s": 0.0,
+  "fixture": {
+    "dataset": "mawi2020_flow",
+    "workload": "真实轨迹",
+    "seed": 0,
+    "members": 75513,
+    "negative_pool": 416397,
+    "learning_queries": 1445151,
+    "tail_queries": 4335454,
+    "prep_s": 0.4497358330118004,
+    "learn_sha256": "912aff192ef16e83b8590c1c9a7cf5aa013b8c02366b5aa64fa60bc1613aa7ce",
+    "tail_sha256": "5dfba2ea81be241d218a3e6098e77c26c720d03d27106fc7a6b59de067ec2b9f",
+    "mixed_sha256": "b719a39351a8c556533091ff572ad9831cfea080a24dc10af16f9bf05f96e1e3"
+  },
+  "read_prepare_s": 0.14211399998748675,
+  "train_select_s": 0.096221084,
+  "build_s": 0.12545333299203776,
+  "train_to_ready_s": 0.221679334,
+  "trees": 2,
+  "model_pickle_bytes": 12108,
+  "bf_target_bits": 99744.0,
+  "bf_logical_bits": 113990,
+  "bf_array_payload_bytes": 28504,
+  "bf_array_with_headers_bytes": 28824,
+  "member_index_bytes": 0,
+  "evaluated_epochs": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libopenblas.0.dylib",
+      "version": "0.3.34",
+      "threading_layer": "openmp",
+      "architecture": "VORTEX"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libomp.dylib",
+      "version": null
+    }
+  ],
+  "query_input_prepare_s": 0.021116165997227654,
+  "member_false_negatives": 0,
+  "verification_s": 0.11099508299957961,
+  "queries": {
+    "negative_tail": {
+      "queries": 4335454,
+      "negatives": 4335454,
+      "fp": 339989,
+      "fn": 0,
+      "fpr": 0.07842062215398894,
+      "seconds": 17.94258049997734,
+      "ns_per_query": 4138.570147434926,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 4116.6044999999995,
+      "chunk_mean_ns_p99": 5535.091999999993,
+      "cache_hits": 0,
+      "model_calls": 4335454
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 13560,
+      "fn": 0,
+      "fpr": 0.07526726540037079,
+      "seconds": 0.7638664580008481,
+      "ns_per_query": 3819.3322900042403,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 3747.0834999999997,
+      "chunk_mean_ns_p99": 5781.523159999983,
+      "cache_hits": 0,
+      "model_calls": 200000
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 1369,
+      "fn": 0,
+      "fpr": 0.0760091055466104,
+      "seconds": 0.3715456250065472,
+      "ns_per_query": 18577.28125032736,
+      "batch": 1,
+      "chunk_mean_ns_p50": 17666.0,
+      "chunk_mean_ns_p99": 23208.01,
+      "cache_hits": 0,
+      "model_calls": 20000
+    }
+  },
+  "train_plus_tail_s": 18.16425983397734,
+  "python": "3.10.22",
+  "numpy": "2.2.6",
+  "peak_rss_bytes": 343474176,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 1,
+  "process_wall_s": 20.695666374987923,
+  "exit_code": 0,
+  "loadavg_after": [
+    10.9833984375,
+    10.88720703125,
+    9.7998046875
+  ]
+}

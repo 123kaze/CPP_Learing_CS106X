@@ -1,0 +1,125 @@
+{
+  "method": "Gama(original)",
+  "dataset": "mawi2022_flow",
+  "budget_kib": 24,
+  "status": "ok",
+  "source_sha256": "353e6dd08e3a75229e5b9aca65d90378e671fcbde2616a3794f55935e3c75c22",
+  "lightgbm": "4.7.0",
+  "jit_setup_s": 0.0,
+  "fixture": {
+    "dataset": "mawi2022_flow",
+    "workload": "真实轨迹",
+    "seed": 0,
+    "members": 36449,
+    "negative_pool": 378032,
+    "learning_queries": 741279,
+    "tail_queries": 2223837,
+    "prep_s": 0.44481641601305455,
+    "learn_sha256": "ee6f91407ffd01e44205d2fc9bcbe30417282abd2d34e4d6c53c3ed3ed805de8",
+    "tail_sha256": "3293ecab9f1c30150d8b34587fd95d81636ee0e43eaa7d922db4d9ffffa1a045",
+    "mixed_sha256": "d95b38f215ca442b9a5ddd3438c468b45c045daaa64ab748ff78b45fb64b8c18"
+  },
+  "read_prepare_s": 0.11172370798885822,
+  "train_select_s": 0.070794209,
+  "build_s": 0.13338491698959842,
+  "train_to_ready_s": 0.204183542,
+  "trees": 2,
+  "model_pickle_bytes": 12079,
+  "bf_target_bits": 99976.0,
+  "bf_logical_bits": 115518,
+  "bf_array_payload_bytes": 28888,
+  "bf_array_with_headers_bytes": 29208,
+  "member_index_bytes": 0,
+  "evaluated_epochs": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libopenblas.0.dylib",
+      "version": "0.3.34",
+      "threading_layer": "openmp",
+      "architecture": "VORTEX"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv_gama/lib/libomp.dylib",
+      "version": null
+    }
+  ],
+  "query_input_prepare_s": 0.010789457999635488,
+  "member_false_negatives": 0,
+  "verification_s": 0.124579541006824,
+  "queries": {
+    "negative_tail": {
+      "queries": 2223837,
+      "negatives": 2223837,
+      "fp": 503966,
+      "fn": 0,
+      "fpr": 0.22662002655770186,
+      "seconds": 8.880437542014988,
+      "ns_per_query": 3993.2951659743894,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 3993.8125,
+      "chunk_mean_ns_p99": 4341.42748,
+      "cache_hits": 0,
+      "model_calls": 2223837
+    },
+    "mixed_batch": {
+      "queries": 200000,
+      "negatives": 180158,
+      "fp": 44492,
+      "fn": 0,
+      "fpr": 0.2469610008992107,
+      "seconds": 0.7804942909860983,
+      "ns_per_query": 3902.4714549304913,
+      "batch": 1000,
+      "chunk_mean_ns_p50": 3897.083,
+      "chunk_mean_ns_p99": 4140.243670000001,
+      "cache_hits": 0,
+      "model_calls": 200000
+    },
+    "mixed_scalar": {
+      "queries": 20000,
+      "negatives": 18011,
+      "fp": 6203,
+      "fn": 0,
+      "fpr": 0.3444006440508578,
+      "seconds": 0.37837408401537687,
+      "ns_per_query": 18918.704200768843,
+      "batch": 1,
+      "chunk_mean_ns_p50": 17541.0,
+      "chunk_mean_ns_p99": 22875.0,
+      "cache_hits": 0,
+      "model_calls": 20000
+    }
+  },
+  "previous_run_check": {
+    "actual": 503966,
+    "expected": 503966,
+    "equal": true
+  },
+  "train_plus_tail_s": 9.084621084014987,
+  "python": "3.10.22",
+  "numpy": "2.2.6",
+  "peak_rss_bytes": 267583488,
+  "threads": 1,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "rep": 1,
+  "process_wall_s": 11.470957666024333,
+  "exit_code": 0,
+  "loadavg_after": [
+    4.75390625,
+    8.337890625,
+    8.94482421875
+  ]
+}

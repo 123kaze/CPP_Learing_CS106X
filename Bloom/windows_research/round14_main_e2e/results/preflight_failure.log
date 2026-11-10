@@ -1,0 +1,20 @@
+INPUTS VERIFIED caida_flow
+Traceback (most recent call last):
+  File "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round14_main_e2e/src/run14.py", line 134, in <module>
+    try: main()
+         ^^^^^^
+  File "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round14_main_e2e/src/run14.py", line 109, in main
+    cfg = json.loads(json.dumps(manifest()))
+                                ^^^^^^^^^^
+  File "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round14_main_e2e/src/run14.py", line 51, in manifest
+    for path in paths: inputs[str(path.relative_to(BLOOM))] = digest(path)
+                                                              ^^^^^^^^^^^^
+  File "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round14_main_e2e/src/run14.py", line 25, in digest
+    with path.open('rb') as f:
+         ^^^^^^^^^^^^^^^
+  File "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/learned_adaptive_hybrid/cache/url/data.npz'
+
+[exited with code 1]
