@@ -1,0 +1,340 @@
+{
+  "seed": 20261119,
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "random_interior_cases": 80,
+  "independent_slsqp_cases": 30,
+  "max_A_relative_error": 1.1102230246251565e-15,
+  "max_B_relative_error": 7.771561172376096e-16,
+  "max_dimensionless_budget_error": 8.881784197001252e-16,
+  "max_slsqp_objective_error": 3.9690473130349346e-14,
+  "A_clipping_gate_reversal": {
+    "p": [
+      0.5,
+      0.5
+    ],
+    "r": [
+      0.99,
+      0.01
+    ],
+    "beta_learned": 0.1,
+    "delta_overhead": 0.2,
+    "KL": 1.614463080360851,
+    "relaxed_FP": 0.18006037271395414,
+    "capped_FP": 0.820543445547202,
+    "plain_BF_FP": 0.7408182206817179,
+    "relaxed_ratio": 0.24305608000334883,
+    "capped_ratio": 1.107617796970651,
+    "relaxed_epsilon": [
+      0.09093958217876472,
+      9.003018635697707
+    ],
+    "capped_epsilon": [
+      0.8187307530779818,
+      1.0
+    ],
+    "clamp_without_resolve_budget": 1.1987799625336475
+  },
+  "B_clipping_below_formula": {
+    "p": [
+      0.5,
+      0.5
+    ],
+    "r": [
+      0.99,
+      0.01
+    ],
+    "q": [
+      0.5,
+      0.5
+    ],
+    "beta": 0.1,
+    "capped_ratio": 1.1027294446701037,
+    "interior_formula": 5.02518907629606
+  },
+  "B_clipping_above_formula": {
+    "p": [
+      0.5,
+      0.1,
+      0.4
+    ],
+    "r": [
+      0.15,
+      0.45,
+      0.4
+    ],
+    "q": [
+      0.2,
+      0.15,
+      0.65
+    ],
+    "beta": 0.6,
+    "capped_ratio": 1.1686629134755488,
+    "interior_formula": 1.1572595109884265
+  },
+  "true_KL_alone_not_plugin_guarantee": {
+    "p": [
+      0.5,
+      0.5
+    ],
+    "r": [
+      0.99,
+      0.01
+    ],
+    "q": [
+      0.01,
+      0.99
+    ],
+    "beta": 3.0,
+    "KL_true": 1.614463080360851,
+    "oracle_ratio": 0.198997487421324,
+    "plugin_ratio": 9.851380665170797
+  },
+  "r_zero_boundary": {
+    "p": [
+      0.5,
+      0.5
+    ],
+    "r": [
+      1.0,
+      0.0
+    ],
+    "beta": 0.1,
+    "KL": "infinity",
+    "naive_formula_FP": 0.0,
+    "capped_FP": 0.8187307530779818
+  },
+  "partition_coarsening": {
+    "fine_p": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "fine_r": [
+      0.49,
+      0.01,
+      0.49,
+      0.01
+    ],
+    "fine_KL": 1.2729656758128873,
+    "two_region_KL": 0.0
+  },
+  "Dirichlet_EB": [
+    {
+      "counts": [
+        5,
+        5
+      ],
+      "h": [
+        0.5,
+        0.5
+      ],
+      "N1": 10,
+      "loglike_infinity": -6.931471805599453,
+      "endpoint": "infinity",
+      "alpha": null,
+      "posterior_mean": [
+        0.5,
+        0.5
+      ],
+      "loglike_best_finite": -6.931471815905224,
+      "best_finite_alpha": 485165050.1490084,
+      "loglike_zero": null,
+      "expansion_1_over_alpha_coefficient": -5.0
+    },
+    {
+      "counts": [
+        8,
+        2
+      ],
+      "h": [
+        0.5,
+        0.5
+      ],
+      "N1": 10,
+      "loglike_infinity": -6.931471805599453,
+      "endpoint": "finite",
+      "alpha": 3.296831487009784,
+      "posterior_mean": [
+        0.7256176595853547,
+        0.27438234041464526
+      ],
+      "loglike_best_finite": -6.160682324675955,
+      "best_finite_alpha": 3.296831487009784,
+      "loglike_zero": null,
+      "expansion_1_over_alpha_coefficient": 13.0
+    },
+    {
+      "counts": [
+        10,
+        0
+      ],
+      "h": [
+        0.5,
+        0.5
+      ],
+      "N1": 10,
+      "loglike_infinity": -6.931471805599453,
+      "endpoint": "zero",
+      "alpha": 0.0,
+      "posterior_mean": [
+        1.0,
+        0.0
+      ],
+      "loglike_best_finite": -0.6931471834754461,
+      "best_finite_alpha": 2.0612009303189287e-09,
+      "loglike_zero": -0.6931471805599453,
+      "expansion_1_over_alpha_coefficient": 45.0
+    },
+    {
+      "counts": [
+        1,
+        0
+      ],
+      "h": [
+        0.5,
+        0.5
+      ],
+      "N1": 1,
+      "loglike_infinity": -0.6931471805599453,
+      "endpoint": "unidentifiable",
+      "alpha": null
+    },
+    {
+      "counts": [
+        0,
+        0
+      ],
+      "h": [
+        0.5,
+        0.5
+      ],
+      "N1": 0,
+      "loglike_infinity": 0.0,
+      "endpoint": "unidentifiable",
+      "alpha": null
+    }
+  ],
+  "true_h_half_N10_probability_infinity_not_max_by_expansion": 0.34375,
+  "GT19_total_rate_examples": [
+    {
+      "key_counts": [
+        1,
+        2
+      ],
+      "total_seen_plus_unseen": 1.3333333333333333
+    },
+    {
+      "key_counts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3
+      ],
+      "total_seen_plus_unseen": 0.2608695652173913
+    }
+  ],
+  "CLOCK_same_key_counts_different_order": {
+    "ways": 4,
+    "buckets": 1,
+    "grouped_stream": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4
+    ],
+    "alternating_stream": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "grouped_FP": 5,
+    "alternating_FP": 15
+  },
+  "archival_feasibility": {
+    "inspected": [
+      {
+        "path": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round6_bucket/results/e3_seeds/cod_256.json",
+        "sha256": "47436c0133f8b61dc53631303be9b2142bf4613c010bf5c41993d965bbf5a2e1",
+        "sample_fields": [
+          "workload",
+          "seed",
+          "rank_rows"
+        ],
+        "detail": "rank_rows: trees, frac, aggregate_RA4, aggregate_bucket, measured_FP"
+      },
+      {
+        "path": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round19_gt_fix/results/rerun_cod_index.json",
+        "sha256": "68b4ff48276930eada730ea7cec09c520c91d309d940508852ccdc4ef44e405a",
+        "sample_fields": [
+          "dataset",
+          "budget_kib",
+          "workload",
+          "seed",
+          "cache",
+          "methods",
+          "candidate_changes",
+          "warm",
+          "diagnostic_wall_s"
+        ],
+        "detail": "candidate_changes: aggregate predictions and measured FP"
+      },
+      {
+        "path": "/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round20_zero_guard/results/main/caida_tcp_flow_fp64.json",
+        "sha256": "45abd52422244650915725612e20b293dbeb796e426741b914f6edfc78272d4c",
+        "sample_fields": [
+          "dataset",
+          "cache",
+          "budget_kib",
+          "workload",
+          "seed",
+          "cohort",
+          "learn_len",
+          "tail_len",
+          "base_stream_sha256",
+          "tail_stream_sha256",
+          "gate",
+          "methods",
+          "historical_predictive_zero",
+          "historical_full_replay",
+          "case_wall_s"
+        ],
+        "detail": "gate and method aggregates; no segment vectors"
+      }
+    ],
+    "formula_scatter_done": false,
+    "reason": "These archives do not save candidate region n_i, M_i(T), q_i, T or active sets. No formula inputs are inferred from aggregate FP."
+  },
+  "all_assertions_passed": true
+}

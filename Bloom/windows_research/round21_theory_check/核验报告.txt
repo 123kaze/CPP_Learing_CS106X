@@ -1,0 +1,166 @@
+独立数学核验：A/B、截断、Dirichlet EB 与廉价诊断可行性
+日期：2026-11-19
+范围：只读冻结代码与少量归档；只在本目录新增文件。不改论文、不训练、不重跑大数据、不提交或 push。
+
+一、结论先行
+
+A：固定分区、固定外生 T、连续理想 BF、真实 miss 权重已知，且所有非空区域的最优 ε≤1 时成立。它是已有 PLBF 分配公式的 KL 改写，不应包装为新理论。
+B：同一分区、同一 Bloom 位预算、同一外生 T，q 分配与 r 最优分配都不触发 ε=1 截断时成立；是加权算术／几何均值不等式。不能直接比较不同 score 分区或不同缓存状态。
+“KL 超过模型成本即可安全采用 learned”：一般不成立。截断、额外成本、未知真实 r、实际部署近似任一项都可能破坏结论；已有明确反例。
+“分布一致 ⇒ αMLE=∞ ⇒ 全 singleton 精确退化”：只有有限样本恰好 s/N1=h 等特殊条件成立；按真实分布一致理解不成立，全部 key 为 singleton 也不成立。
+KL 置信下界：可作条件模型诊断，但不是未来 CLOCK 误报非劣保证；后选择、序列相关、未见 key 与 plug-in 分配误差均需另处理。
+现有受检归档只有聚合预测／实测 FP，没有分区 p/r/q/T；本轮未伪造 A/B 散点，也未用评估结果调门槛。
+
+二、A 的严格推导及门控方向
+
+令 a=(ln 2)^2，n=sum n_i>0，W=sum M_i(T)>0，p_i=n_i/n，r_i=M_i/W，β=aB/n；B 是实际可供 Bloom 位数组使用的位数，不是总预算或字节数。以下先假定 p_i,r_i>0。
+理想模型是 min F/W=sum r_i ε_i，约束 sum p_i log(1/ε_i)≤β，0<ε_i≤1。
+它假设 ε=exp(-a·bits/member)，允许连续位数和连续最优 hash 数；忽略整数／有限尺寸 BF 误差。
+先放松 ε≤1。拉格朗日驻点给 ε_i=c p_i/r_i；预算等号给 log c=-β-D(p||r)。因此
+  F_relax = W exp[-β-D(p||r)]。
+这个驻点合法当且仅当
+  β ≥ max_i log(p_i/r_i) - D(p||r)。
+合法时它就是凸优化的全局最优；否则只是放松问题下界。这里的“无截断”不能只靠代码不写 min(1,·) 来实现。
+
+有截断时必须重新求 c，使 ε_i=min(1,c p_i/r_i) 满足预算。令 A={ε_i<1}、U 为 PASS 区域，P_A=sum_A p_i、R_A=sum_A r_i、R_U=sum_U r_i，则
+  F_cap/W = R_U + R_A exp[-β/P_A - D(p_A/P_A || r_A/R_A)]。
+F_cap≥F_relax。直接把不合法的 ε>1 改为 1 会删除原来的“负内存”，反而超预算，必须重解。
+
+数值反例（W=1）：p=(.5,.5)，r=(.99,.01)，learned β=.1，额外成本 δ=.2，plain BF β=.3。
+D=1.614463>.2；不截断公式声称 learned/BF=.243056，实际上合法最优比值=1.107618，已经输了。
+具体 F_relax=.180060，F_cap=.820543，BF=.740818；放松 ε=(.090940,9.003019)。简单 clamp 后用量 β=1.198780，而预算只有 .1。
+所以仅在相同理想条件下，D>δ 是能赢的必要条件；截断后不再充分。相同 Bloom 位数、不计额外成本时，合法分区最优当然不劣于统一 ε，但 learned 的物理位数通常更少。
+
+预算更正：设 plain BF 和 learned 可用位数分别为 B0、BL；同 W 时，内点比值是 exp[a(B0-BL)/n-D]。
+只有全部差额恰好等于模型位数时，才可写成 exp[a·b_model-D]，且 b_model 单位必须是 bit/member。
+差额必须包括模型、区域导航／元数据、数组头、缓存、对齐及未使用的位数，并扣除 plain BF 本身的头部成本。
+若候选各有 W_L(T_L)、W_0(T_0)，相同 n 下还必须乘 W_L/W_0；两个分区模型比较还要加上基线的 D_0。
+同样缓存槽数不意味着同一个 T；不同 tree/cache 候选不可只按 KL 排序。
+
+三、B 的严格推导及适用边界
+
+把 q（例如 h）用于分配，真实固定权重为 r。在同 p、β 下，内点解为
+  ε(q)=exp[-β-D(p||q)] p/q。
+以 r 衡量的实际理想目标除以针对 r 优化的理想目标：
+  F_r(ε(q))/F_r(ε(r))
+    = exp[D(p||r)-D(p||q)] E_p[r/q]
+    = E_p[r/q] / exp(E_p[log(r/q)]) ≥ 1。
+等号当且仅当 r/q 在 p 支持集上为常数；全支持且二者归一时即 r=q。
+
+截断后，“同可行域的错误权重解不优于真最优”这个 ≥1 仍成立，但上面的数值等式既非通用上界也非通用下界。
+反例 1：p=(.5,.5),r=(.99,.01),q=(.5,.5),β=.1，截断损失比=1.102729，公式=5.025189。
+反例 2：p=(.5,.1,.4),r=(.15,.45,.4),q=(.2,.15,.65),β=.6，截断损失比=1.168663，公式=1.157260。
+B 衡量的是“已知真实权重的 oracle”与错配分配之间的差距，不是 RA6 相对 Gama 的无条件实测定理。
+
+重要补充：即使真实 D 的置信下界非常准确，D 大仍不能保证按估计 q 部署的结构赢。
+p=(.5,.5),r=(.99,.01),q=(.01,.99),β=3，两个解都无截断、没有模型成本；真实 D=1.614463。
+oracle/BF=.198997，但 q 部署/BF=9.851381。
+在内点模型里，安全比较还需要错配代价：log ratio=δ-D(p||r)+log L_B，而不仅是 D。
+更直接的统计目标应是固定实际 ε 的真实加权成本上界，而非仅给 oracle KL 加下界。
+
+四、零质量、分区数和现有实现
+
+1. n_i=0：若确知该区域无成员，可 EMPTY 免费拒绝该区域查询，但仍要支付识别区域的导航／元数据成本。p=0 的项不进入 KL；要单独处理 ε，不能直接计算 0/0。若 p 支持上 r>0，保留全体 r 的归一化仍可使用 A，EMPTY 的收益已包含其中。
+2. r_i=0 而 p_i>0：最佳是该区 PASS、不给位；KL=∞ 绝不自动意味着 FP=0。p=(.5,.5),r=(1,0),β=.1，真最优 FP=.818731，不是 0。这是截断边界，不是无限收益。
+3. q_i=0 而 p_i,r_i>0：r/q 与 D(p||q) 的内点表达失效；实际 q 解可能 PASS，损失仍需合法优化计算。单纯加 floor 是方法改动，不是证明。
+4. W=0 或 n=0：归一化与公式未定义，分别单独处理零目标／空成员集合。
+5. 分区必须是实际可独立分配 ε 的区域。细分 KL≥合并 KL，不能拿 1000 个微桶的 KL 声称只能分 5 区的部署收益。例：p=(.25,.25,.25,.25),r=(.49,.01,.49,.01)，细分 D=1.272966，按相邻两桶合并后 D=0。
+6. 现有 DP 是 N_SEG=1000、K_REG=5；DP 对 member_counts 也加 1 并归一，但 build 的实际位数用原始成员数。故 DP 所用 p̃ 不是严格命题中的 n_i/n；还存在整数 floor、整数 k、packed 字节取整，以及超支时缩小 M 的循环。不能把理想恒等式当该部署实现的精确恒等式。
+7. learned 的 metadata=(k+1)*8+k*17+(k+1)*8=33k+16 字节，另有 12 个数组头及模型 dict 头；plain BF 为 4 个 uint64 头字+1 个数组头。比较只扣模型 arrays 会漏账。
+8. RA5 权重另加 1e-6*sum(M)*h，且与 h 足够接近时 snap 回 validation+1；数学上“比例相等”与实现上“bit-identical”不是同一命题。有限 α 通常不能满足旧 no-repeat snap 条件。
+
+五、固定 T 条件不能直接升级为端到端缓存定理
+
+A/B 只在 M_i(T) 与 ε 外生解耦时成立。Che/TTL 的解释还要求近似平稳 IRM/Poisson 到达、合理的 BF key-level 随机筛选和一致的冷／热启动语义。
+固定物理槽数 S 时，T 会随 ε 改变，容量关系为 sum ε_i O_i(T)=S。固定 T 还额外强制容量约束时，KKT 分母一般是 M_i+νO_i，而非单独 M_i；把 cache 内存也放进总预算会再次改变公式。不能忽略该约束后声称联合最优。
+RA6 的 top5 refinement 使用实际 BF FP key 集、每 bucket 自己的 Che 时间；既非全局单一 T，也非始终等于 ε_i M_i 的期望。固定 shortlist 也不保证最优候选没有被前级预测剪掉。
+真正部署是 4-way CLOCK：引用位、时序、冲突、safe-prefix bypass、实际反馈、冷／热启动都影响 misses。仅凭 per-key 次数不可能恢复真实序列成本。
+小例：5 个 key 都为静态 FP、每个出现 3 次、都映射同一 4-way bucket，冷启动。按 key 连续成组请求，CLOCK FP=5；轮流请求 0,1,2,3,4 三遍，FP=15。key 计数与 bucket 负载完全相同。
+模型 inference／cache lookup／反馈延迟还影响端到端时间；FP 理论不推出吞吐率或选择成本优势。
+因此 round20 的 learning 非劣保证仍只是 replay 保证；其已观察到的未来 26 次对 RA6 回退，不能用本公式排除。本核验没有重跑这些案例。
+
+六、旧 Good–Turing rate 不是概率分布
+
+round19 明确只修复 c=2..5 且下一频数类别为空的分支，没有归一化。
+T=0 时，sum_i M_i(0)=H*(sum_key rate_key+N1/L)，不必等于 H。
+独立复现：key 次数 [1,2] 给总率 4/3；[2,2,2,2,2,2,2,2,2,2,3] 给 6/23≈.260870。
+应取 W=sum M、r=M/W 才能把 D 解释为 KL；不能直接把 rate 或 M/H 当归一 r，也不能默认 plain BF 的实际 query horizon=这个 W。
+归一化 r 只修正形状表达，不会修复原来的绝对质量、λ 到 T 的非线性误差或 CLOCK 偏差。把旧 λ 统一缩放是方法改动，可能改变 T 与 shortlist，不属于本次核验。
+
+七、Dirichlet–multinomial EB：哪些端点成立
+
+在工作模型 s|θ~Multinomial(N1,θ)、θ~Dirichlet(αh)，h_i>0 且 sum h_i=1 下，给定 α 的 posterior mean 确为
+  u_i=(s_i+αh_i)/(N1+α)。
+这只是 unseen mass 的分段分布；若仍采用 GT，总 unseen 质量另乘 N1/L。singleton 的产生机制受 key 频率与“恰好出现一次”筛选影响，不能不加假设就认定真实 singleton 向量服从该 multinomial/DM。
+忽略与 α 无关的多项式系数，
+  ℓ(α)=logΓ(α)-logΓ(α+N1)+sum_i[logΓ(αh_i+s_i)-logΓ(αh_i)]。
+端点：
+- α→∞：ℓ∞=sum s_i log h_i，u→h。
+- N1=0 或 1：似然对 α 完全平坦，MLE 不可识别，不能声称“必为∞”。N1=0 时 unseen 质量为零，不要计算 0/0。
+- N1≥2 且只占一个区域 j：α→0 是最优边界，ℓ→log h_j，u→该区域点质量（h_j<1）。
+- 若占了 d≥2 个区域：ℓ(α)=(d-1)log α+O(1)→-∞，但最优可能有限或∞。
+- 若样本恰好 s/N1=h、h 非退化，则∞是全局上确界：multinomial likelihood 在 θ=h 唯一最大，有限 Dirichlet 对其做平均严格低于该最大值。这证明的是“样本精确匹配”，不是“真实分布相同”。
+- α=0、∞都是扩展参数空间的极限，不是有限 proper Dirichlet 参数。h_i=0 与 s_i>0 不相容；应限制支持或另建模型。
+
+大 α 展开：
+  ℓ(α)=ℓ∞ + [sum_i s_i(s_i-1)/h_i - N1(N1-1)]/(2α) + O(α^-2)。
+方括号>0 时，有限大 α 已优于∞，所以∞不可能是 MLE；方括号≤0 本身不证明全局最优在∞。
+
+关键反例：10 个不同 key 各只出现一次，但按 score 区域统计 s=(8,2)，h=(.5,.5)。
+数值最优 α≈3.296831，u≈(.725618,.274382)，不是 h；有限点 ℓ=-6.160682，明显优于 ℓ∞=-6.931472。
+s=(10,0) 时更是 α→0。全部 key singleton 不等于每个 score 区域最多一个 singleton。
+即使真正 θ=h=(.5,.5)、N1=10，二项样本中 |s1-5|≥2 的概率为 .34375；上述展开已证明这些样本的∞都不是最大值。
+现有 no-repeat 退化依赖：全 key singleton ⇒ λ=0、N1/L=1、G=Hh ⇒ M∝h。改成有限-α EB 后变成 G=Hu，一般破坏该精确结论。
+若必须保留旧结论，只能显式规定全 singleton 时回退 h／α=∞，并承认这是额外结构规则，而非 EB 自动推出；本次未修改任何规则。
+
+八、置信下界、后选择与 bootstrap
+
+1. 固定 p、固定分区、真正 iid multinomial r 的理想情形，delta 近似方差是 [sum p_i^2/r_i-1]/N。稀疏／零格子时不可靠；当 p=r 时一阶方差为 0，KL 是二阶量，普通一阶 Wald 下界尤其不合适。
+2. 实际 r 来自 GT、EB、有限网格 T 和 cache feedback，不是 iid 直方图；h 也有验证采样误差。需传播这些 nuisance 误差，不能只用 multinomial 方差。
+3. 同一数据既估计 r、选 α／T／score 边界、筛 tree×cache 候选，再报告赢家的普通逐候选置信区间，会有后选择偏差。需要预先固定候选族的同时覆盖、完整重跑选择流程的有效 bootstrap，或独立选择／校准数据；Bonferroni 也先要求每个原始区间真的有效。
+4. 按 key bootstrap 可条件性描述“已见 key 组成”的不确定性，但看不到未见 key；复制 key 是同一个 ID 还是新 ID 会改变频率和 bucket 竞争。独立抽 key 也不保留跨 key 时序和 CLOCK 状态，不能因此称得到未来 misses 的有效区间。
+5. 时间块方法可作为后续平稳／mixing 假设下的探索，但要事先确定块与边界 cache 状态；不能保证分布漂移下的未来非劣。
+6. 即便 D 的下界有效，仍有第三节的 plug-in 错配反例。若要用于决策，应对预先固定候选的实际成本或 paired loss 给不确定性控制，而不是把“oracle 能赢”的证据当成“已部署结构能赢”的证据。
+
+九、数值检验及散点的最小下一步
+
+脚本用独立水位求解与 SciPy SLSQP 双重检查，不 import 冻结实验模块、不产生旧目录的 pyc/numba cache。
+80 个随机内点案例：A 最大相对误差 1.12e-15、B 7.78e-16；30 个独立凸优化对照：最大目标差 3.97e-14。上述截断、零质量、EB、非归一 rate、CLOCK 反例全部通过断言。
+这些数值检验验证推导／反例，不是实际流量上的准确率实验。
+
+已检查的归档：round6 的 E3 rank_rows=[trees,frac,RA4预测,bucket预测,实测FP]；round19 candidate_changes 也只存总预测和总实测；round20 为 gate 与 method 聚合信息。没有保存候选 n_i/M_i(T)/q_i、实际分界及单一 T／有效 active set。
+因此不能直接从现有聚合行恢复 A/B 所需量。尤其不能用 measured_FP/ε 反推 M 再拿来“验证”同一个 measured_FP。
+
+建议最小诊断（不是新门控）：
+- 首先把 A/B 定位为误差分解，不替换 round20/21 的选择规则，不根据 26 次回退挑阈值。
+- 在主 agent 已加载的小型、非 holdout 案例旁路导出数据，不增加训练、候选网格或 replay。先从 cache=0、T=0 开始，避免 Che/CLOCK 混杂。
+- 每个预先固定候选导出：最终 5 区边界、原始 n_i 与 DP 平滑 p̃、h_i、学习预测 M_i、sum M、真实 Bloom 位数、各项固定／cache 成本、连续 ε 与部署整数 m/k、PASS/EMPTY 标记，以及已有实测 FP。
+- A 先比较“细桶 KL／最终区域 KL／截断连续目标／部署预测／已有实测 FP”各层差额，不把中间层误差混成门控有效性。
+- B 必须在同一最终分区、同一 B、同一固定 T 下构造 q 与 r 的理论对照。两个现成方法若分界不同，不能用 B 等式解释它们的 FP 比；没有配套实际结构，就只报告理论对照。
+- 此后若确需缓存诊断，另导出候选相关 T_b、FP key bucket 负载与冷／热启动状态；把它标为 Che/CLOCK 近似检查，而非 A/B 精确验证。
+- 若使用未来分段质量，必须明确它只是事后诊断，绝不进入 selector／EB 门槛或方法参数。零 FP 单独展示，不悄悄把 +1 平滑混进数学恒等式。
+
+十、出处核验状态与相关路径
+
+外部论文出处、A/B 是否已有完全相同表述、EB 对 singleton 的严格适用文献：本轮未进行外部文献核验。不得宣称原创定理。
+本地 FastPLBF 实现已明确用 G log(G/H) 的 DPKL 分段，且 ra4 自述为 PLBF 的连续闭式解；这足以说明 KL 分配思想并非本轮新提出。
+
+核验产物（均为新目录）：
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round21_theory_check/核验报告.txt
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round21_theory_check/check_theory.py
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round21_theory_check/numerical_checks.json
+
+关键代码依据：
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round4_ra_plbf/src/ra4.py:127-137,175-223,231-280
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round5_dp/src/ra5.py:32-59,62-93
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round5_dp/src/dp_alloc.py:17,31-54,139-155
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round5_dp/src/engine5.py:42-63,74-120
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round5_dp/src/cache5.py:125-189
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round6_bucket/src/ra6.py:29-93
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round12_nomodel/src/baseline.py:17-37,65-80
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round19_gt_fix/src/summarize19.py:12-27
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round19_gt_fix/src/rerun19.py:143-148
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round20_zero_guard/src/guard20.py:49-82
+
+复现命令：
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/bin/python -I /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round21_theory_check/check_theory.py

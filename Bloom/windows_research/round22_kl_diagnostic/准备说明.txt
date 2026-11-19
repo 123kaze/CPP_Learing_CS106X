@@ -1,0 +1,72 @@
+Round22 KL + Dirichlet + zero-tree 廉价诊断：仅准备，未开始真实实验
+
+状态与启动限制
+- 本目录与 round21_shared_replay* 完全隔离；旧 round21_theory_check 只读复用。
+- 当前只能完成准备及小型测试。没有检查／轮询正式任务进度，没有加载真实数据、训练、生成候选、回放或进行实际选择计时。
+- run22.py 在任何重型 import 前，一次性读取 round21_shared_replay_v2/results/completion.json；仅 status=complete 可以启动。没有等待循环或自动重试。
+- 若旧任务失败／停止，必须由主线程另写本目录内的明确 release JSON，并确认旧任务已停止；缺失文件／沉默／failed 标记本身均不放行。本轮没有创建真实 release。
+- runner 另有非阻塞进程锁，保证本轮不会并发多个 runner；smoke 与 matrix 各自拒绝覆盖现有目录。失败保留证据并非零退出，不能默默跳过或继续后续 worker。
+
+方法定义：诊断与启发式分开
+1. 静态核心：cache=0、外生 T=0。预先固定树前缀 (1,16,48,96)，不合预算的记录并跳过；不是完整 tree 网格搜索。
+2. 每个树前缀构造三套实际 FastPLBF 5 区结构：
+   validation-h：冻结验证 h 分段与分配；其预测评估质量用 GT19-h。
+   GT19-h：学习 seen rates + GT unseen_total*h。
+   GT19-EB：同一 seen rates + GT unseen_total*u，u=(s+alpha*h)/(N1+alpha)。
+   unseen_total=H*N1/L，seen_i=H*sum_i(rate_key)，只用前25% learning。保留旧 rate 非归一性并导出总率，绝不悄悄归一化 λ。
+3. EB 在 1000 微桶 singleton 向量上拟合。固定 log(alpha)∈[-16,24] 的161点网格，局部细化，再与0/∞端点比较；明确标“grid-refined working model”，不是已证明全局MLE。
+   N1≤1 不识别，显式采用 h；单占一个区域用 alpha→0；数值近似持平时优先∞；有限搜索边界单列，不能称真正有限MLE。
+   不对 all-singleton 强制回 h，不声称自然保留旧 no-repeat 精确退化。s=(8,2),h=(.5,.5) 的反例是强制测试。
+4. 每个候选导出真实最终5区边界、原始 n_i/p、DP平滑p、q、M/W/r、模型／meta／array/cache成本、可用位数／逻辑位数／packed位数、连续ε、整数m/k、PASS/EMPTY、预算余量。
+   同分区同预算独立计算未截断KL、合法水位重解代理、整数BF期望；B只在同一分区比较。不能以1000微桶KL充当5区部署收益。
+   选择完成之后才计算尾段经验区域查询质量和实际FP，另存 posthoc_true_tail_A_B。它只用于事后诊断，不进入任何阈值、α或选择。
+5. t=0：全部13缓存比例固定为冻结FRACS；实际BF预算／hash数来自 round12 baseline.py。零缓存候选是单区T=0；有cache候选直接重建冻结GT19/Che有效miss，不反推实测M；T标为空并明确“候选相关，无法共享单一T”。
+   BF13-Predict-GT19：用 round17.zero_table 的stage1预测最小值；并列偏小cache_frac，无bucket-refinement，也无learning replay参与。
+   BF13-ExactLearning：另对全部13候选运行冻结精确learning replay，含可验证early-stop；并列规则用冻结 (learning_FP,est_fpr,trees,frac)。其结果只作参照，绝不冒充预测选择。
+6. 保留 RA6-frozen 和 RA6-GT19、BF-no-cache、上述两个BF13参照。RA6仍是冻结完整tree×cache表、top5与bucket refinement；并未修改其参数。若原/新summary逐位相等，允许复用同一选中结构，并明确不是第二份新计时。
+   RA6旁路导出选中结构的分区和候选相关有效M；有cache时不套T=0恒等式，也不声称它等于bucket-refinement总预测。
+7. 可选启发式 --heuristic，另名 KL-EB22-static13：候选为四个GT19-EB静态learned结构及13个零树/cache结构。
+   learned以其实际最终分区、真实可用BF预算下“合法截断连续最优”预测；zero以冻结zero_table的GT19/Che预测。取最小目标，平局优先trees=0，再小frac。
+   这是不对称受限候选族的探索，不是把EB塞入完整RA6后又宣称同一种方法。静态结构实际DP／整数分配也不必达到其连续代理；缓存分支不满足共同T；没有未来非劣保证。
+   原始不合法ε>1的KL值仅记录、不参与启发式选择；没有bootstrap、置信界或新门槛。
+8. 时间完整记录学习统计、α拟合、质量构造、模型准备、静态构建与分析、13BF构建／预测、参照replay及RA6选择。selection_pipeline_envelope_s把全部依赖与额外诊断／参照都计入，是保守流程成本，不当成独立算法benchmark或speedup；共同输入准备另列。每项只一遍，没有声称与round21三次公平计时可直接比。
+
+预定矩阵与资源
+- 13个案例，index cache一种格式、seed0；无holdout。
+- URL128、CAIDA256、Shalla1024，各 zipf1.0-全部／每key一次／全新对抗，共9个；复用冻结流生成器，synthetic queries=10,000,000，前25%学习、后75%评估。
+- TCP-only真实轨迹：caida32、mawi2020 64、mawi2021 41、mawi2022 64 KiB，共4个，均为原预算列表第二档。
+- smoke只跑URL128 zipf1.0-全部；成功后matrix只跑剩余12个，同时用来源hash验证并纳入已完成smoke，最终13例，不重复计作新运行。
+- 每例至多12个静态实际结构+13个BF实际结构+两个RA6最多各5个结构（统计相等时后者复用）。RA6参照本身仍需要完整14×13预测网格，不能把这部分隐去。
+- 单dataset worker串行、native threads=1；CAIDA基线通常约2.5GB，加多候选／树缓存，保守预留约4–6GB可用内存。不启动并行数据集。
+- 未进行实际计时，不能承诺分钟数。粗预算：URL smoke约数分钟至几十分钟（含首次JIT），完整13例约0.5–3小时量级，依机器／缓存可能更长。应先看smoke资源，不按结果改变矩阵或阈值。此估算不是实测证据。
+
+文件与复现命令（须由主线程确认round21结束后再执行）
+根目录 /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round22_kl_diagnostic
+协议 plan/protocol.json；来源冻结 plan/freeze.json；数学 src/math22.py；runner src/run22.py；真实worker src/worker22.py；小型测试 src/test22.py。
+
+只做准备／核验（不会加载真实数据）
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/bin/python -I -B /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round22_kl_diagnostic/src/control22.py verify
+/Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/bin/python -I -B /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round22_kl_diagnostic/src/test22.py
+
+建议实际试验命令（本次未执行；使用harness后台runner及caffeinate保持串行）
+caffeinate -s -i /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/bin/python -I -B -u /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round22_kl_diagnostic/src/run22.py smoke --heuristic
+smoke成功后再显式执行
+caffeinate -s -i /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/.condaenv/bin/python -I -B -u /Users/bytedance/Project/CPP_Learing_CS106X/Bloom/windows_research/round22_kl_diagnostic/src/run22.py matrix --heuristic
+若只要诊断，不给 --heuristic；smoke与matrix的flag必须相同。
+
+合法的人工release字段（仅当前序任务已确认失败／停止时由coordinator另建；不是现在可用的绕过）
+prior_round="round21_shared_replay_v2", prior_status="failed"或"stopped",
+approved_for_round22=true, recorded_by="coordinator", prior_jobs_confirmed_stopped=true,
+reason="实际停止证据／原因"；用 --release-marker 指向本目录内该文件。
+
+结果与防写入
+- results/smoke 或 results/matrix 下保存输入sha256、逐候选／逐区JSON、methods.csv、static_layers.csv、日志与completion状态；没有绘图代码。
+- runner核对源hash；worker要求runner授权ticket。缺缓存立即报错，禁止训练；lgb.train被显式拦截。Python级写入审计只允许本目录，-B禁止冻结目录pyc，NUMBA_CACHE_DIR/TMPDIR均指向本目录。
+- 当前准备只检查依赖是否可发现，不导入冻结实验、不读取大数组；真实加载／native接口正确性只能在正式允许的URL smoke上确认。
+- 15个小型测试覆盖：截断反转、B上下两向反例、随机凸优化对照、零质量／EMPTY、EB端点与singleton反例、高α稳定展开、KL不保证plugin部署、位预算单位、串行gate缺失／running／failed拒绝、单次读取、显式release验证、固定矩阵及延后导入。没有实际dataset integration测试。
+
+还缺什么
+1. 主线程确认当前round21任务完成，或者明确停止后提供release；当前没有擅自等待／轮询。
+2. 主线程审核本13例矩阵与“静态EB learned vs 13BF”启发式定义是否正是要试的最小范围。
+3. 允许后运行URL smoke确认冻结模块集成、预算／member断言、输入可用性、JSON字段与实际耗时。任何失败保留证据，不自动改参数或扩样本。
+4. 若以后要扩成“所有cache候选上的EB-RA6”、有效CI、端到端时间或绘图，需单独协议；本准备不预先许诺，也不接触round16内容。
