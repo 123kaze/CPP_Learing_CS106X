@@ -1,0 +1,19 @@
+FILTER caida_tcp_flow rep0 LR 16KiB: FP=44705 model=168B query=44.1ns
+FILTER caida_tcp_flow rep0 LR 32KiB: FP=27226 model=168B query=48.6ns
+TRAIN LR: 0.013s status=converged
+FILTER caida_tcp_flow rep0 GaussianNB 16KiB: FP=44898 model=216B query=45.2ns
+FILTER caida_tcp_flow rep0 GaussianNB 32KiB: FP=27188 model=216B query=51.8ns
+TRAIN GaussianNB: 0.006s status=completed
+FILTER caida_tcp_flow rep0 Additive16 16KiB: FP=45758 model=728B query=55.8ns
+FILTER caida_tcp_flow rep0 Additive16 32KiB: FP=27238 model=728B query=61.8ns
+TRAIN Additive16: 0.033s status=converged
+FILTER caida_tcp_flow rep0 MLP8 16KiB: FP=45139 model=408B query=48.4ns
+FILTER caida_tcp_flow rep0 MLP8 32KiB: FP=27358 model=408B query=53.1ns
+TRAIN MLP8: 0.230s status=converged
+FILTER caida_tcp_flow rep0 Tree1 16KiB: FP=46135 model=1342B query=90.4ns
+FILTER caida_tcp_flow rep0 Tree1 32KiB: FP=27466 model=1342B query=102.1ns
+TRAIN Tree1: 0.018s status=completed
+FILTER caida_tcp_flow rep0 Tree16 16KiB: FP=61532 model=11392B query=286.9ns
+FILTER caida_tcp_flow rep0 Tree16 32KiB: FP=37212 model=11392B query=317.0ns
+TRAIN Tree16: 0.036s status=completed
+COMPLETE caida_tcp_flow rep0

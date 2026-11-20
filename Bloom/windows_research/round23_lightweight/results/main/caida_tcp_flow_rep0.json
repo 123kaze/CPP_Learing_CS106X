@@ -1,0 +1,543 @@
+{
+  "status": "complete",
+  "dataset": "caida_tcp_flow",
+  "rep": 0,
+  "features": [
+    "src",
+    "dst"
+  ],
+  "rows": 212272,
+  "members": 128574,
+  "train_rows": 72623,
+  "validation_negatives": 8471,
+  "test_negatives": 66917,
+  "request_count": 100000,
+  "request_positive_count": 10000,
+  "request_sha256": "e5f22acc315d88faad7342844171a2ca206363490056b828b7ff63b1da2bb6e5",
+  "input_sha256": "a6e4dc35c0a6e790b10efd6ac32182e38b87ac1d519f1e5436a4a5977b5043d8",
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "openblas_threads": 1,
+  "numba_threads": 1,
+  "models": [
+    {
+      "name": "LR",
+      "code": 1,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": true,
+      "optimizer_status": 0,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 4,
+      "objective": 0.3556611670612362,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "converged",
+      "train_s": 0.012521333002950996,
+      "all_rows_score_s": 0.007054250003420748,
+      "model_arrays_sha256": {
+        "params": "d512f6854ace5109e9191994529de9464defe92b73e9df0a511e67a2148877b9"
+      },
+      "model_payload_bytes": 56,
+      "model_bytes_with_headers": 168,
+      "score_ns_all": [
+        23.09041,
+        22.66166,
+        24.5575
+      ],
+      "score_ns_median": 23.09041,
+      "heldout_auc": 0.4999493916884016,
+      "reference_check_max_abs": 2.220446049250313e-16,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "GaussianNB",
+      "code": 2,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "Closed-form GaussianNB, train-derived scale; variance floor1e-6",
+      "fit_status": "completed",
+      "train_s": 0.006155791998025961,
+      "all_rows_score_s": 0.005616415997792501,
+      "model_arrays_sha256": {
+        "params": "4008a4613ccbd27fcc3912040846d8b25b4934d0bbb687035ec2194c911a4a8a"
+      },
+      "model_payload_bytes": 104,
+      "model_bytes_with_headers": 216,
+      "score_ns_all": [
+        27.03083,
+        26.23584,
+        24.67125
+      ],
+      "score_ns_median": 26.23584,
+      "heldout_auc": 0.4999493916884016,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Additive16",
+      "code": 3,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": true,
+      "optimizer_status": 0,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "iterations": 10,
+      "objective": 0.35364249097093436,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "converged",
+      "train_s": 0.032503707996511366,
+      "all_rows_score_s": 0.007355542002187576,
+      "model_arrays_sha256": {
+        "params": "6d64bbf749fcb623280760a49d8777439d3bca2f49bca87f6760b690e7ec27ea",
+        "edges": "429aad7181cf826a83474ca454f012898b41a82fbf236ef08e6ab578f5e440dc"
+      },
+      "model_payload_bytes": 504,
+      "model_bytes_with_headers": 728,
+      "score_ns_all": [
+        39.27667,
+        39.74625,
+        39.34917
+      ],
+      "score_ns_median": 39.34917,
+      "heldout_auc": 0.5406438328596747,
+      "reference_check_max_abs": 4.440892098500626e-16,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "MLP8",
+      "code": 4,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": true,
+      "optimizer_status": 0,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "iterations": 35,
+      "objective": 0.3556620427812859,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "converged",
+      "train_s": 0.2301894169941079,
+      "all_rows_score_s": 0.005840999998326879,
+      "model_arrays_sha256": {
+        "params": "968a414ca3aa210406bf6b3f38bc1d6974c040841796cb79c83b0c1607c2555e"
+      },
+      "model_payload_bytes": 296,
+      "model_bytes_with_headers": 408,
+      "score_ns_all": [
+        28.86917,
+        29.26375,
+        27.48042
+      ],
+      "score_ns_median": 28.86917,
+      "heldout_auc": 0.4999493916884016,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Tree1",
+      "code": 5,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "LightGBM binary objective",
+      "trees": 1,
+      "fit_status": "completed",
+      "train_s": 0.01832387500326149,
+      "all_rows_score_s": 0.013058707998425234,
+      "model_arrays_sha256": {
+        "feat": "a5529f7af4dcc9ef4c4e54e9958738c18d5dd8df7f96990d958197eada70c34e",
+        "thr": "101c7e3b847a7ba3edc0e76764cf494a7b3e2546df4c9b020e3ebd564d7d8380",
+        "left": "51bfd37ac0c357795ba0802a0b33d8e866afc179d96e92142f109bd7aa9304d9",
+        "right": "bd0523220c915e1c89d7c8a94229b058d3a78089c3353d8c98bf925166f34914",
+        "leaf": "390ba68730a712da2581f02660a108bedd347509d09422bf156005be0624f828",
+        "roots": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+      },
+      "model_payload_bytes": 670,
+      "model_bytes_with_headers": 1342,
+      "score_ns_all": [
+        67.0,
+        65.25459,
+        69.08625
+      ],
+      "score_ns_median": 67.0,
+      "heldout_auc": 0.5473225405124664,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Tree16",
+      "code": 5,
+      "features": 2,
+      "seed": 1,
+      "optimizer": "LightGBM binary objective",
+      "trees": 16,
+      "fit_status": "completed",
+      "train_s": 0.035514332994353026,
+      "all_rows_score_s": 0.06007925000449177,
+      "model_arrays_sha256": {
+        "feat": "511595e0248b67a1d47bfe9923b55c794e23b2ed576616913f61ca7034747cfc",
+        "thr": "9df7799c3938eb2ae133fb5ce8723ed95fe06c1ec40f0ebd9579567a3cfa1155",
+        "left": "ea2eb6157da48966bf224c0a9891e46e1e618531acbaed612d5e1e5df89309e7",
+        "right": "fd7fa7292eeefdfbd2b7816a9758c987596c5e53a74766a7adb60130d704cf88",
+        "leaf": "b1ece39dd8ae99c3fe8b72536f7e3c80d4fd74fee5459bd3187c89bef117b530",
+        "roots": "a9730116af5bd8d538b1a04f413d4457b148c8f63d35f013aae2d86b7b860c4f"
+      },
+      "model_payload_bytes": 10720,
+      "model_bytes_with_headers": 11392,
+      "score_ns_all": [
+        283.49833,
+        290.27583,
+        462.30958
+      ],
+      "score_ns_median": 290.27583,
+      "heldout_auc": 0.5566572626384463,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    }
+  ],
+  "filters": [
+    {
+      "model": "BF",
+      "budget_kib": 16,
+      "fp": 41884,
+      "negatives": 66917,
+      "total_bytes": 16384,
+      "model_bytes_with_headers": 0,
+      "model_payload_bytes": 0,
+      "filter_payload_bytes": 16240,
+      "metadata_and_headers_bytes": 144,
+      "filter_build_s": 0.0003672079983516596,
+      "native": {
+        "ns_per_query_all": [
+          6.26,
+          5.89125,
+          5.62541
+        ],
+        "median_ns_per_query": 5.89125,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "05642e00d3e5a5a8216f93f7615290fbfe0efdc158ac07e7e71bbc1066ba78d3"
+    },
+    {
+      "model": "BF",
+      "budget_kib": 32,
+      "fp": 25922,
+      "negatives": 66917,
+      "total_bytes": 32768,
+      "model_bytes_with_headers": 0,
+      "model_payload_bytes": 0,
+      "filter_payload_bytes": 32624,
+      "metadata_and_headers_bytes": 144,
+      "filter_build_s": 0.0002683339989744127,
+      "native": {
+        "ns_per_query_all": [
+          8.41292,
+          9.09125,
+          7.75459
+        ],
+        "median_ns_per_query": 8.41292,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "4519eaec52059e1cc5bff3f1a641cd90d80acfc9a5e4f5c2bbc92c608b65077d"
+    },
+    {
+      "model": "LR",
+      "total_bytes": 15685,
+      "model_bytes_with_headers": 168,
+      "model_payload_bytes": 56,
+      "filter_payload_bytes": 14544,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 44705,
+      "negatives": 66917,
+      "filter_build_s": 0.013386792001256254,
+      "native": {
+        "ns_per_query_all": [
+          45.12458,
+          39.85125,
+          44.1475
+        ],
+        "median_ns_per_query": 44.1475,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "800a5f21495bc9f57db07d209eddbda1a1faf4dcb40f979d75bd167f662e561a"
+    },
+    {
+      "model": "LR",
+      "total_bytes": 32069,
+      "model_bytes_with_headers": 168,
+      "model_payload_bytes": 56,
+      "filter_payload_bytes": 30928,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 27226,
+      "negatives": 66917,
+      "filter_build_s": 0.010360416999901645,
+      "native": {
+        "ns_per_query_all": [
+          49.83,
+          48.63166,
+          43.46083
+        ],
+        "median_ns_per_query": 48.63166,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "724d4f255996511de5416a6142082c38ec60e0773947b15992858308e8c021e6"
+    },
+    {
+      "model": "GaussianNB",
+      "total_bytes": 15684,
+      "model_bytes_with_headers": 216,
+      "model_payload_bytes": 104,
+      "filter_payload_bytes": 14495,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 44898,
+      "negatives": 66917,
+      "filter_build_s": 0.01067637500091223,
+      "native": {
+        "ns_per_query_all": [
+          48.46834,
+          45.16542,
+          44.86291
+        ],
+        "median_ns_per_query": 45.16542,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "c6286c3076916c083d9bd1a90d848d84829911c1d539609c9156678e77f1325b"
+    },
+    {
+      "model": "GaussianNB",
+      "total_bytes": 32068,
+      "model_bytes_with_headers": 216,
+      "model_payload_bytes": 104,
+      "filter_payload_bytes": 30879,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 27188,
+      "negatives": 66917,
+      "filter_build_s": 0.010234583998681046,
+      "native": {
+        "ns_per_query_all": [
+          50.03291,
+          54.37375,
+          51.84
+        ],
+        "median_ns_per_query": 51.84,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "94f00c293e1014f98d1f5208c7f9d860de66d1d363f0c3946caf3274c2dddf52"
+    },
+    {
+      "model": "Additive16",
+      "total_bytes": 15763,
+      "model_bytes_with_headers": 728,
+      "model_payload_bytes": 504,
+      "filter_payload_bytes": 14062,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 45758,
+      "negatives": 66917,
+      "filter_build_s": 0.01663633299904177,
+      "native": {
+        "ns_per_query_all": [
+          53.45625,
+          55.81292,
+          58.36583
+        ],
+        "median_ns_per_query": 55.81292,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "566939c6546cb75bdfbe7cf1c324f85085a1264e09310670658813025a369458"
+    },
+    {
+      "model": "Additive16",
+      "total_bytes": 32147,
+      "model_bytes_with_headers": 728,
+      "model_payload_bytes": 504,
+      "filter_payload_bytes": 30446,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 27238,
+      "negatives": 66917,
+      "filter_build_s": 0.017403999998350628,
+      "native": {
+        "ns_per_query_all": [
+          61.84291,
+          59.95583,
+          65.95542
+        ],
+        "median_ns_per_query": 61.84291,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "64e860129ca1a16f414d16854bbd78bbfaaac586c69c69650b2666aa9c10e5c9"
+    },
+    {
+      "model": "MLP8",
+      "total_bytes": 15685,
+      "model_bytes_with_headers": 408,
+      "model_payload_bytes": 296,
+      "filter_payload_bytes": 14304,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 45139,
+      "negatives": 66917,
+      "filter_build_s": 0.0103575000030105,
+      "native": {
+        "ns_per_query_all": [
+          48.53542,
+          48.40167,
+          48.04333
+        ],
+        "median_ns_per_query": 48.40167,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "c803f410ec659ec4d1626c491d1460e5d1b5ca1e96cec6e2e296b83a3836a4ec"
+    },
+    {
+      "model": "MLP8",
+      "total_bytes": 32069,
+      "model_bytes_with_headers": 408,
+      "model_payload_bytes": 296,
+      "filter_payload_bytes": 30688,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 27358,
+      "negatives": 66917,
+      "filter_build_s": 0.010069167001347523,
+      "native": {
+        "ns_per_query_all": [
+          54.62667,
+          52.64,
+          53.07
+        ],
+        "median_ns_per_query": 53.07,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "eb05f59b1b3af658204a2431c4f991eadba586ec06dbf19fb93219d00c533944"
+    },
+    {
+      "model": "Tree1",
+      "total_bytes": 15696,
+      "model_bytes_with_headers": 1342,
+      "model_payload_bytes": 670,
+      "filter_payload_bytes": 13381,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 46135,
+      "negatives": 66917,
+      "filter_build_s": 0.013400416995864362,
+      "native": {
+        "ns_per_query_all": [
+          94.23958,
+          88.70333,
+          90.43208
+        ],
+        "median_ns_per_query": 90.43208,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "ba4fca794a65d31d9c1b9c3216aef671fa5175b007bcfd683816d2a5ff97c986"
+    },
+    {
+      "model": "Tree1",
+      "total_bytes": 32078,
+      "model_bytes_with_headers": 1342,
+      "model_payload_bytes": 670,
+      "filter_payload_bytes": 29763,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 27466,
+      "negatives": 66917,
+      "filter_build_s": 0.01409037499979604,
+      "native": {
+        "ns_per_query_all": [
+          102.78209,
+          99.78292,
+          102.12542
+        ],
+        "median_ns_per_query": 102.12542,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "16cbf83bf6cc7e4eb52199262fcd012b3ea002b448a73673eb17de8bd40dd943"
+    },
+    {
+      "model": "Tree16",
+      "total_bytes": 15777,
+      "model_bytes_with_headers": 11392,
+      "model_payload_bytes": 10720,
+      "filter_payload_bytes": 3412,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 16,
+      "fp": 61532,
+      "negatives": 66917,
+      "filter_build_s": 0.01659562499844469,
+      "native": {
+        "ns_per_query_all": [
+          283.25708,
+          286.92583,
+          302.33042
+        ],
+        "median_ns_per_query": 286.92583,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "189c12c11b65ce9f029edcc9c3aae2f36019413cfc047bbe80641280db10f76b"
+    },
+    {
+      "model": "Tree16",
+      "total_bytes": 32152,
+      "model_bytes_with_headers": 11392,
+      "model_payload_bytes": 10720,
+      "filter_payload_bytes": 19787,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 32,
+      "fp": 37212,
+      "negatives": 66917,
+      "filter_build_s": 0.016278416995191947,
+      "native": {
+        "ns_per_query_all": [
+          322.50875,
+          317.03583,
+          301.62791
+        ],
+        "median_ns_per_query": 317.03583,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "44bcd02f6afa1e1231659d993719a9ccdcc6b3a928e17c717de207ac3a647834"
+    }
+  ],
+  "peak_rss_bytes": 342622208,
+  "exit_code": 0,
+  "process_wall_s": 3.5110121249963413
+}

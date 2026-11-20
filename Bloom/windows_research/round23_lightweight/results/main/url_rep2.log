@@ -1,0 +1,19 @@
+FILTER url rep2 Additive16 64KiB: FP=2341 model=4696B query=344.8ns
+FILTER url rep2 Additive16 128KiB: FP=514 model=4696B query=338.2ns
+TRAIN Additive16: 2.351s status=stopped_without_convergence
+FILTER url rep2 MLP8 64KiB: FP=1763 model=1688B query=265.0ns
+FILTER url rep2 MLP8 128KiB: FP=364 model=1688B query=248.3ns
+TRAIN MLP8: 1.195s status=stopped_without_convergence
+FILTER url rep2 Tree1 64KiB: FP=5438 model=1342B query=298.5ns
+FILTER url rep2 Tree1 128KiB: FP=1591 model=1342B query=243.9ns
+TRAIN Tree1: 0.136s status=completed
+FILTER url rep2 Tree16 64KiB: FP=1357 model=11392B query=642.9ns
+FILTER url rep2 Tree16 128KiB: FP=205 model=11392B query=586.3ns
+TRAIN Tree16: 0.292s status=completed
+FILTER url rep2 LR 64KiB: FP=9218 model=552B query=172.1ns
+FILTER url rep2 LR 128KiB: FP=2403 model=552B query=183.7ns
+TRAIN LR: 0.332s status=converged
+FILTER url rep2 GaussianNB 64KiB: FP=25831 model=984B query=295.1ns
+FILTER url rep2 GaussianNB 128KiB: FP=7373 model=984B query=325.6ns
+TRAIN GaussianNB: 0.032s status=completed
+COMPLETE url rep2

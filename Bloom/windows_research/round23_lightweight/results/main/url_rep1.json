@@ -1,0 +1,559 @@
+{
+  "status": "complete",
+  "dataset": "url",
+  "rep": 1,
+  "features": [
+    "dot",
+    "www",
+    "at",
+    "dir",
+    "embed",
+    "https",
+    "http",
+    "pct",
+    "dash",
+    "eq",
+    "len",
+    "host_len",
+    "tld_len",
+    "digits",
+    "letters",
+    "ip",
+    "vowels",
+    "labels"
+  ],
+  "rows": 641119,
+  "members": 213045,
+  "train_rows": 149408,
+  "validation_negatives": 42567,
+  "test_negatives": 342660,
+  "request_count": 100000,
+  "request_positive_count": 10000,
+  "request_sha256": "46d400c8273dca263eb05574fd5bef8447ca9f632047f26119249cd2c99208fc",
+  "input_sha256": "a7e1d728e311bab127b6e54a16a63b9f4d1347e18f6b02c1548053c56c72c13a",
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "openblas_threads": 1,
+  "numba_threads": 1,
+  "models": [
+    {
+      "name": "GaussianNB",
+      "code": 2,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "Closed-form GaussianNB, train-derived scale; variance floor1e-6",
+      "fit_status": "completed",
+      "train_s": 0.04033062500093365,
+      "all_rows_score_s": 0.04465166699810652,
+      "model_arrays_sha256": {
+        "params": "1d3486edd09100808fdaffc533d476c242834dda85c0a5621f3e316cacef47a1"
+      },
+      "model_payload_bytes": 872,
+      "model_bytes_with_headers": 984,
+      "score_ns_all": [
+        218.60041,
+        221.76042,
+        206.44166
+      ],
+      "score_ns_median": 218.60041,
+      "heldout_auc": 0.8576560652612346,
+      "reference_check_max_abs": 9.094947017729282e-13,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Additive16",
+      "code": 3,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": false,
+      "optimizer_status": 1,
+      "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+      "iterations": 100,
+      "objective": 0.16205446860490264,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "stopped_without_convergence",
+      "train_s": 2.119374540998251,
+      "all_rows_score_s": 0.06958458299777703,
+      "model_arrays_sha256": {
+        "params": "ed31fbec0e3dd836818343788925dd4c4f1788e545d5fff4152c3d3ceae829c7",
+        "edges": "b922a14525bcf59285e232e72f2fe85f1b36c32b2ce79381fbb8a4ba15e8915e"
+      },
+      "model_payload_bytes": 4472,
+      "model_bytes_with_headers": 4696,
+      "score_ns_all": [
+        359.56084,
+        312.83333,
+        353.72416
+      ],
+      "score_ns_median": 353.72416,
+      "heldout_auc": 0.9814345828092322,
+      "reference_check_max_abs": 3.552713678800501e-15,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "MLP8",
+      "code": 4,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": false,
+      "optimizer_status": 1,
+      "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+      "iterations": 100,
+      "objective": 0.15231836273018257,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "stopped_without_convergence",
+      "train_s": 1.1621952909990796,
+      "all_rows_score_s": 0.0623682919977,
+      "model_arrays_sha256": {
+        "params": "792201295166d27ce2f9650edd7ca61c9a499e57c585d0b0475dfe2242d7c37d"
+      },
+      "model_payload_bytes": 1576,
+      "model_bytes_with_headers": 1688,
+      "score_ns_all": [
+        199.73375,
+        190.47,
+        189.82041
+      ],
+      "score_ns_median": 190.47,
+      "heldout_auc": 0.984311184470557,
+      "reference_check_max_abs": 2.1316282072803006e-14,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Tree1",
+      "code": 5,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "LightGBM binary objective",
+      "trees": 1,
+      "fit_status": "completed",
+      "train_s": 0.1721386249992065,
+      "all_rows_score_s": 0.03927783400285989,
+      "model_arrays_sha256": {
+        "feat": "bd415c215698449a577828ca08adaba8193c9028fb2f52d23161f03a775c9664",
+        "thr": "ac1d6ee9b848c60d100882ab83a1e474e63513277e121211afa6b469251db5bb",
+        "left": "f0ce81fd742dc5a9fa25d17b0cd4ee5eeb592354db2d00a8358a6730a14f04ad",
+        "right": "bc0e2fce33455a92a81170e82ca398c259767854527500b80f04b2dec20a5c07",
+        "leaf": "4864124ff3c334dcb20ce82fe127426f63844bd059b6ee1179196e89f839b3c5",
+        "roots": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+      },
+      "model_payload_bytes": 670,
+      "model_bytes_with_headers": 1342,
+      "score_ns_all": [
+        194.52709,
+        186.82125,
+        202.76917
+      ],
+      "score_ns_median": 194.52709,
+      "heldout_auc": 0.9753855711534088,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "Tree16",
+      "code": 5,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "LightGBM binary objective",
+      "trees": 16,
+      "fit_status": "completed",
+      "train_s": 0.29234008300409187,
+      "all_rows_score_s": 0.14263495900377166,
+      "model_arrays_sha256": {
+        "feat": "ef9fd9555c5c01393ada49999ba3473cd05951fcfa3f338e83283efb11eab97d",
+        "thr": "d4b0f87740c874533f8a8863e0b3a8ccecde2ab06b1af26379836d3addf2af51",
+        "left": "d6ed46591f970305816f6cfc3f49389b056421752f5a8439b6cd4454be05f045",
+        "right": "516d0214c43cc1bd79357d00dfc2bffb67e08728fceb65ac5df54c7e143c8f50",
+        "leaf": "0c6587142d00165965dee66af6171ac23dd64bb830a9926cc7f2f07b9b836d0d",
+        "roots": "a9730116af5bd8d538b1a04f413d4457b148c8f63d35f013aae2d86b7b860c4f"
+      },
+      "model_payload_bytes": 10720,
+      "model_bytes_with_headers": 11392,
+      "score_ns_all": [
+        470.99875,
+        442.29708,
+        571.54791
+      ],
+      "score_ns_median": 470.99875,
+      "heldout_auc": 0.9863172523912004,
+      "reference_check_max_abs": 0.0,
+      "native_reload_bit_exact": true
+    },
+    {
+      "name": "LR",
+      "code": 1,
+      "features": 18,
+      "seed": 1,
+      "optimizer": "L-BFGS-B",
+      "optimizer_success": true,
+      "optimizer_status": 0,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "iterations": 75,
+      "objective": 0.2769285043916399,
+      "maxiter": 100,
+      "L2": 0.0001,
+      "fit_status": "converged",
+      "train_s": 0.32069370800309116,
+      "all_rows_score_s": 0.016737957994337194,
+      "model_arrays_sha256": {
+        "params": "c67559a31e919e31aff08f183448bc10b04476dde10b58484de4cff6693898a3"
+      },
+      "model_payload_bytes": 440,
+      "model_bytes_with_headers": 552,
+      "score_ns_all": [
+        92.06875,
+        94.26084,
+        92.10917
+      ],
+      "score_ns_median": 92.10917,
+      "heldout_auc": 0.9455706856799834,
+      "reference_check_max_abs": 5.329070518200751e-15,
+      "native_reload_bit_exact": true
+    }
+  ],
+  "filters": [
+    {
+      "model": "BF",
+      "budget_kib": 64,
+      "fp": 106302,
+      "negatives": 342660,
+      "total_bytes": 65536,
+      "model_bytes_with_headers": 0,
+      "model_payload_bytes": 0,
+      "filter_payload_bytes": 65392,
+      "metadata_and_headers_bytes": 144,
+      "filter_build_s": 0.0020255830022506416,
+      "native": {
+        "ns_per_query_all": [
+          10.9675,
+          10.52416,
+          10.41917
+        ],
+        "median_ns_per_query": 10.52416,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "0e91193d87988836f2ca38548f46bb1a8d1671db3954d636ce733701d06d27b4"
+    },
+    {
+      "model": "BF",
+      "budget_kib": 128,
+      "fp": 32377,
+      "negatives": 342660,
+      "total_bytes": 131072,
+      "model_bytes_with_headers": 0,
+      "model_payload_bytes": 0,
+      "filter_payload_bytes": 130928,
+      "metadata_and_headers_bytes": 144,
+      "filter_build_s": 0.002245999996375758,
+      "native": {
+        "ns_per_query_all": [
+          14.5625,
+          13.975,
+          13.65625
+        ],
+        "median_ns_per_query": 13.975,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "8ac0d9a6cf032415333011d4729a2924016d0ec7ec04abf0702164cd713fd1ff"
+    },
+    {
+      "model": "GaussianNB",
+      "total_bytes": 64797,
+      "model_bytes_with_headers": 984,
+      "model_payload_bytes": 872,
+      "filter_payload_bytes": 62840,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 25831,
+      "negatives": 342660,
+      "filter_build_s": 0.05384379099996295,
+      "native": {
+        "ns_per_query_all": [
+          235.05083,
+          229.91,
+          233.50375
+        ],
+        "median_ns_per_query": 233.50375,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "c1f7b17fd56a4b266f1655c1941286ee04ee95e23d1762bf95ba8f5f16561927"
+    },
+    {
+      "model": "GaussianNB",
+      "total_bytes": 130333,
+      "model_bytes_with_headers": 984,
+      "model_payload_bytes": 872,
+      "filter_payload_bytes": 128376,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 7373,
+      "negatives": 342660,
+      "filter_build_s": 0.04944845899444772,
+      "native": {
+        "ns_per_query_all": [
+          302.69584,
+          269.27166,
+          273.57833
+        ],
+        "median_ns_per_query": 273.57833,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "1e1b43da4d2a78824d6b827f5660695a1d4fee089e5ba8128f0f25c92536ee65"
+    },
+    {
+      "model": "Additive16",
+      "total_bytes": 64360,
+      "model_bytes_with_headers": 4696,
+      "model_payload_bytes": 4472,
+      "filter_payload_bytes": 58691,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 2341,
+      "negatives": 342660,
+      "filter_build_s": 0.0594578750024084,
+      "native": {
+        "ns_per_query_all": [
+          358.35875,
+          313.79416,
+          323.94667
+        ],
+        "median_ns_per_query": 323.94667,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "8bf50ed41a255e0064fdac8df615533ff5161ce23e5a5d026dab7bcb40b62d9d"
+    },
+    {
+      "model": "Additive16",
+      "total_bytes": 129673,
+      "model_bytes_with_headers": 4696,
+      "model_payload_bytes": 4472,
+      "filter_payload_bytes": 124004,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 514,
+      "negatives": 342660,
+      "filter_build_s": 0.06529299999965588,
+      "native": {
+        "ns_per_query_all": [
+          300.52167,
+          336.05,
+          322.36208
+        ],
+        "median_ns_per_query": 322.36208,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "d042268dd3b6f5b0a0a50221b1feda62e7060f253ba99305b7f56e03ddf2a559"
+    },
+    {
+      "model": "MLP8",
+      "total_bytes": 64326,
+      "model_bytes_with_headers": 1688,
+      "model_payload_bytes": 1576,
+      "filter_payload_bytes": 61665,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 1763,
+      "negatives": 342660,
+      "filter_build_s": 0.05675208300090162,
+      "native": {
+        "ns_per_query_all": [
+          230.97375,
+          228.14792,
+          233.38917
+        ],
+        "median_ns_per_query": 230.97375,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "b32f8bc281c1bba902a2081aa6e97c6b8d1bf3f59fa93176aa5f194e37bcf39f"
+    },
+    {
+      "model": "MLP8",
+      "total_bytes": 129595,
+      "model_bytes_with_headers": 1688,
+      "model_payload_bytes": 1576,
+      "filter_payload_bytes": 126934,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 364,
+      "negatives": 342660,
+      "filter_build_s": 0.05893258300056914,
+      "native": {
+        "ns_per_query_all": [
+          444.64833,
+          294.39708,
+          261.77625
+        ],
+        "median_ns_per_query": 294.39708,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "0222320d7270a046c80031e886e122a0955f894ee9044440a066374b3a0185f3"
+    },
+    {
+      "model": "Tree1",
+      "total_bytes": 64108,
+      "model_bytes_with_headers": 1342,
+      "model_payload_bytes": 670,
+      "filter_payload_bytes": 61793,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 5438,
+      "negatives": 342660,
+      "filter_build_s": 0.04324087499844609,
+      "native": {
+        "ns_per_query_all": [
+          297.80042,
+          284.99416,
+          284.87042
+        ],
+        "median_ns_per_query": 284.99416,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "1dac947cbca23f6f396737832776af2d8f2eeaa8c6e06dc66631ed3d6f4864f2"
+    },
+    {
+      "model": "Tree1",
+      "total_bytes": 129644,
+      "model_bytes_with_headers": 1342,
+      "model_payload_bytes": 670,
+      "filter_payload_bytes": 127329,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 1591,
+      "negatives": 342660,
+      "filter_build_s": 0.043849291003425606,
+      "native": {
+        "ns_per_query_all": [
+          213.9375,
+          209.67291,
+          184.75875
+        ],
+        "median_ns_per_query": 209.67291,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "25829f2d88fbd56ff998a4f49dcdbbb1f2199e1a17a57a2580c73fb6f071f035"
+    },
+    {
+      "model": "Tree16",
+      "total_bytes": 64326,
+      "model_bytes_with_headers": 11392,
+      "model_payload_bytes": 10720,
+      "filter_payload_bytes": 51961,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 1357,
+      "negatives": 342660,
+      "filter_build_s": 0.052728083996044006,
+      "native": {
+        "ns_per_query_all": [
+          501.43917,
+          535.92583,
+          596.78958
+        ],
+        "median_ns_per_query": 535.92583,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "4e029962be6bd07b122cafd8f37562a00d3d4746f3168d8945fbf6daa1893d4c"
+    },
+    {
+      "model": "Tree16",
+      "total_bytes": 129387,
+      "model_bytes_with_headers": 11392,
+      "model_payload_bytes": 10720,
+      "filter_payload_bytes": 117022,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 205,
+      "negatives": 342660,
+      "filter_build_s": 0.053865374997258186,
+      "native": {
+        "ns_per_query_all": [
+          487.71292,
+          494.82042,
+          506.33709
+        ],
+        "median_ns_per_query": 494.82042,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "6d25f7c56be220ae38edd679f38514e987829d0b08bb50844674e284fbf5626d"
+    },
+    {
+      "model": "LR",
+      "total_bytes": 64818,
+      "model_bytes_with_headers": 552,
+      "model_payload_bytes": 440,
+      "filter_payload_bytes": 63293,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 64,
+      "fp": 9218,
+      "negatives": 342660,
+      "filter_build_s": 0.05653333300142549,
+      "native": {
+        "ns_per_query_all": [
+          165.58292,
+          173.14125,
+          176.29291
+        ],
+        "median_ns_per_query": 173.14125,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "de7e434b67eb2e2bf9074af24736d96b05885a6b068815d6912f7fe2c41ead2d"
+    },
+    {
+      "model": "LR",
+      "total_bytes": 130191,
+      "model_bytes_with_headers": 552,
+      "model_payload_bytes": 440,
+      "filter_payload_bytes": 128666,
+      "metadata_and_headers_bytes": 973,
+      "budget_kib": 128,
+      "fp": 2403,
+      "negatives": 342660,
+      "filter_build_s": 0.06080524999561021,
+      "native": {
+        "ns_per_query_all": [
+          166.59542,
+          196.755,
+          161.1975
+        ],
+        "median_ns_per_query": 166.59542,
+        "queries": 100000
+      },
+      "member_fn": 0,
+      "roundtrip_checked": true,
+      "static_flags_sha256": "635595bea7b8aa49d378048032e3e3d7814e5436c85cb7383bd66133e6465dc3"
+    }
+  ],
+  "peak_rss_bytes": 541327360,
+  "exit_code": 0,
+  "process_wall_s": 11.592815999996674
+}
