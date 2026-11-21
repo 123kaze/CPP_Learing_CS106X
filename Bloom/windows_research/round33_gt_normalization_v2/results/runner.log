@@ -1,0 +1,54 @@
+Only select() timing instrumentation differs; all normalization/math/worker/test code unchanged
+--- 
++++ 
+@@ -80,7 +80,9 @@
+ 
+ 
+ def select(setup,scores,lm,kib,H,arm):
++    normalize_start=time.perf_counter()
+     transformed,diagnostic=normalize(lm,arm)
++    normalization_s=time.perf_counter()-normalize_start
+     start=time.perf_counter()
+     with adapted(arm) as capture:
+         chosen,info=ra6.select6(setup,scores,transformed,kib,H)
+@@ -88,4 +90,4 @@
+     timer=time.perf_counter()
+     ordered=sorted(capture['table'],key=lambda r:(r['pred'],r['trees'],r['frac']))
+     table=[dict(rank=i,trees=r['trees'],frac=r['frac'],cache_bytes=r['cache_bytes'],slots=r['slots'],predicted_fp=float(r['pred']),weights_sha256=ah(r['weights']),fpr_sha256=ah(r['seg_fpr_pred'])) for i,r in enumerate(ordered)]
+-    return chosen,dict(info,selector_wall_s=select_s,rank_serialization_s=time.perf_counter()-timer,normalization=diagnostic,table=table)
++    return chosen,dict(info,selector_wall_s=select_s,normalization_s=normalization_s,normalize_and_select_s=normalization_s+select_s,rank_serialization_s=time.perf_counter()-timer,normalization=diagnostic,table=table)
+
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.007s
+
+OK
+PREFLIGHT:30case keys,60same-format archived controls
+FROZEN 30 sources 58 inputs
+JOB cod index exit 0
+JOB cod fp64 exit 0
+JOB url index exit 0
+JOB url fp64 exit 0
+JOB caida index exit 0
+JOB caida fp64 exit 0
+JOB shalla index exit 0
+JOB shalla fp64 exit 0
+JOB caida_flow index exit 0
+JOB caida_flow fp64 exit 0
+JOB mawi2020_flow index exit 0
+JOB mawi2020_flow fp64 exit 0
+JOB mawi2021_flow index exit 0
+JOB mawi2021_flow fp64 exit 0
+JOB mawi2022_flow index exit 0
+JOB mawi2022_flow fp64 exit 0
+JOB caida_tcp_flow index exit 0
+JOB caida_tcp_flow fp64 exit 0
+JOB mawi2020_tcp_flow index exit 0
+JOB mawi2020_tcp_flow fp64 exit 0
+JOB mawi2021_tcp_flow index exit 0
+JOB mawi2021_tcp_flow fp64 exit 0
+JOB mawi2022_tcp_flow index exit 0
+JOB mawi2022_tcp_flow fp64 exit 0
+COMPLETE GT normalization:180arm records
+
+[exited with code 0]
