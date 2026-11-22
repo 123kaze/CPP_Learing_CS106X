@@ -31,7 +31,7 @@ int main(){
     */
    for(int i=0;i<n;i++){
     for (int j=capacity;j>=bags[i];j--){
-        if (dp[j]>dp[j-bags[i]]+values[i]){
+        if (dp[j]<dp[j-bags[i]]+values[i]){
         dp[j] = dp[j-bags[i]]+values[i];
         choose[i][j] == true;
     }}

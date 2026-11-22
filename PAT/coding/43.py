@@ -59,6 +59,8 @@ def get(id):
 
         next = set()
         for p in curlevel:
+            if p not in ids:
+                continue
             father = ids[p][1]
             mother = ids[p][2]
             if father != '-1':
