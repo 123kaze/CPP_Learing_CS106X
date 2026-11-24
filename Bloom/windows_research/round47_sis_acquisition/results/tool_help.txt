@@ -1,0 +1,29 @@
+zpaq v7.15 journaling archiver, compiled Aug 17 2016
+Usage: zpaq command archive[.zpaq] files... -options...
+Files... may be directory trees. Default is the whole archive.
+Use * or ???? in archive name for multi-part or "" for empty.
+Commands:
+   a  add         Append files to archive if dates have changed.
+   x  extract     Extract most recent versions of files.
+   l  list        List or compare external files to archive by dates.
+Options:
+  -all [N]        Extract/list versions in N [4] digit directories.
+  -f -force       Add: append files if contents have changed.
+                  Extract: overwrite existing output files.
+                  List: compare file contents instead of dates.
+  -index F        Extract: create index F for archive.
+                  Add: create suffix for archive indexed by F, update F.
+  -key X          Create or access encrypted archive with password X.
+  -mN  -method N  Compress level N (0..5 = faster..better, default 1).
+  -noattributes   Ignore/don't save file attributes or permissions.
+  -not files...   Exclude. * and ? match any string or char.
+       =[+-#^?]   List: exclude by comparison result.
+  -only files...  Include only matches (default: *).
+  -repack F [X]   Extract to new archive F with key X (default: none).
+  -sN -summary N  List: show top N sorted by size. -1: show frag IDs.
+                  Add/Extract: if N > 0 show brief progress.
+  -test           Extract: verify but do not write files.
+  -tN -threads N  Use N threads (default: 0 = 14 cores).
+  -to out...      Rename files... to out... or all to out/all.
+  -until N        Roll back archive to N'th update or -N from end.
+  -until 2026-11-23 09:53:57  Set date, roll back (UT, default time: 235959).
