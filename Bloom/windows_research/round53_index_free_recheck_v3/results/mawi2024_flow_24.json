@@ -1,0 +1,960 @@
+{
+  "status": "complete",
+  "pilot": false,
+  "dataset": "mawi2024_flow",
+  "budget_kib": 24,
+  "seed": 0,
+  "cache_schema_width": 9,
+  "members": 52040,
+  "negative_pool": 237924,
+  "input_load_s": 0.013695416011614725,
+  "shared_tree_preparation_s": 1.035733666998567,
+  "JIT_warm_s": 0.164977040985832,
+  "learned_grid_build_s": 1.364109207992442,
+  "bf_grid_build_s": 0.052557584014721215,
+  "candidates": 95,
+  "model_training": "reused frozen model; not retimed",
+  "score_generation": "reused frozen prefixes; not retimed",
+  "member_index_built": false,
+  "raw_key_blob_bytes": 3145779,
+  "raw_key_offsets_bytes": 2796256,
+  "raw_key_array_header_bytes": -5941811,
+  "member_hash_input_bytes": 416320,
+  "query_hash_input_bytes": 1903392,
+  "all_ids_input_bytes": 2796248,
+  "split_mask_bytes": 1398124,
+  "shared_tree_segment_bytes": 32475968,
+  "rows": [
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "Gama",
+      "trees": 4,
+      "frac": 0.0,
+      "fp": 400523,
+      "tail_queries": 1492243,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 400523,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "c0ce93dfad3f83aab9dbb280e8e2685ec56c51fa3a0950d573c6ac80d1f0ecfe",
+      "selection_build_s": 0.11708358197938651,
+      "tail_reference_replay_s": 0.017418332980014384,
+      "all_member_cache_check_s": 0.0005371670122258365,
+      "selection_info": {},
+      "total_bytes": 24009,
+      "budget_bytes": 24576,
+      "model_bytes": 2680,
+      "bf_bytes": 19532,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 400523,
+      "Gama_old_FP_regression": true
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "Gama+10%",
+      "trees": 4,
+      "frac": 0.1,
+      "fp": 44370,
+      "tail_queries": 1492243,
+      "cache_hits": 254072,
+      "inserts": 44370,
+      "evictions": 44198,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e17f0bfd9187de448a586bd3ca8a18394da80b301c67e0fd297c34c283b7df1b",
+      "static_flags_sha256": "85806fdc2b24193cf72033210a5bfdd009250cc857d40d61c4cacb0d65ab770f",
+      "selection_build_s": 0.12931695699808188,
+      "tail_reference_replay_s": 0.02247408402035944,
+      "all_member_cache_check_s": 0.00048587500350549817,
+      "selection_info": {},
+      "total_bytes": 24031,
+      "budget_bytes": 24576,
+      "model_bytes": 2680,
+      "bf_bytes": 17131,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 2423,
+      "cache_slots": 172,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 27652
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "Replay",
+      "trees": 2,
+      "frac": 0.2,
+      "fp": 36160,
+      "tail_queries": 1492243,
+      "cache_hits": 277281,
+      "inserts": 36160,
+      "evictions": 35800,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "ae1665af638abfb3de47bcb87b613983ca9015edeaa8ebcdb0a89cce7ad4fb56",
+      "static_flags_sha256": "5aee6343dcea7047edf1dc0455aa6b73e48a1d64b0bb461bf750ac545b352b47",
+      "selection_build_s": 1.6700597909803037,
+      "tail_reference_replay_s": 0.02313595899613574,
+      "all_member_cache_check_s": 0.0005120419955346733,
+      "selection_info": {
+        "learning_replay_s": 0.3059505829878617,
+        "candidate_build_s": 1.364109207992442
+      },
+      "total_bytes": 23986,
+      "budget_bytes": 24576,
+      "model_bytes": 1340,
+      "bf_bytes": 15935,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4914,
+      "cache_slots": 360,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 23839
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "RA-global",
+      "trees": 2,
+      "frac": 0.2,
+      "fp": 36160,
+      "tail_queries": 1492243,
+      "cache_hits": 277281,
+      "inserts": 36160,
+      "evictions": 35800,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "ae1665af638abfb3de47bcb87b613983ca9015edeaa8ebcdb0a89cce7ad4fb56",
+      "static_flags_sha256": "5aee6343dcea7047edf1dc0455aa6b73e48a1d64b0bb461bf750ac545b352b47",
+      "selection_build_s": 1.0117055409937166,
+      "tail_reference_replay_s": 0.023423042002832517,
+      "all_member_cache_check_s": 0.0005113329971209168,
+      "selection_info": {
+        "config": {
+          "new_mix": 0.0,
+          "gt": true,
+          "setassoc": true,
+          "formula": "enum",
+          "mode": "global",
+          "pop": "emp"
+        },
+        "trees": 2,
+        "frac": 0.2,
+        "predicted_fp": 55931.31591005869,
+        "select_seconds": 0.9901325829850975,
+        "build_seconds": 0.011329833010677248,
+        "candidates": 95
+      },
+      "total_bytes": 23986,
+      "budget_bytes": 24576,
+      "model_bytes": 1340,
+      "bf_bytes": 15935,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4914,
+      "cache_slots": 360,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 23839
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "RA-PLBF-GT19",
+      "trees": 2,
+      "frac": 0.1,
+      "fp": 33224,
+      "tail_queries": 1492243,
+      "cache_hits": 162688,
+      "inserts": 33224,
+      "evictions": 33052,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "b6e36eaa662acb0162ca876b05fd34c76ec09bd5c607927aad64c1117b430c7f",
+      "static_flags_sha256": "5455317c9a1eb9df8f05e2f7d5e790da85ac945aba88d6a708b42a41cb08c38d",
+      "selection_build_s": 1.1372049579804298,
+      "tail_reference_replay_s": 0.02168816700577736,
+      "all_member_cache_check_s": 0.0004911669821012765,
+      "selection_info": {
+        "trees": 2,
+        "frac": 0.1,
+        "predicted_fp": 50932.59869870986,
+        "ra4_rank": 1,
+        "select_seconds": 1.1268301669624634,
+        "build_seconds": 0.0,
+        "candidates": 95,
+        "built": 5
+      },
+      "total_bytes": 24512,
+      "budget_bytes": 24576,
+      "model_bytes": 1340,
+      "bf_bytes": 18952,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 2423,
+      "cache_slots": 172,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "BF+Exact",
+      "trees": 0,
+      "frac": 0.2,
+      "fp": 76925,
+      "tail_queries": 1492243,
+      "cache_hits": 311010,
+      "inserts": 76925,
+      "evictions": 76565,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "f34277f3620426488e46875e08e3289384344475c37bcce7d0bc9d9eaa9fbcec",
+      "static_flags_sha256": "d7c6d7e9e20d7440915e05431e12442f3528878ee05a33d9f177bed78ff9ff3d",
+      "selection_build_s": 0.1151449590397533,
+      "tail_reference_replay_s": 0.0257668339763768,
+      "all_member_cache_check_s": 0.0004944999818690121,
+      "selection_info": {
+        "learning_replay_s": 0.06258737502503209,
+        "candidate_build_s": 0.052557584014721215
+      },
+      "total_bytes": 24570,
+      "budget_bytes": 24576,
+      "model_bytes": 0,
+      "bf_bytes": 19512,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 4914,
+      "cache_slots": 360,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "mawi2024_flow",
+      "budget_kib": 24,
+      "workload": "真实轨迹",
+      "seed": 0,
+      "method": "PlainBF",
+      "trees": 0,
+      "frac": 0.0,
+      "fp": 191604,
+      "tail_queries": 1492243,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 191604,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "f9039d1c409c3c86c69fc06ef17775c0d60265f5601123fd09c56ec25dd456b5",
+      "selection_build_s": 0.003620375005993992,
+      "tail_reference_replay_s": 0.016982374974759296,
+      "all_member_cache_check_s": 0.0004983329854439944,
+      "selection_info": {},
+      "total_bytes": 24576,
+      "budget_bytes": 24576,
+      "model_bytes": 0,
+      "bf_bytes": 24432,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0
+    }
+  ],
+  "workloads": [
+    {
+      "workload": "真实轨迹",
+      "stream_sha256": "1685e2087f34333a9dd5f623ef1b77d45f597de921cae03e1f7889a2745b89de",
+      "learning_sha256": "b18a5a0526950a1ad67d0d0acf90ab101d29149def6ca99a57986b1c823fddd8",
+      "tail_sha256": "aa9200d85b7542e96065cf5fba87d67db6c44d0f3b60d7abf27fb443b7e01c99",
+      "learning_queries": 497414,
+      "tail_queries": 1492243,
+      "stream_generation_s": 0.011884334002388641,
+      "summary_s": 0.010137250006664544,
+      "learning_state_bytes": 1010432,
+      "learning_trace_bytes": 3979312,
+      "full_trace_bytes": 15917256,
+      "query_keys_over_width": 0,
+      "tail_requests_over_width": 0,
+      "replay_candidate_results": [
+        {
+          "trees": 4,
+          "frac": 0.0,
+          "fp": 129877,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.001,
+          "fp": 129877,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.002,
+          "fp": 129877,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.005,
+          "fp": 129877,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.01,
+          "fp": 49133,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.015,
+          "fp": 29218,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.02,
+          "fp": 29219,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.0,
+          "fp": 106141,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.001,
+          "fp": 106141,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.002,
+          "fp": 106141,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.005,
+          "fp": 106141,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.01,
+          "fp": 29219,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.015,
+          "fp": 29219,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.02,
+          "fp": 27448,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.05,
+          "fp": 19874,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.0,
+          "fp": 86577,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.001,
+          "fp": 86577,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.002,
+          "fp": 86577,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.005,
+          "fp": 86577,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.05,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.01,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.0,
+          "fp": 108523,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.001,
+          "fp": 108523,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.002,
+          "fp": 108523,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.005,
+          "fp": 108523,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.015,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.01,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.02,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.015,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.02,
+          "fp": 19875,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.1,
+          "fp": 14751,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.1,
+          "fp": 14438,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.05,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.05,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.0,
+          "fp": 136557,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.001,
+          "fp": 136557,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.002,
+          "fp": 136557,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.005,
+          "fp": 136557,
+          "cutoff": false
+        },
+        {
+          "trees": 1,
+          "frac": 0.1,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.01,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.015,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.02,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.1,
+          "fp": 14439,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.2,
+          "fp": 12033,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.05,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.0,
+          "fp": 152731,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.001,
+          "fp": 152731,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.002,
+          "fp": 152731,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.005,
+          "fp": 152731,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.01,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.015,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.02,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.1,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.05,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.1,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.0,
+          "fp": 230245,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.001,
+          "fp": 230245,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.002,
+          "fp": 230245,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.005,
+          "fp": 230245,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.01,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.015,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.02,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.05,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.6,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.1,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.6,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.3,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.6,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.4,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.6,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.2,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.0,
+          "fp": 436076,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.001,
+          "fp": 436076,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.002,
+          "fp": 436076,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.005,
+          "fp": 436076,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.01,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.015,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.02,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.05,
+          "fp": 12034,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.6,
+          "fp": 12034,
+          "cutoff": true
+        }
+      ],
+      "bf_candidate_results": [
+        {
+          "trees": 0,
+          "frac": 0.0,
+          "fp": 69474,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.001,
+          "fp": 69474,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.002,
+          "fp": 69474,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.005,
+          "fp": 69474,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.01,
+          "fp": 45194,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.015,
+          "fp": 31364,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.02,
+          "fp": 31365,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.05,
+          "fp": 25132,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.1,
+          "fp": 25133,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.2,
+          "fp": 24641,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.3,
+          "fp": 24642,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.4,
+          "fp": 24642,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.6,
+          "fp": 24642,
+          "cutoff": true
+        }
+      ],
+      "wall_s": 2.6898825830139685
+    }
+  ],
+  "wall_s": 5.398854958009906,
+  "peak_rss_bytes": 520224768
+}

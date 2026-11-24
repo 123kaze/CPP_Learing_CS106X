@@ -1,0 +1,4380 @@
+{
+  "status": "complete",
+  "pilot": false,
+  "dataset": "cod",
+  "budget_kib": 4096,
+  "seed": 0,
+  "cache_schema_width": 8,
+  "members": 3000000,
+  "negative_pool": 999621,
+  "input_load_s": 0.1873263329907786,
+  "shared_tree_preparation_s": 3.636504750000313,
+  "JIT_warm_s": 0.35227770800702274,
+  "learned_grid_build_s": 17.68650033301674,
+  "bf_grid_build_s": 0.9090946669748519,
+  "candidates": 182,
+  "model_training": "reused frozen model; not retimed",
+  "score_generation": "reused frozen prefixes; not retimed",
+  "member_index_built": false,
+  "raw_key_blob_bytes": 48000000,
+  "raw_key_offsets_bytes": 48000008,
+  "raw_key_array_header_bytes": -95999784,
+  "member_hash_input_bytes": 24000000,
+  "query_hash_input_bytes": 7996968,
+  "all_ids_input_bytes": 48000000,
+  "split_mask_bytes": 24000000,
+  "shared_tree_segment_bytes": 447957552,
+  "rows": [
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "Gama",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 1.4744518309016712,
+      "tail_reference_replay_s": 0.029928959003882483,
+      "all_member_cache_check_s": 0.029203000012785196,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 1,
+      "Gama_old_FP_regression": true
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "Gama+10%",
+      "trees": 64,
+      "frac": 0.1,
+      "fp": 0,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "79dd8e888bba8746db2b8ab306f46e91d7fdb68fd32b3ba15a2e8021a1f5861e",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 1.5819947058917023,
+      "tail_reference_replay_s": 0.03653641598066315,
+      "all_member_cache_check_s": 0.028175665996968746,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 3727646,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 419388,
+      "cache_slots": 34224,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "Replay",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 18.448947541008238,
+      "tail_reference_replay_s": 0.029271709005115554,
+      "all_member_cache_check_s": 0.028162041009636596,
+      "selection_info": {
+        "learning_replay_s": 0.7624472079914995,
+        "candidate_build_s": 17.68650033301674
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 1
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "RA-global",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 1.527169416018296,
+      "tail_reference_replay_s": 0.029348042007768527,
+      "all_member_cache_check_s": 0.028047166008036584,
+      "selection_info": {
+        "config": {
+          "new_mix": 0.0,
+          "gt": true,
+          "setassoc": true,
+          "formula": "enum",
+          "mode": "global",
+          "pop": "emp"
+        },
+        "trees": 64,
+        "frac": 0.0,
+        "predicted_fp": 0.4512950329374295,
+        "select_seconds": 1.4098699580063112,
+        "build_seconds": 0.11125024998909794,
+        "candidates": 182
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 1
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "RA-PLBF-GT19",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 2.1845524160016794,
+      "tail_reference_replay_s": 0.029654999991180375,
+      "all_member_cache_check_s": 0.028005208005197346,
+      "selection_info": {
+        "trees": 64,
+        "frac": 0.0,
+        "predicted_fp": 0.45129503293742945,
+        "ra4_rank": 0,
+        "select_seconds": 2.178319750033552,
+        "build_seconds": 0.0,
+        "candidates": 182,
+        "built": 5
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "BF+Exact",
+      "trees": 0,
+      "frac": 0.002,
+      "fp": 3546,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 3546,
+      "evictions": 2874,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "944927025dd4b3822ae56c65324f744ce8299e1be964794f7a6c38f37022ef8d",
+      "static_flags_sha256": "18a8122c1a7df36b1837095144a11f951e2d464f4b4a8892cf53f71f965a5113",
+      "selection_build_s": 1.0445574999903329,
+      "tail_reference_replay_s": 0.07302574999630451,
+      "all_member_cache_check_s": 0.028214375022798777,
+      "selection_info": {
+        "learning_replay_s": 0.135462833015481,
+        "candidate_build_s": 0.9090946669748519
+      },
+      "total_bytes": 4194304,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4185784,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 8376,
+      "cache_slots": 672,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "每key一次",
+      "seed": 0,
+      "method": "PlainBF",
+      "trees": 0,
+      "frac": 0.0,
+      "fp": 3483,
+      "tail_queries": 749716,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 3483,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "73505f2c0f6d26e4f1ba29dfcd81c0c84ef394e1856f352bb322d7427cd2c318",
+      "selection_build_s": 0.07977991702500731,
+      "tail_reference_replay_s": 0.030430083017563447,
+      "all_member_cache_check_s": 0.028115249995607883,
+      "selection_info": {},
+      "total_bytes": 4194304,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4194160,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "Gama",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 6,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 6,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 1.4744518309016712,
+      "tail_reference_replay_s": 0.2731677920091897,
+      "all_member_cache_check_s": 0.02746370801469311,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 6,
+      "Gama_old_FP_regression": true
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "Gama+10%",
+      "trees": 64,
+      "frac": 0.1,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "79dd8e888bba8746db2b8ab306f46e91d7fdb68fd32b3ba15a2e8021a1f5861e",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 1.5819947058917023,
+      "tail_reference_replay_s": 0.3595581669942476,
+      "all_member_cache_check_s": 0.02805925000575371,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 3727646,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 419388,
+      "cache_slots": 34224,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "Replay",
+      "trees": 64,
+      "frac": 0.001,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "9383ca8e411c9dd6ecf62a7b52d0adebb6c9d4286050380bd9f10fbf7460e693",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 22.798666875023628,
+      "tail_reference_replay_s": 0.3115350419830065,
+      "all_member_cache_check_s": 0.02797066600760445,
+      "selection_info": {
+        "learning_replay_s": 5.112166542006889,
+        "candidate_build_s": 17.68650033301674
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4142872,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4162,
+      "cache_slots": 328,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "RA-global",
+      "trees": 64,
+      "frac": 0.001,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "9383ca8e411c9dd6ecf62a7b52d0adebb6c9d4286050380bd9f10fbf7460e693",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 2.0241417919751257,
+      "tail_reference_replay_s": 0.3778948340041097,
+      "all_member_cache_check_s": 0.028153125022072345,
+      "selection_info": {
+        "config": {
+          "new_mix": 0.0,
+          "gt": true,
+          "setassoc": true,
+          "formula": "enum",
+          "mode": "global",
+          "pop": "emp"
+        },
+        "trees": 64,
+        "frac": 0.001,
+        "predicted_fp": 0.553910435931446,
+        "select_seconds": 1.832285792013863,
+        "build_seconds": 0.11151637500734068,
+        "candidates": 182
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4142872,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4162,
+      "cache_slots": 328,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "RA-PLBF-GT19",
+      "trees": 64,
+      "frac": 0.001,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "9383ca8e411c9dd6ecf62a7b52d0adebb6c9d4286050380bd9f10fbf7460e693",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 2.6353232080000453,
+      "tail_reference_replay_s": 0.31960091600194573,
+      "all_member_cache_check_s": 0.027908541000215337,
+      "selection_info": {
+        "trees": 64,
+        "frac": 0.001,
+        "predicted_fp": 0.3969454680959121,
+        "ra4_rank": 0,
+        "select_seconds": 2.554876666981727,
+        "build_seconds": 0.0,
+        "candidates": 182,
+        "built": 5
+      },
+      "total_bytes": 4191565,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4142726,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4162,
+      "cache_slots": 328,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "BF+Exact",
+      "trees": 0,
+      "frac": 0.02,
+      "fp": 8674,
+      "tail_queries": 7500000,
+      "cache_hits": 30674,
+      "inserts": 8674,
+      "evictions": 4019,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "249aa5843ebe41d56eb1249d560090763c3f565c5d703146a772a902116de390",
+      "static_flags_sha256": "da8fab942a23d80f3817afb11448366c8ad2b32d917ae415c06d96f770618850",
+      "selection_build_s": 2.5742042089696042,
+      "tail_reference_replay_s": 0.6978119169943966,
+      "all_member_cache_check_s": 0.04574983299244195,
+      "selection_info": {
+        "learning_replay_s": 1.6651095419947524,
+        "candidate_build_s": 0.9090946669748519
+      },
+      "total_bytes": 4194301,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4110272,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 83885,
+      "cache_slots": 6836,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "uniform-全部",
+      "seed": 0,
+      "method": "PlainBF",
+      "trees": 0,
+      "frac": 0.0,
+      "fp": 35327,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 35327,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "73505f2c0f6d26e4f1ba29dfcd81c0c84ef394e1856f352bb322d7427cd2c318",
+      "selection_build_s": 0.07977991702500731,
+      "tail_reference_replay_s": 0.2654705830209423,
+      "all_member_cache_check_s": 0.028030249988660216,
+      "selection_info": {},
+      "total_bytes": 4194304,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4194160,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "Gama",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 1.4744518309016712,
+      "tail_reference_replay_s": 0.18825754200224765,
+      "all_member_cache_check_s": 0.027974374999757856,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 1,
+      "Gama_old_FP_regression": true
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "Gama+10%",
+      "trees": 64,
+      "frac": 0.1,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "79dd8e888bba8746db2b8ab306f46e91d7fdb68fd32b3ba15a2e8021a1f5861e",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 1.5819947058917023,
+      "tail_reference_replay_s": 0.2211962909786962,
+      "all_member_cache_check_s": 0.028280667000217363,
+      "selection_info": {},
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 3727646,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 419388,
+      "cache_slots": 34224,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "Replay",
+      "trees": 64,
+      "frac": 0.0,
+      "fp": 1,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 1,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "753a3df00403f93d910907cd4ed3dd199db6abe70045147dcd0eaba9a775c94c",
+      "selection_build_s": 22.500200875016162,
+      "tail_reference_replay_s": 0.17761704200529493,
+      "all_member_cache_check_s": 0.028112291998695582,
+      "selection_info": {
+        "learning_replay_s": 4.813700541999424,
+        "candidate_build_s": 17.68650033301674
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4147034,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 1
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "RA-global",
+      "trees": 64,
+      "frac": 0.001,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "9383ca8e411c9dd6ecf62a7b52d0adebb6c9d4286050380bd9f10fbf7460e693",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 1.9428284999739844,
+      "tail_reference_replay_s": 0.2105348749901168,
+      "all_member_cache_check_s": 0.027939499996136874,
+      "selection_info": {
+        "config": {
+          "new_mix": 0.0,
+          "gt": true,
+          "setassoc": true,
+          "formula": "enum",
+          "mode": "global",
+          "pop": "emp"
+        },
+        "trees": 64,
+        "frac": 0.001,
+        "predicted_fp": 0.4866904681202489,
+        "select_seconds": 1.7850001249753404,
+        "build_seconds": 0.1112748330051545,
+        "candidates": 182
+      },
+      "total_bytes": 4191711,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4142872,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4162,
+      "cache_slots": 328,
+      "required_member_index_bytes": 0,
+      "historical_prefix_fp": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "RA-PLBF-GT19",
+      "trees": 64,
+      "frac": 0.001,
+      "fp": 0,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "9383ca8e411c9dd6ecf62a7b52d0adebb6c9d4286050380bd9f10fbf7460e693",
+      "static_flags_sha256": "1b162dcc5780be712560e46f6ea79ae57753d974da32fc52c2fca6eb4c98513d",
+      "selection_build_s": 2.594744041998638,
+      "tail_reference_replay_s": 0.2109819590114057,
+      "all_member_cache_check_s": 0.02797870899667032,
+      "selection_info": {
+        "trees": 64,
+        "frac": 0.001,
+        "predicted_fp": 0.4275965451897647,
+        "ra4_rank": 0,
+        "select_seconds": 2.5481387919862755,
+        "build_seconds": 0.0,
+        "candidates": 182,
+        "built": 5
+      },
+      "total_bytes": 4191643,
+      "budget_bytes": 4194304,
+      "model_bytes": 42880,
+      "bf_bytes": 4142804,
+      "metadata_bytes": 181,
+      "header_bytes": 1616,
+      "cache_bytes": 4162,
+      "cache_slots": 328,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "BF+Exact",
+      "trees": 0,
+      "frac": 0.01,
+      "fp": 4008,
+      "tail_queries": 7500000,
+      "cache_hits": 22508,
+      "inserts": 4008,
+      "evictions": 1280,
+      "bypasses": 0,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "aa8e5110fb64ee86b3700acc54734fcebbd194b63439fe18eabe4f44ab189e1e",
+      "static_flags_sha256": "896a9c744e2db94e177939b1f07920f57c5650de0c3487e5e8b7e9a2c251349a",
+      "selection_build_s": 1.7914113749866374,
+      "tail_reference_replay_s": 0.42286820799927227,
+      "all_member_cache_check_s": 0.03796904202317819,
+      "selection_info": {
+        "learning_replay_s": 0.8823167080117855,
+        "candidate_build_s": 0.9090946669748519
+      },
+      "total_bytes": 4194301,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4152216,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 41941,
+      "cache_slots": 3412,
+      "required_member_index_bytes": 0
+    },
+    {
+      "dataset": "cod",
+      "budget_kib": 4096,
+      "workload": "zipf1.0-全部",
+      "seed": 0,
+      "method": "PlainBF",
+      "trees": 0,
+      "frac": 0.0,
+      "fp": 22965,
+      "tail_queries": 7500000,
+      "cache_hits": 0,
+      "inserts": 0,
+      "evictions": 0,
+      "bypasses": 22965,
+      "member_BF_FN": 0,
+      "final_member_cache_hits": 0,
+      "cache_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "static_flags_sha256": "73505f2c0f6d26e4f1ba29dfcd81c0c84ef394e1856f352bb322d7427cd2c318",
+      "selection_build_s": 0.07977991702500731,
+      "tail_reference_replay_s": 0.2234171660093125,
+      "all_member_cache_check_s": 0.028345792001346126,
+      "selection_info": {},
+      "total_bytes": 4194304,
+      "budget_bytes": 4194304,
+      "model_bytes": 0,
+      "bf_bytes": 4194160,
+      "metadata_bytes": 32,
+      "header_bytes": 112,
+      "cache_bytes": 0,
+      "cache_slots": 0,
+      "required_member_index_bytes": 0
+    }
+  ],
+  "workloads": [
+    {
+      "workload": "每key一次",
+      "stream_sha256": "fad4f579fb69d40981953f3b58ebf5c23ac1dc99957ffd9de7ce616fc365823c",
+      "learning_sha256": "a28bf66d24394c6c9d66949e1a524f71ecc5efbbd298898d45489ca19b325ae5",
+      "tail_sha256": "d2d28608ee44d524b74ed00237b3657d2e6b5845c587ba34091bc6a0c1cab492",
+      "learning_queries": 249905,
+      "tail_queries": 749716,
+      "stream_generation_s": 0.06098566600121558,
+      "summary_s": 0.005944166012341157,
+      "learning_state_bytes": 3998480,
+      "learning_trace_bytes": 1999240,
+      "full_trace_bytes": 7996968,
+      "query_keys_over_width": 0,
+      "tail_requests_over_width": 0,
+      "replay_candidate_results": [
+        {
+          "trees": 64,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.0,
+          "fp": 1,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 64,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.4,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.4,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.0,
+          "fp": 3,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.4,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.0,
+          "fp": 7,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.0,
+          "fp": 4,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.0,
+          "fp": 5,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 64,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.0,
+          "fp": 6,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.0,
+          "fp": 13,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.0,
+          "fp": 14,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        }
+      ],
+      "bf_candidate_results": [
+        {
+          "trees": 0,
+          "frac": 0.0,
+          "fp": 1212,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.001,
+          "fp": 1165,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.002,
+          "fp": 1113,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.005,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.01,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.015,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.02,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.05,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.1,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.2,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.3,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.4,
+          "fp": 1114,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.6,
+          "fp": 1114,
+          "cutoff": true
+        }
+      ],
+      "wall_s": 5.136009959009243
+    },
+    {
+      "workload": "uniform-全部",
+      "stream_sha256": "f0d570f118e4edd1187d7373c0a72d988fb813ea52acb77782ba57ce9f51f452",
+      "learning_sha256": "c2da8ea2a1cc8f1d5124eb465735d3a2245d49b7d834132cbab00e9224aa1f8b",
+      "tail_sha256": "93a1c3ac06f1f1cde947a3083a7e222bb30b431f8afeafadb773421492e17cae",
+      "learning_queries": 2500000,
+      "tail_queries": 7500000,
+      "stream_generation_s": 0.08882887498475611,
+      "summary_s": 0.08023374999174848,
+      "learning_state_bytes": 14684720,
+      "learning_trace_bytes": 20000000,
+      "full_trace_bytes": 80000000,
+      "query_keys_over_width": 0,
+      "tail_requests_over_width": 0,
+      "replay_candidate_results": [
+        {
+          "trees": 64,
+          "frac": 0.0,
+          "fp": 4,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.0,
+          "fp": 2,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.0,
+          "fp": 15,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.0,
+          "fp": 48,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.0,
+          "fp": 30,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.0,
+          "fp": 69,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 64,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.0,
+          "fp": 59,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.0,
+          "fp": 83,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.0,
+          "fp": 118,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        }
+      ],
+      "bf_candidate_results": [
+        {
+          "trees": 0,
+          "frac": 0.0,
+          "fp": 11481,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.001,
+          "fp": 10919,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.002,
+          "fp": 9853,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.005,
+          "fp": 8240,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.01,
+          "fp": 6389,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.015,
+          "fp": 5420,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.02,
+          "fp": 5354,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.05,
+          "fp": 5355,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.1,
+          "fp": 5355,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.2,
+          "fp": 5355,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.3,
+          "fp": 5355,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.4,
+          "fp": 5355,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.6,
+          "fp": 5355,
+          "cutoff": true
+        }
+      ],
+      "wall_s": 14.327642708987696
+    },
+    {
+      "workload": "zipf1.0-全部",
+      "stream_sha256": "37aef21bfe564017771dd45b8bd9d198ba2f25d8c4bbfeec8cabf084ab88a8c9",
+      "learning_sha256": "b24ec80b955fd1da33ca92e2349a0dc6015dea120e726793b9740ad66b099be0",
+      "tail_sha256": "db555efe4d71fe799777f54568437d0c013e0c3499d5035658ffaad86bf0711c",
+      "learning_queries": 2500000,
+      "tail_queries": 7500000,
+      "stream_generation_s": 0.7121418750029989,
+      "summary_s": 0.04647299999487586,
+      "learning_state_bytes": 6271488,
+      "learning_trace_bytes": 20000000,
+      "full_trace_bytes": 80000000,
+      "query_keys_over_width": 0,
+      "tail_requests_over_width": 0,
+      "replay_candidate_results": [
+        {
+          "trees": 64,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.0,
+          "fp": 1,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.02,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 64,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.0,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.001,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.002,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.005,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.01,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 96,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.015,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 200,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 32,
+          "frac": 0.05,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.1,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 48,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.2,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 64,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 128,
+          "frac": 0.3,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 160,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.4,
+          "fp": 0,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.0,
+          "fp": 2,
+          "cutoff": false
+        },
+        {
+          "trees": 24,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.0,
+          "fp": 15,
+          "cutoff": false
+        },
+        {
+          "trees": 16,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.0,
+          "fp": 5,
+          "cutoff": false
+        },
+        {
+          "trees": 12,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.0,
+          "fp": 20,
+          "cutoff": false
+        },
+        {
+          "trees": 8,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 96,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 64,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.0,
+          "fp": 30,
+          "cutoff": false
+        },
+        {
+          "trees": 4,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 128,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 160,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 48,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 200,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.0,
+          "fp": 58,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.0,
+          "fp": 75,
+          "cutoff": false
+        },
+        {
+          "trees": 2,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.001,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.002,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.005,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.01,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.015,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.02,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.05,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 32,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.1,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.2,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.3,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 24,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.4,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 16,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 12,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 8,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 4,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 2,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        },
+        {
+          "trees": 1,
+          "frac": 0.6,
+          "fp": 1,
+          "cutoff": true
+        }
+      ],
+      "bf_candidate_results": [
+        {
+          "trees": 0,
+          "frac": 0.0,
+          "fp": 7534,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.001,
+          "fp": 3272,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.002,
+          "fp": 2616,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.005,
+          "fp": 2085,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.01,
+          "fp": 1935,
+          "cutoff": false
+        },
+        {
+          "trees": 0,
+          "frac": 0.015,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.02,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.05,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.1,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.2,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.3,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.4,
+          "fp": 1936,
+          "cutoff": true
+        },
+        {
+          "trees": 0,
+          "frac": 0.6,
+          "fp": 1936,
+          "cutoff": true
+        }
+      ],
+      "wall_s": 12.824855500017293
+    }
+  ],
+  "wall_s": 56.978306708013406,
+  "peak_rss_bytes": 2988032000
+}
