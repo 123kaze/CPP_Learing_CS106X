@@ -1,0 +1,15 @@
+{
+  "command": [
+    "node",
+    "/private/tmp/claude-501/bundled-skills/2.1.332/f0d382fb6564631696036bbcd6ebc89a/dataviz/scripts/validate_palette.js",
+    "#257de0,#f47230,#00b894",
+    "--mode",
+    "light",
+    "--pairs",
+    "all"
+  ],
+  "returncode": 0,
+  "stdout": "\nPalette (light, surface #ffffff, categorical): 3 slots\n  [PASS] Lightness band         all 3 inside L 0.43\u20130.78\n  [PASS] Chroma floor           all 3 >= 0.1\n  [PASS] CVD separation         worst all-pairs #00b894\u2194#f47230 \u0394E 12.6 (deutan) \u00b7 tritan 10.8\n  [PASS] Normal-vision floor    worst all-pairs #00b894\u2194#257de0 \u0394E 23.0 (normal)\n  [WARN] Contrast vs surface    below 3:1 \u2014 relief required (visible labels or table view): [[\"#f47230\",2.88],[\"#00b894\",2.54]]\n\n  \u2192 ALL CHECKS PASS  (CVD in the 6\u20138 floor band is legal ONLY with secondary encoding: direct labels, gaps, or texture)\n  scope: categorical palettes only. For a lone status/text color check text contrast with this script's apca() or contrast(); for a sequential ramp, lightness monotonicity.\n\n",
+  "stderr": "",
+  "contrast_relief": "CSV twin and visible labels; fixed light-mode static research figures"
+}
